@@ -1,0 +1,181 @@
+<html>
+<head>
+	
+<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/css.css" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<title>Monitor Page</title> 
+</head>
+<div class="botao_home">
+	<form name="home" action="/" method="get">
+		<div class="home_btn">
+		<input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+		</div>
+	</form>
+</div>
+
+<body >
+		
+<script type="text/javascript">
+	function setdisp() {
+	  // var disp = id = "disp";
+		var hd=document.getElementById('hd').value;
+		var md=document.getElementById('md').value;
+		var sd=document.getElementById('sd').value;
+		
+
+		// add a zero in front of numbers<10
+	   // m=checkTime(m);
+	   // s=checkTime(s);
+		document.getElementById('disp').innerHTML=hd+":"+md+":"+sd;
+	}
+</script>
+	
+<div>
+<form action="/mqtt" method = "get">
+	<p><h1>Temperatura Sala mqtt</h1></p>
+	<input type="text" name="output" size="12" >
+<input type="button" onclick=mqtt_show() value="Ler Mqtt" />
+</form>
+	
+<input type="button" onclick=getContent() value="Show" />
+
+<form action="/user" method = "post">
+	<p><h2>Cadastrar Usuario</h2></p>
+	<label>Nome</label>
+		<input type="text" value="Nome"	name = "nome" size="12" > 
+	<label>Sobrenome</label>
+		<input type="text" value="Sobrenome" name = "sobrenome" size="12" > 
+	<label>Idade</label>
+		<input type="text" idade= 0 name = "idade" size="12" > 
+
+		<button type="submit"> Cadastrar User</button>
+</form>
+
+<form action="/user" method = "get">
+	<p><h2>Consultar</h2></p>
+	<input type="text" name = "list" size="12" > 
+	<button type="submit">Listar</button>
+	
+</form>	
+
+<form action="/user" method = "patch">
+	<p><h2>Altera</h2></p>
+	<input type="text" value="ID"			name = "id" size="12" > <br>
+	<input type="text" value="Nome"			name = "nome" size="12" > <br>
+	<input type="text" value="Sobrenome" 	name = "sobrenome" size="12" > <br>
+	<input type="text" idade= '0' 			name = "idade" size="12" > 
+	<button type="submit">Alterar </button>
+</form>
+
+<form action="/user" method = "delete">
+		<p><h2>Deletar</h2></p>
+		<input type="text" value="ID" name = "id" size="12" > 
+		<button type="submit">Deletar</button>
+</form>
+
+</div>
+
+</body>
+
+<script>
+	
+async function mqtt_show() {
+	const options = {
+		method: 'GET',
+		mode: 'cors',
+		cache: 'default'
+	}
+
+	try{
+	fetch('http://127.0.0.1:8081/mqtt').then(function (response){
+		return response.json();
+	})
+	.then(function(data){
+		console.log(data);
+	})
+
+	const temperaturas = document.getElementById('temperaturas')
+	temperaturas.innerHTML=temperaturas.value;
+	//var sd=document.getElementById('m').value;
+	var numero5 = document.getElementById('Temp1').innerText= parseInt(myObj.h5);
+
+	}catch (error){
+		console.log(error)
+	}
+}
+
+async function getContent() {
+		const options = {
+			method: 'GET',
+			mode: 'cors',
+			cache: 'default'
+		}
+
+		try{
+		fetch('http://127.0.0.1:8081/user').then(function (response){
+			return response.json();
+		})
+		.then(function(data){
+			console.log(data);
+		})
+	
+		console.log(response)
+
+		let output = ''
+		for (let user of users){
+			output += `<li>${user.local}</li>`
+		}
+		document.querySelector('user').innerHTML=output
+	
+		}catch (error){
+			console.log(error)
+		}
+}
+
+function show(user){
+	
+	//let output = ''
+	//for (let user of users){
+	//		output += `<li>${user.name}</li>`
+	//	}
+	//	document.querySelector('user').innerHTML=output
+		
+		const tbody = document.getElementById('tbody')
+		tbody.innerHTML = people.map( user=> {
+	//	people = document.createElement('user').innerHTML = person;
+	
+		//tbody.appendChild(people)
+		document.write("Novo usuario" + user.nome + " ")
+	
+	return `	<tr>
+			<h2 id = "user"></h2>	
+			<td>${user.id}</td>
+			<td>${user.nome}</td>
+			</tr>`
+		})
+	}
+
+</script>
+
+<script type="text/javascript">
+function altera(form2)
+{
+	var name=prompt("Digite a Sala:","A B C D E F G H");
+	
+	if (name!=null && name!="")
+	 
+	var TA=document.form2.input.value
+	var TB=document.form2.input.value
+
+		document.write("Sala A");
+		document.write(TA);
+		document.write("Sala B");
+		document.write(TB);
+}
+
+
+
+</script>
+
+</html>

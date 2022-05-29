@@ -1,0 +1,248 @@
+﻿body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    margin: 5px;
+    background: #ffffff;
+    min-width: 400px;
+    width: 100%;
+   }
+  h1 {
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+    background: #787878;
+    border-radius: 7px 7px 0px 0px;
+    padding: 7px 4px 0px 4px;
+    margin: 0px;
+  }
+  h2 {
+    font-size: 12px;
+    text-align: left;
+    color: #ffffff;
+    background: #787878;
+    padding: 4px 8px 4px 8px;
+    margin: 0px;
+    border: #787878 solid 2px;
+  }
+  h3 {
+    font-size: 12px;
+    text-align: left;
+    font-weight: normal;
+    background: #ffffff;
+    padding: 7px;
+    margin: 0px;
+    border: #787878 solid 2px;
+    border-radius: 0px 0px 7px 7px;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+  th {
+    font-size: 11px;
+    background: rgb(118,156,236);
+    text-align: right;
+    padding: 5px;
+    border-radius: 3px 0px 0px 3px;
+    width: 100%;
+  }
+  td {
+    font-size: 11px;
+    background: #768cec;
+    padding: 5px;
+    border-radius: 0px 3px 3px 0px;
+  }
+  a {
+    font-size: 12px;
+    color: #ffffff;
+  }
+  input[type=submit] {
+    border: 2px solid #333333;
+    border-radius: 5px;
+    padding: 5px;
+    width: 90px;
+  }
+  .msg {
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+  }
+  .div
+  {
+  width: 400px;
+  height: 300px;
+  
+  }
+  
+.container
+{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ width: 100%;
+ max-width: 1200px;
+ margin: auto 20px auto 20px;
+ border-radius: 3px;
+}
+
+.botao_home
+{
+    display: flex;
+    border-radius: 10px;
+    width: 800px;
+    height: 200px;
+    
+    position: space-between;
+  
+    margin-top: 10px;
+    padding: 5px; 
+}
+.home_btn
+{
+  display: flex;
+  margin-top: 5px;
+
+}
+.secao__Botoes {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+
+.Botoes__pagina0
+{
+    display: flex;
+    justify-content: space-between;
+    
+    color:rgb(117, 129, 238);
+    background-color: rgba(120,140,255);
+    font-size:1.0em;
+    padding: 10px 60px;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.Botoes__pagina0 IMG
+{
+    border: 0;
+    border-radius: 10px;
+}
+
+img
+{
+    border: 0;
+}
+
+
+.botãochart
+{
+    display: block;
+    align-items: center;
+    margin-bottom: auto 20px auto 20px;
+
+}
+
+.botão_chart
+{
+    display: flex;
+    justify-content: space-between;
+
+    border-radius: 10px;
+    width: 1200px;
+    height: 250px;
+    background-color: rgb(118,156,236);
+    position: relative;
+    float: left;
+    margin-top: 20px;
+    padding: 20px; 
+   
+}
+
+.chart
+{
+    align-items: center;
+}
+
+.charts
+{
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+    height: 300px;
+    background-color: rgb(100, 104, 200);
+    position: relative;
+    float: left;
+    margin-top: 20px;
+    border-radius: 10px;
+   
+}
+
+.container1
+{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ width: 100%;
+ max-width: 1200px;
+ margin: auto 20px auto 150px;
+ border-radius: 3px;
+}
+
+.container2
+{
+display: block;
+ width: 100%;
+ height: 300px;
+ max-width: 1200px;
+ margin: auto 20px auto 150px;
+ border-radius: 3px;
+}
+
+.container3
+{
+display: block;
+ width: 100%;
+ height: 300px;
+ max-width: 1200px;
+ margin: auto 20px auto 150px;
+ border-radius: 3px;
+}
+
+.dados
+{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+   
+}
+._dados
+{
+    display:block;
+    width: 1200px;
+    height: 300px;
+    background-color: rgb(120,160,236);
+    position: relative;
+    float: left;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px; 
+   
+}
+
+.Info__Response
+{
+    background-color: rgb(199, 30, 185);
+    width: 1200px;
+    margin: 10px auto 10px 150px;
+}
+
+.headerSession
+{
+    color:rgb(78, 86, 199);
+    font-size:1.0em;
+}

@@ -1,0 +1,302 @@
+<html>
+<head>
+	
+<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/css.css" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<title>Monitor Page</title> 
+</head>
+<div class="botao_home">
+	<form name="home" action="/" method="get">
+		<div class="home_btn">
+		<input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+		</div>
+	</form>
+</div>
+
+<body onload="startTime()">
+
+		
+<h1>Relogio IOT</h1>
+	<br>
+		<form action="Relogio" method="post">
+		<h3>
+		<table>
+		<tr><td>Hora </td> <td><h1 id = "txt"> </h1></td></tr>
+		<tr><td><h2>Disparo </h2></td>
+		<td><input type="text" 	name = "hd" value = "10" size="12" >
+			<input type="text"  name = "md" value = "10"  size="12" > 
+			<input type="text" 	name = "sd" value = "10"  size="12" > </td> 
+			<tr></tr><td><h1 id = "disp"> </h1></td></tr>
+		<tr><td><h2>Tempo ligado </h2></td><td><input type="text" id="tempo" value="" maxlength="16" ></td> <td><h2 id="tempo"></h2></td></tr>
+		<td rowspan =2>Estado<td><span id="rele">N/D</span></td>
+		</tr>
+		<tr><td>
+			<input type="button" id="btnOn" value="Ligar" onClick="setRelay(1)">
+			<input type="button" id="btnOff" value="Desligar" onClick="setRelay(0)">
+			<input type="button" id="btndisp" value="Setar" onClick="setdisp()">
+		</td></tr>
+		</h3>
+		</table>
+		</form>
+		
+<br>
+<div>
+<form action="/mqtt" method = "get">
+	<p><h1>Temperatura Sala mqtt</h1></p>
+	<table>
+	<td><h1 id = "m"> </h1></td>
+	<td><h1 id = "mes"> </h1></td>
+	<td><input type="button" onclick=mqtt_show() value="Mqtt show" /></td>
+	<td><button type="submit" onclick= stop()  >STOP </button></td>
+	<td><button type="button" onclick= cad_new_temp() >CAD_NEW_TEMP </button></td>
+</tr>
+</table>
+</form>
+	
+<form >
+<li id= 'fill_list'></li>
+</form>
+
+<h3>
+	<table>
+		<tr><th colspan = 4>TEMPERATURAS </th></tr>
+		<tr><td><h2>Local: 	</h2></td><td colspan = 3><h2 id ='local'></h2></td></tr>       
+		<tr><td><h2>Temp: 	</h2></td><td colspan = 3><h2 id ='temperatura'></h2></td></tr>   
+		<tr><td><h2>Data: 	</h2></td><td><h2 id ='dia'></h2><td><h2 id ='mes'></h2></td><td><h2 id ='ano'></h2> </td></tr>
+	</table>
+	<input type="button" onclick=getContent() value="Get Content" />
+	</h3>
+	<br>
+	
+</h3>
+<form action="/temps" method = "post">
+	<table>
+	<tr><th colspan = 4>Cadastrar Temperatura</th></tr>
+	<td><h2>Local: </h2></td>
+	<td><h2><input type="text"  value="local" name = "local" size="5" > </h2></td></tr>
+	<td><h2>Temperatura: </h2></td>
+	<td><h2><input type="text" value= 0 name = "temperatura" size="5" > </h2></td></tr>
+	<td><h2>Dia: </h2></td>
+	<td><h2><input type="text"  value= 0 name = "dia" size="5" ></h2></td></tr>
+	<td><h2>Mes: </h2></td>
+	<td><h2><input type="text" value= 0 name = "mes" size="5" ></h2></td></tr>
+	<td><h2>Ano: </h2></td>
+	<td><h2><input type="text" value= 0 name = "ano" size="5" ></h2></td></tr>
+	<td><h2><button type="submit"> Cadastrar Temperatura</button></h2></td>
+	</tr>
+	</table>
+</form>
+<br>
+
+<form action="/temps" method = "get">
+	<table>
+	<tr><th colspan = 4>Log Temperatura dia</th></tr>
+	<td><h2>Local: </h2></td>
+	<td><h2>Temperatura: </h2></td>
+	<td><h2>Dia: </h2></td>
+	<td><h2><input type="text" id = 'dia' value= 0 name = "dia" size="5" ></h2></td></tr>
+	<td><h2>Mes: </h2></td>
+	<td><h2>Ano: </h2></td>
+    <td><h2><button type="submit"> Listar dia</button></h2></td>
+	<h2 id = "dia" id = "mes" id= "ano"></h2>
+	</tr>
+	</table>
+</form>
+<br>
+<form action="/temps" method = "get">
+<table>
+	<tr><th colspan =2>Consultar Temperaturas</th></tr>
+	<tr><td><h2><input type="text" name = "list" size="12" ></h2></td>
+	<td><h2><button type="submit">Listar</button></h2></td>
+	</tr>
+
+</table>
+</form>	
+<br>
+
+<form action="/temps" method = "delete">
+		<p><h2>Deletar</h2></p>
+		<input type="text" value="dia" name = "dia" size="5" > 
+		<button type="submit">Deletar</button>
+</form>
+</div>
+</body>
+
+<script type="text/javascript">
+    function startTime() {
+        var today=new Date();
+        var h=today.getHours();
+        var m=today.getMinutes();
+        var s=today.getSeconds();
+        // add a zero in front of numbers<10
+        m=checkTime(m);
+        s=checkTime(s);
+        document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+        t=setTimeout('startTime()',500);
+    }
+   
+    function checkTime(i){
+    if (i<10) {
+        i="0" + i;
+    }
+        return i;
+    }
+</script>
+
+<script type="text/javascript">
+
+function stoploop(){
+	var t = 0;
+			if (t>=12) {
+			t = 0;
+			clearInterval(contagem);
+			console.log("Contagem = "+ t);}
+			{
+			t= t + i;
+			}
+		}
+</script>
+
+<script type="text/javascript">
+function setdisp() {
+	  //  var disp;
+		var hd=document.getElementById('hd');
+		var md=document.getElementById('md');
+		var sd=document.getElementById('sd');
+	
+		// add a zero in front of numbers<10
+	   // m=checkTime(m);
+	   // s=checkTime(s);
+		document.getElementById('disp').innerHTML=hd+":"+md+":"+sd;
+	}
+ 
+//var contagem = setInterval(function(){
+//	mqtt_show();
+//	getContent();
+//	stoploop();
+//},2000); 
+</script>
+<script type="text/javascript">
+
+async function mqtt_show() {
+	const options = {
+		method: 'GET',
+		mode: 'cors',
+		cache: 'default'
+					}
+	fetch('http://127.0.0.1:8081/mqtt').then(function (response){
+	return response.text()})
+	.then(data=>{
+	console.log(data)
+	const myObj = JSON.parse(data)
+	var locais = document.getElementById('mes').innerText=myObj.vm.m;
+	var temp = document.getElementById('m').innerText=parseInt(myObj.vm.m);
+	//var dias = document.getElementById('m').innerText=parseInt(myObj.vm.dia);
+	//var meses = document.getElementById('m').innerText=parseInt(myObj.vm.mes);
+	//var anos = document.getElementById('m').innerText = parseInt(myObj.vm.ano);
+	const date = new Date();
+	var dias = date.getDate();
+	var meses = date.getMonth() + 1;
+	var anos = date.getFullYear();
+
+const dados = {
+	"local": locais,
+	"temperatura": Number(temp),
+	"dia": Number(dias),
+	"mes": Number(meses),
+	"ano": Number(anos)
+}
+const init = {
+	method: 'post',
+	headers: {
+"Content-type": 'text/text'
+	},
+	//body: JSON.stringfy(dados)
+	body: dados
+	}
+const response = fetch('http://127.0.0.1:8081/temps',init)
+const datas =  response
+console.log(dados)
+console.log(response)
+})
+}
+
+async function getContent() {
+	//Obtem dados do banco de dados
+		const options = {
+						method: 'GET',
+						mode: 'cors',
+						cache: 'default'
+						}
+		fetch('http://127.0.0.1:8081/temps').then(function (response){
+			return response.text()})
+		.then(data=>{
+			console.log(data)
+			const myObj = JSON.parse(data)
+			//let divid = document.querySelector(".id")
+			//const list = document.querySelector('#fill_list')
+			var local = document.getElementById('local').innerHTML= myObj.temps[0].local;
+			var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[0].temperatura;
+			var dia = document.getElementById('dia').innerHTML= myObj.temps[0].dia;
+			var mes = document.getElementById('mes').innerHTML= myObj.temps[0].mes;
+			var ano = document.getElementById('ano').innerText= myObj.temps[0].ano;
+		})			
+}
+
+async function cad_new_temp(){
+//cadastra nova temperatura
+const date = new Date();
+var dias = date.getDate();
+var meses = date.getMonth()+ 1;
+var anos = date.getFullYear();
+console.log(dias, meses, anos)
+
+const dados = {
+	"local": local,
+	"temperatura": temperatura,
+	"dia": dias,
+	"mes": meses,
+	"ano": anos
+	}
+
+const init = {
+	method: 'post',
+	headers: {
+"Content-type": 'application/json'
+	},
+	body: JSON.stringify(dados)
+	}
+	//mqtt_show.send (dados);
+
+// chamar post na api
+const response = await fetch('http://127.0.0.1:8081/temps',init)
+const datos = await response.json()
+
+console.log(datos)
+}
+
+function show(user){
+	//let output = ''
+	//for (let user of users){
+	//		output += `<li>${user.name}</li>`
+	//	}
+	//	document.querySelector('user').innerHTML=output
+		
+		const tbody = document.getElementById('tbody')
+		tbody.innerHTML = people.map( user=> {
+	//	people = document.createElement('user').innerHTML = person;
+	
+		//tbody.appendChild(people)
+	
+	return `	<tr>
+			<h2 id = "user"></h2>	
+			<td>${user.id}</td>
+			<td>${user.nome}</td>
+			</tr>`
+		})
+	}
+
+</script>
+
+</html>

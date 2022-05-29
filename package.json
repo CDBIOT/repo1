@@ -1,0 +1,24 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": " Primeiro projeto",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node server.js"
+  },
+  "author": "CDB",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "bootstrap": "^5.1.3",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "jquery": "^3.6.0",
+    "mongoose": "^6.3.1",
+    "mqtt": "^4.3.7",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.18.0"
+  },
+  "devDependencies": {}
+}

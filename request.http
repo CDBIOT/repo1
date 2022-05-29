@@ -1,0 +1,60 @@
+POST http://localhost:8081/user
+content-type: application/json
+
+{
+"nome": "lulu",
+"sobrenome": "sawahara",
+"idade": 14
+}
+
+###
+POST http://localhost:8081/temps
+content-type: application/json
+
+{
+//"_id": "2",
+"local": "sala",
+"temperatura": "16",
+"dia":"1",
+"mes":"05",
+"ano":"2022"
+}
+###
+
+GET http://localhost:8081/temps
+
+###
+GET http://localhost:8081//temps/getone/:dia'
+
+
+###
+PATCH   http://localhost:8081/user/1
+content-type: application/json
+
+{
+"nome": "lulu",
+"sobrenome": "kawahara",
+"idade": 15
+}
+
+###
+PATCH   http://localhost:8081/temps/2
+content-type: application/json
+
+{
+"_id": "2",
+"local": "sala",
+"temperatura": "16",
+"dia": "17",
+"mes": "05",
+"ano": "2022"
+}
+
+
+###
+DELETE http://localhost:8081/temps/20
+
+
+
+
+
