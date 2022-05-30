@@ -4,7 +4,7 @@ const db_atlas = require('./db_atlas')
 //mongoose.Promise = global.Promise;
 //
 //mongodb+srv://cdb:<faculdade18>@cluster0.mvho6.mongodb.net/?retryWrites=true&w=majority
-mongoose.connect('./db_atlas.mongoURI').then(() => {
+mongoose.connect('./db_atlas.MONGODB_URI').then(() => {
     console.log("MongodB temps conectado com sucesso!")
 
 }).catch((err) => {
