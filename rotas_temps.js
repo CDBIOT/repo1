@@ -101,6 +101,7 @@ routers.use('/css', express.static("/css"))
 routers.use('/imagens', express.static("/imagens"))
 routers.use('/grafico.js', express.static("/"))
 routers.use('/mqtt_node2.js', express.static("/"))
+
  routers.get('/index.html',function(req,res){
      res.sendFile(__dirname + "/index.html");
  });
