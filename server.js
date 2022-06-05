@@ -8,17 +8,16 @@ const mqtt = require('./mqtt_node2');
 //const db =  require('./database');
 const Temps = require('./temps')
 const db_atlas = require('./db_atlas')
+const cors = require('cors')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 app.use(express.json());
+
+
 app.use(routers);
 
-app.use((req,res,next) => {
-    console.log("MIDDLEWARE1");
-    next()
-   })
 
 app.use((req, res, next) =>{
     console.log("MIDDLEWARE2");

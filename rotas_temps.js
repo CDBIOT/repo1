@@ -3,7 +3,14 @@ const express = require('express');
 const routers = express.Router();
 const app = express();
 const Temps = require('./temps')
+
 //app.use(mqtt);
+
+app.use((req,res,next) => {
+    console.log("Cors habilitado");
+    app.usee(cors())
+    next()
+   })
 
  routers.get('/mqtt',(req, res) =>{
     try{ 
