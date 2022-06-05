@@ -8,6 +8,7 @@ const Temps = require('./temps')
 
 app.use((req,res,next) => {
     console.log("Cors habilitado");
+    res.header("Access-Control-Allow-Origin","*")
     app.usee(cors())
     next()
    })
