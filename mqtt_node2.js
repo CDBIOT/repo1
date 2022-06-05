@@ -22,7 +22,8 @@ client.on('connect', () => {
     console.log(`Subscribe to topic '${topic}'`)
 
 client.on('message', (topic, payload) => {
-      m = payload
+      temp = payload
+      local= topic
      // console.log('Received Message:', topic, payload.toString())
       //res.status(200).json({m})
     })
@@ -30,8 +31,8 @@ client.on('message', (topic, payload) => {
 })
 setInterval(() => {
 client.on('message', (topic, payload) => {
-  m = payload.toString()
-  console.log('Received Message:', topic, m)
+  temp = payload.toString()
+  console.log('Received Message:', topic, temp)
   client.end()
  // res.status(200).json({m})
 })

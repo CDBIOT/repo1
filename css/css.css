@@ -246,3 +246,13 @@ display: block;
     color:rgb(78, 86, 199);
     font-size:1.0em;
 }
+
+.temp_show {
+  color: #ffffff;
+  display: flex;
+  position: space-between;
+  font-size: 48px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+}

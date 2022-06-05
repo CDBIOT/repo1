@@ -7,10 +7,13 @@ const Temps = require('./temps')
 
  routers.get('/mqtt',(req, res) =>{
     try{ 
+        date = new Date() 
         var vm = {
-           // title: 'MQTT',
-           message: [m],
-           m: m          
+            temp: temp,
+            local: local,
+            dia: date.getDate(),   
+            mes: date.getMonth() + 1,
+            ano: date.getFullYear()
         }
         console.log(vm);
         //res.send(vm);
@@ -96,6 +99,10 @@ routers.use('/mqtt_node2.js', express.static("/"))
  
  routers.get("/mqtt_node2",function(req,res){
     res.sendFile(__dirname + "/mqtt_node2.js");
+});
+
+routers.get("/mqtt.html",function(req,res){
+    res.sendFile(__dirname + "/mqtt.html");
 });
  
  routers.get("/Grafico",function(req,res){

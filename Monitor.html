@@ -17,11 +17,12 @@
 <body onload="startTime()">
 
 		
-<h1>Relogio IOT</h1>
+
 	<br>
 		<form action="Relogio" method="post">
 		<h3>
 		<table>
+		<tr><td colspan = 6><h1>Relogio IOT</h1></tr></td>
 		<tr><td>Hora </td> <td><h1 id = "txt"> </h1></td></tr>
 		<tr><td><h2>Disparo </h2></td>
 		<td><input type="text" 	name = "hd" value = "10" size="12" >
@@ -43,11 +44,11 @@
 <br>
 <div>
 <form action="/mqtt" method = "get">
-	<p><h1>Temperatura Sala mqtt</h1></p>
 	<table>
+	<tr><th colspan = 6>TEMPERATURA SALA </th></tr>
+	<tr>
 	<td><h1 id = "m"> </h1></td>
 	<td><h1 id = "mes"> </h1></td>
-	<td><input type="button" onclick=mqtt_show() value="Mqtt show" /></td>
 	<td><button type="submit" onclick= stop()  >STOP </button></td>
 	<td><button type="button" onclick= cad_new_temp() >CAD_NEW_TEMP </button></td>
 </tr>
@@ -116,9 +117,13 @@
 <br>
 
 <form action="/temps" method = "delete">
-		<p><h2>Deletar</h2></p>
-		<input type="text" value="dia" name = "dia" size="5" > 
-		<button type="submit">Deletar</button>
+	<table>
+	<tr><th colspan = 2>DELETAR</th></tr>
+	<tr>
+	<td><input type="text" value="dia" name = "dia" size="5" > </td>
+	<td><button type="submit">Deletar</button></td>
+	</tr>
+	</table>
 </form>
 </div>
 </body>
@@ -136,7 +141,7 @@
         t=setTimeout('startTime()',500);
     }
    
-    function checkTime(i){
+function checkTime(i){
     if (i<10) {
         i="0" + i;
     }
@@ -179,48 +184,6 @@ function setdisp() {
 </script>
 <script type="text/javascript">
 
-async function mqtt_show() {
-	const options = {
-		method: 'GET',
-		mode: 'cors',
-		cache: 'default'
-					}
-	fetch('http://127.0.0.1:8081/mqtt').then(function (response){
-	return response.text()})
-	.then(data=>{
-	console.log(data)
-	const myObj = JSON.parse(data)
-	var locais = document.getElementById('mes').innerText=myObj.vm.m;
-	var temp = document.getElementById('m').innerText=parseInt(myObj.vm.m);
-	//var dias = document.getElementById('m').innerText=parseInt(myObj.vm.dia);
-	//var meses = document.getElementById('m').innerText=parseInt(myObj.vm.mes);
-	//var anos = document.getElementById('m').innerText = parseInt(myObj.vm.ano);
-	const date = new Date();
-	var dias = date.getDate();
-	var meses = date.getMonth() + 1;
-	var anos = date.getFullYear();
-
-const dados = {
-	"local": locais,
-	"temperatura": Number(temp),
-	"dia": Number(dias),
-	"mes": Number(meses),
-	"ano": Number(anos)
-}
-const init = {
-	method: 'post',
-	headers: {
-"Content-type": 'text/text'
-	},
-	//body: JSON.stringfy(dados)
-	body: dados
-	}
-const response = fetch('http://127.0.0.1:8081/temps',init)
-const datas =  response
-console.log(dados)
-console.log(response)
-})
-}
 
 async function getContent() {
 	//Obtem dados do banco de dados
@@ -281,21 +244,19 @@ function show(user){
 	//for (let user of users){
 	//		output += `<li>${user.name}</li>`
 	//	}
-	//	document.querySelector('user').innerHTML=output
-		
+	//	document.querySelector('user').innerHTML=output	
 		const tbody = document.getElementById('tbody')
 		tbody.innerHTML = people.map( user=> {
 	//	people = document.createElement('user').innerHTML = person;
-	
 		//tbody.appendChild(people)
-	
-	return `	<tr>
+	return ` 
+		<tr>
 			<h2 id = "user"></h2>	
 			<td>${user.id}</td>
 			<td>${user.nome}</td>
-			</tr>`
+		</tr>`
 		})
-	}
+}
 
 </script>
 

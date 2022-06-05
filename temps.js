@@ -4,10 +4,15 @@ const db_atlas = require('./db_atlas')
 //mongoose.Promise = global.Promise;
 //
 //mongodb+srv://cdb:<faculdade18>@cluster0.mvho6.mongodb.net/?retryWrites=true&w=majority
+//try{
 mongoose.connect('./db_atlas.MONGODB_URI').then(() => {
+
+  //  useNewUrlParser: true,
+  //useUnifiedTopology: true,
     console.log("MongodB temps conectado com sucesso!")
 
-}).catch((err) => {
+})
+.catch((err) => {
     console.log("Houve um erro ao se conectar ao mongodB temps: "+err)
 })
 

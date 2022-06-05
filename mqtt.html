@@ -1,0 +1,97 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/css.css" />
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body > 
+<section class="Botoes">
+<div class="container">
+        
+<div class="botao_home">
+	<form name="home" action="/" method="get">
+		<div class="home_btn">
+		<input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+		</div>
+	</form>
+</div>
+		<div class="home_btn">
+			<form name="home" action="/" method="get">
+                <a  href="Monitor.html">
+			    <img NAME="bar_04" src="imagens/blue/gear_btn.png"  ALT=""></a>
+			</form>
+		</div>
+	</div>
+</section>
+
+<section class=" Botoes_pagina0">
+    <div class= "Botoes__pagina0">
+        <table>
+	        <tr>
+		        <td>
+			        <a onclick = mqtt_show() >
+			        <img NAME="bar_04" src="imagens/blue/raio_btn.png" ALT=""></a>
+                </td>	
+            </tr>
+        </table>
+
+<form action="/mqtt" method = "get">
+ <table>
+    <tr><th colspan = 6> TEMPERATURA DA SALA </th></tr>
+    <tr>
+    <td><h1 id = "local"> </h1></td>
+    <td><h1 id = "temp"> </h1></td>
+	<td><h1 id = "dia"> </h1></td>
+    <td><h1 id = "mes"> </h1></td>
+    <td><h1 id = "ano"> </h1></td>
+    </tr>
+</table>
+</form>
+
+</div>
+</section>
+
+</body>
+
+<script>
+async function mqtt_show() {
+	const options = {
+		method: 'GET',
+		mode: 'cors',
+		cache: 'default'
+					}
+	fetch('http://127.0.0.1:8081/mqtt').then(function (response){
+	return response.text()})
+	.then(data=>{
+	console.log(data)
+	const myObj = JSON.parse(data)
+	var local = document.getElementById('local').innerText=myObj.vm.local;
+	var temp = document.getElementById('temp').innerText=parseInt(myObj.vm.temp);
+	var dia = document.getElementById('dia').innerText=parseInt(myObj.vm.dia);
+	var mes = document.getElementById('mes').innerText=parseInt(myObj.vm.mes);
+	var ano = document.getElementById('ano').innerText = parseInt(myObj.vm.ano);
+
+const dados = {
+	"local": local,
+	"temperatura": Number(temp),
+	"dia": Number(dia),
+	"mes": Number(mes),
+	"ano": Number(ano)
+}
+const init = {
+	method: 'post',
+	headers: {
+"Content-type": 'text/text'
+	},
+	body: JSON.stringfy(dados)
+//	body: dados
+	}
+const response = fetch('http://127.0.0.1:8081/temps',init)
+const datas =  response
+console.log(dados)
+console.log(response)
+})
+}
+</script>
+</html>
