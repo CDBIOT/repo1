@@ -15,8 +15,9 @@ app.use(bodyParser.json())
 
 app.use(express.json());
 
-
 app.use(routers);
+
+app.use(cors());
 
 
 app.use((req, res, next) =>{

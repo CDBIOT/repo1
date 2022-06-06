@@ -6,12 +6,6 @@ const Temps = require('./temps')
 
 //app.use(mqtt);
 
-app.use((req,res,next) => {
-    console.log("Cors habilitado");
-    res.header("Access-Control-Allow-Origin","*")
-    app.usee(cors())
-    next()
-   })
 
  routers.get('/mqtt',(req, res) =>{
     try{ 
@@ -30,6 +24,20 @@ app.use((req,res,next) => {
          res.status(500).json(error)
      }  
     })
+    
+
+app.use((req,res,next) => {
+    console.log("Cors habilitado");
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Header",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if (req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
+        res.status(200).send({})
+    }
+    
+   next()
+   })
+
 
  //Create temps
  routers.post('/temps', async (req, res) =>{

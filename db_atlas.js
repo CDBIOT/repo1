@@ -1,5 +1,5 @@
 if(process.env.NODE_ENV == "production"){
-module.exports = {MONGODB_URI: "mongodb+srv://cdb:faculdade18@cluster0.mvho6.mongodb.net/?retryWrites=true&w=majority"},
+module.exports = {MONGODB_URI: "mongodb+srv://cdb:Faculdade18@cluster0.mvho6.mongodb.net/Temps?retryWrites=true&w=majority"},
 {
 useNewUrlParser: true,
 useUnifiedTopology: true

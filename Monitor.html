@@ -208,12 +208,13 @@ async function getContent() {
 }
 
 async function cad_new_temp(){
-//cadastra nova temperatura
+var local = local;
+var temperatura = temperatura;
 const date = new Date();
 var dias = date.getDate();
 var meses = date.getMonth()+ 1;
 var anos = date.getFullYear();
-console.log(dias, meses, anos)
+console.log(local,temperatura,dias, meses, anos)
 
 const dados = {
 	"local": local,
