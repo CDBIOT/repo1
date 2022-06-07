@@ -6,7 +6,6 @@ const Temps = require('./temps')
 
 //app.use(mqtt);
 
-
  routers.get('/mqtt',(req, res) =>{
     try{ 
         date = new Date() 

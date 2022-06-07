@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/css.css" />
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-<title>Monitor Page</title> 
+<title>Cadastro de usuarios</title> 
 </head>
 <div class="botao_home">
 	<form name="home" action="/" method="get">
@@ -32,11 +32,6 @@
 </script>
 	
 <div>
-<form action="/mqtt" method = "get">
-	<p><h1>Temperatura Sala mqtt</h1></p>
-	<input type="text" name="output" size="12" >
-<input type="button" onclick=mqtt_show() value="Ler Mqtt" />
-</form>
 	
 <input type="button" onclick=getContent() value="Show" />
 
@@ -79,31 +74,6 @@
 </body>
 
 <script>
-	
-async function mqtt_show() {
-	const options = {
-		method: 'GET',
-		mode: 'cors',
-		cache: 'default'
-	}
-
-	try{
-	fetch('http://127.0.0.1:8081/mqtt').then(function (response){
-		return response.json();
-	})
-	.then(function(data){
-		console.log(data);
-	})
-
-	const temperaturas = document.getElementById('temperaturas')
-	temperaturas.innerHTML=temperaturas.value;
-	//var sd=document.getElementById('m').value;
-	var numero5 = document.getElementById('Temp1').innerText= parseInt(myObj.h5);
-
-	}catch (error){
-		console.log(error)
-	}
-}
 
 async function getContent() {
 		const options = {
