@@ -31,41 +31,20 @@
 	}
 </script>
 	
-<div>
+<div class = msg >
 	
-<input type="button" onclick=getContent() value="Show" />
-
 <form action="/user" method = "post">
 	<p><h2>Cadastrar Usuario</h2></p>
-	<label>Nome</label>
-	<input type="text" value="Nome"	name = "nome" size="12" > 
-	<label>Sobrenome</label>
-	<input type="text" value="Sobrenome" name = "sobrenome" size="12" > 
-	<label>Idade</label>
-	<input type="text" idade= 0 name = "idade" size="12" > 
-	<button type="submit"> Cadastrar User</button>
-</form>
+	<p></p><label>E-mail</label></p>
+	<input type="e-mail" value="E-mail"	name = "nome" size="12" > 
+    <p><label>Password</label></p>
 
-<form action="/user" method = "get">
-	<p><h2>Consultar</h2></p>
-	<input type="text" name = "list" size="12" > 
-	<button type="submit">Listar</button>
-	
-</form>	
+	<input type="password" value="Password" name = "sobrenome" size="12" > 
+    <br>   <br>
 
-<form action="/user" method = "patch">
-	<p><h2>Altera</h2></p>
-	<input type="text" value="ID"			name = "id" size="12" > <br>
-	<input type="text" value="Nome"			name = "nome" size="12" > <br>
-	<input type="text" value="Sobrenome" 	name = "sobrenome" size="12" > <br>
-	<input type="text" idade= '0' 			name = "idade" size="12" > 
-	<button type="submit">Alterar </button>
-</form>
-
-<form action="/user" method = "delete">
-		<p><h2>Deletar</h2></p>
-		<input type="text" value="ID" name = "id" size="12" > 
-		<button type="submit">Deletar</button>
+    <p><button type="submit"> Login </button></p>
+    <br>
+    <p> <button type="submit"> Submit </button></p>
 </form>
 
 </div>
