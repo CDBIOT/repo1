@@ -24,9 +24,6 @@ const Temps = require('./temps')
      }  
     })
     
-
-
-
  //Create temps
  routers.post('/temps', async (req, res) =>{
     const {local, temperatura, dia, mes, ano } = req.body
