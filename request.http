@@ -28,6 +28,9 @@ content-type: application/json
 GET http://localhost:8081/temps
 
 ###
+GET https://polar-beyond-82520.herokuapp.com/temps
+
+###
 GET http://localhost:8081//temps/getone/:dia'
 
 

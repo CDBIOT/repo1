@@ -35,7 +35,8 @@
                 </td>	
             </tr>
         </table>
-
+	</div>
+<div class =  container>
 <form action="/mqtt" method = "get">
  <table>
     <tr><th colspan = 6> TEMPERATURA DA SALA </th></tr>
@@ -66,11 +67,11 @@ async function mqtt_show() {
 	.then(data=>{
 	console.log(data)
 	const myObj = JSON.parse(data)
-	var local = document.getElementById('local').innerText=myObj.vm.local;
-	var temp = document.getElementById('temp').innerText=parseInt(myObj.vm.temp);
-	var dia = document.getElementById('dia').innerText=parseInt(myObj.vm.dia);
-	var mes = document.getElementById('mes').innerText=parseInt(myObj.vm.mes);
-	var ano = document.getElementById('ano').innerText = parseInt(myObj.vm.ano);
+	let local = document.getElementById('local').innerText=myObj.vm.local;
+	let temp = document.getElementById('temp').innerText=parseInt(myObj.vm.temp);
+	let dia = document.getElementById('dia').innerText=parseInt(myObj.vm.dia);
+	let mes = document.getElementById('mes').innerText=parseInt(myObj.vm.mes);
+	let ano = document.getElementById('ano').innerText = parseInt(myObj.vm.ano);
 
 const dados = {
 	"local": local,

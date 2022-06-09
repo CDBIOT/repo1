@@ -6,6 +6,7 @@ const routers = require('./rotas_temps');
 const mqtt = require('./mqtt_node2');
 //const mongo = require('./mongo');
 //const db =  require('./database');
+var fs = require('fs');
 const Temps = require('./temps')
 const db_atlas = require('./db_atlas')
 const cors = require('cors')
