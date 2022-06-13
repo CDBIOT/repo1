@@ -10,7 +10,7 @@ setInterval(function()
 function drawAjax(){
 // //   google.charts.load('current',{ packages:['corechart']}).then(function () {
    $.ajax({
-      url: '/dados/jsonTemp.json',
+      url: 'http://127.0.0.1:8081/temps',
       method: 'GET',
       dataType: "json",
       success: function(resposta) {
