@@ -1,9 +1,9 @@
 setInterval(function()
 {
-	//getData();
+	getData();
 	 // drawGraph();
-  drawAjax();
-   draw_Chart2();
+  //drawAjax();
+  // draw_Chart2();
 }, 10000);
 
 
@@ -93,11 +93,11 @@ var getdata = function getData()
       
      // for (var i = 0; i < 5; i++)
       {
-     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.Tempo.Tempo);
-     var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.h2);
-     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.h3);
-     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.h4);
-     var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.h5);
+     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.temps[0].temperatura);
+     var numero2 = document.getElementById('Temp2').innerText=parseInt(myObj.temps[0].temperatura);
+     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.temps[0].temperatura);
+     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.temps[0].temperatura);
+     var numero5 = document.getElementById('Temp5').innerText=parseInt(myObj.temps[0].temperatura);
        // document.getElementById('Temp1').innerText= myObj.Hora[i];
       //document.getElementById('Temp2').innerHTML= myObj.h2 + 'C';
     }
@@ -109,7 +109,6 @@ var getdata = function getData()
 	//   var cell2 = row.insertCell(1);
 	//   cell1.innerHTML = Dia;
 	//   cell2.innerHTML = temp;
-    console.log(myObj);
     console.log(Temp1);
     console.log(Temp2);
     console.log(Temp3);

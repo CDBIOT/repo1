@@ -50,7 +50,13 @@
 	</div>
 </section>
 
-<div class =  container>
+<div class = temp_show>
+<p font-size = 48>Temperatura do Quarto </p>
+<br>
+<h1 id = "temp"> </h1><h1>   ºC</h1>
+</div> 
+
+<div class =  container></div>
 <form action="/mqtt" method = "get">
  <table>
     <tr><th colspan = 6> TEMPERATURA DA SALA </th></tr>
@@ -88,17 +94,25 @@
 </form>
 
 <br>
+<a ><img NAME="bar_04" src='imagens/Kit1.png' ALT=""></a>
 </div>
 </section>
 
 </body>
 <script type="text/javascript">
 	
-//var contagem = setInterval(function(){
-//	mqtt_show();
+var contagem = setInterval(function(){
+	mqtt_show();
 //	getContent();
+	myFunction() ;
 
-//},2000); 
+},60000); 
+
+
+fs.writeFile('myfile.txt', 'Hello content!', function (err) {
+	if (err) throw err;
+	console.log('Saved!');
+  });
 
 async function mqtt_show() {
 	const options = {
@@ -106,9 +120,9 @@ async function mqtt_show() {
 		mode: 'cors',
 		cache: 'default'
 					}
-	const response =fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
+	//const response =fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
 	//const response =fetch(URI)
-	//const response = fetch('http://127.0.0.1:8081/mqtt')
+	const response = fetch('http://127.0.0.1:8081/mqtt')
 	.then(function (response){
 	return response.text()})
 	.then(data=>{
@@ -132,10 +146,11 @@ const arrayTemps= [];
 for (var hora1 =0; hora1<11; hora1++)
 {
 hora1 = arrayTemps.push(temp);
-console.log(hora1);
+
 //arrayTemps.forEach(function (item, indice, array) {
 }
 console.log(arrayTemps);
+console.log(hora1);
 const init = {
 	method: 'post',
 	headers: {

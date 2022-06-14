@@ -39,6 +39,21 @@ client.on('message', (topic, payload) => {
   
 }, 1000);
 
+const topic2 = 'Quarto'
+client.on('connect', () => {
+  console.log('Connected')
+  client.subscribe([topic2], () => {
+    console.log(`Subscribe to topic '${topic2}'`)
+
+client.on('message', (topic2, payload) => {
+      temp = payload
+      local= topic2
+     // console.log('Received Message:', topic, payload.toString())
+      //res.status(200).json({m})
+    })
+  })
+})
+
  // client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: true }, (error) => {
 //  if (error) {
     //  console.error(error)
