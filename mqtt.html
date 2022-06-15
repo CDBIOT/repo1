@@ -51,14 +51,12 @@
 </section>
 
 <div class = temp_show>
-<p font-size = 48>Temperatura do Quarto </p>
-<br>
-<h1 id = "temp"> </h1><h1>   ºC</h1>
-</div> 
-
-<div class =  container></div>
-<form action="/mqtt" method = "get">
- <table>
+<form action="/mqtt" method = "get"></form>
+<table>
+<p >Temperatura do Quarto </p>
+ <tr>
+<td><h1 id = "temp"> </h1><h1>   ºC</h1></td>
+</tr>
     <tr><th colspan = 6> TEMPERATURA DA SALA </th></tr>
     <tr>
     <td><h1 id = "local"> </h1></td>
@@ -151,6 +149,7 @@ hora1 = arrayTemps.push(temp);
 }
 console.log(arrayTemps);
 console.log(hora1);
+
 const init = {
 	method: 'post',
 	headers: {

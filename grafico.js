@@ -1,6 +1,6 @@
 setInterval(function()
 {
-	getData();
+//	getData();
 	 // drawGraph();
   //drawAjax();
   // draw_Chart2();
@@ -66,14 +66,16 @@ function drawAjax(){
 //     piegraf.draw(data, piegraf_options);
 //   }
 
+
 function draw_Chart2()
+
 {
  var data = google.visualization.arrayToDataTable();
       ['Hora', 'Temp']
 
-         for (var i = 0; i < jsonTemp.length; i++)
+         for (var i = 0; i < hora1.length; i++)
           {
-           var row = [jsonTemp[i].Hora, jsonTemp[i].Temp];
+           var row = [hora1[i].Hora, hora1[i].Temp];
             data.push(row);
           }
          
@@ -82,25 +84,26 @@ function draw_Chart2()
  linhas.draw(data);
 }
         
-var getdata = function getData()
-    {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() 
-    {
-    if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200)
-    {
-      var myObj = JSON.parse(this.responseText);
-      
+async function getData(){	
+  const options = {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'default'
+                     }
+    const response =fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
+    //const response = fetch('http://127.0.0.1:8081/mqtt')
+    .then(function (response){
+    return response.text()})
+    .then(data=>{
+    console.log(data)
+    const myObj = JSON.parse(data)
      // for (var i = 0; i < 5; i++)
-      {
-     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.temps[0].temperatura);
-     var numero2 = document.getElementById('Temp2').innerText=parseInt(myObj.temps[0].temperatura);
-     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.temps[0].temperatura);
-     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.temps[0].temperatura);
-     var numero5 = document.getElementById('Temp5').innerText=parseInt(myObj.temps[0].temperatura);
-       // document.getElementById('Temp1').innerText= myObj.Hora[i];
-      //document.getElementById('Temp2').innerHTML= myObj.h2 + 'C';
-    }
+     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
+     var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
+     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
+     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
+     var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
+     
   //     values.push(myObj);
   //     timeStamp.push(time);
   //     showGraph();	//Update Graphs
@@ -114,21 +117,15 @@ var getdata = function getData()
     console.log(Temp3);
     console.log(Temp4);
     console.log(Temp5);
-  }   
-}
-}
-  function drawChart()
-  {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Dia');
-    data.addColumn('number', 'Temp');
-    data.addRows([      
-      ['01', numero1],
-      ['02', numero2],
-      ['03', numero3],
-      ['04', numero4],
-      ['05', numero5],
-      ]);
+
+    var data = new google.visualization.arrayToDataTable([
+     ['Dia','Temp'],
+     ['01', numero1],
+     ['02', numero2],
+     ['03', numero3],
+     ['04', numero4],
+     ['05', numero5]
+     ]);
 
     var options  = {
       'title' : 'TEMP/DIA',
@@ -138,11 +135,50 @@ var getdata = function getData()
     //instanciando e desenhando o grafico linhas
     var divgraf = new google.visualization.LineChart(document.getElementById('divgraf'));
     divgraf.draw(data,options);
+  })  
+ 
+}
 
-   // xmlhttp.open('GET', "/dados/jsonTemp.json",true);
-    xmlhttp.open('GET', 'http://127.0.0.1:8081/temps',true);
-    
-    xmlhttp.send();
-  }
+  function drawChart()
+  {
+    const options = {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'default'
+                     }
+    const response =fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
+    //const response = fetch('http://127.0.0.1:8081/mqtt')
+    .then(function (response){
+    return response.text()})
+    .then(data=>{
+    console.log(data)
+    const myObj = JSON.parse(data)
+     // for (var i = 0; i < 5; i++)
+     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
+     var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
+     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
+     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
+     var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
+     
+   // var data = google.visualization.arrayToDataTable([
+      var data = google.visualization.arrayToDataTable([
+        ['DIA', 'TEMP'],
+        ['01', 1],
+        ['02', 2],
+        ['03', 3],
+        ['04', 4],
+        ['05', 5]
+      ]);
+    var options  = {
+      'title' : 'TEMP/DIA',
+      'width' : 400,
+      'height': 300
+    };
+    //instanciando e desenhando o grafico linhas
+    var divgraf = new google.visualization.LineChart(document.getElementById('divgraf'));
+    divgraf.draw(data,options);
+
+  })
+}
 
   
