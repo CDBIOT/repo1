@@ -156,11 +156,11 @@ async function getData(){
        // var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
   
         ['DIA', 'TEMP'],
-        ['1', (myObj.vm.temp)],
-        ['2', (myObj.vm.temp)],
-        ['3', (myObj.vm.temp)],
-        ['4', (myObj.vm.temp)],
-        ['5', (myObj.vm.temp)]
+        [1, (myObj.vm.temp)],
+        [2, (myObj.vm.temp)],
+        [3, (myObj.vm.temp)],
+        [4, (myObj.vm.temp)],
+        [5, (myObj.vm.temp)]
       ]);
    // }
     var options_graf = {
