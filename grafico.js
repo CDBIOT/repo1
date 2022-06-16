@@ -68,11 +68,9 @@ function drawAjax(){
 
 
 function draw_Chart2()
-
 {
  var data = google.visualization.arrayToDataTable();
       ['Hora', 'Temp']
-
          for (var i = 0; i < hora1.length; i++)
           {
            var row = [hora1[i].Hora, hora1[i].Temp];
@@ -97,13 +95,14 @@ async function getData(){
     .then(data=>{
     console.log(data)
     const myObj = JSON.parse(data)
-     // for (var i = 0; i < 5; i++)
+      //for (var i = 0; i < 5; i++)
+    {
      var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
      var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
      var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
      var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
      var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
-     
+    }
   //     values.push(myObj);
   //     timeStamp.push(time);
   //     showGraph();	//Update Graphs
@@ -112,13 +111,9 @@ async function getData(){
 	//   var cell2 = row.insertCell(1);
 	//   cell1.innerHTML = Dia;
 	//   cell2.innerHTML = temp;
-    console.log(Temp1);
-    console.log(Temp2);
-    console.log(Temp3);
-    console.log(Temp4);
-    console.log(Temp5);
-
-    var data = new google.visualization.arrayToDataTable([
+   // console.log(Temp+i);
+  
+    var dados_graf = new google.visualization.arrayToDataTable([
      ['Dia','Temp'],
      ['01', numero1],
      ['02', numero2],
@@ -134,11 +129,9 @@ async function getData(){
     };
     //instanciando e desenhando o grafico linhas
     var divgraf = new google.visualization.LineChart(document.getElementById('divgraf'));
-    divgraf.draw(data,options);
+    divgraf.draw(dados_graf,options);
   })  
- 
 }
-
   function drawChart()
   {
     const options = {
@@ -153,32 +146,45 @@ async function getData(){
     .then(data=>{
     console.log(data)
     const myObj = JSON.parse(data)
-     // for (var i = 0; i < 5; i++)
-     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
-     var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
-     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
-     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
-     var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
-     
-   // var data = google.visualization.arrayToDataTable([
+      //for (var i = 0; i < 5; i++){ 
+        var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
+        var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
+        var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
+        var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
+        var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
+  
       var data = google.visualization.arrayToDataTable([
         ['DIA', 'TEMP'],
-        ['01', 1],
-        ['02', 2],
-        ['03', 3],
-        ['04', 4],
-        ['05', 5]
+        ['1', mumero1],
+        ['2', mumero2],
+        ['3', mumero3],
+        ['4', mumero4],
+        ['5', mumero5]
       ]);
+   // }
     var options  = {
       'title' : 'TEMP/DIA',
       'width' : 400,
       'height': 300
     };
     //instanciando e desenhando o grafico linhas
-    var divgraf = new google.visualization.LineChart(document.getElementById('divgraf'));
-    divgraf.draw(data,options);
+    var chart_div = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart_div.draw(data,options);
 
   })
 }
 
+// function draw_table(data){
+
+//   var table = document.getElementById('mytable');
+   
+//    for (var i = 0; i <data.length; i++)
+//    {
+      
+//     var row = ` <tr>
+//                  <td>${data[i].Temp}</td>
+//                <tr>`
+//                table.innerHTML += row
+//    }
+//    }
   
