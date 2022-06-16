@@ -147,29 +147,30 @@ async function getData(){
     console.log(data)
     const myObj = JSON.parse(data)
       //for (var i = 0; i < 5; i++){ 
-        var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
-        var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
-        var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
-        var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
-        var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
-  
+        
       var data = google.visualization.arrayToDataTable([
+        //var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
+        //var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
+        //var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
+        //var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
+       // var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
+  
         ['DIA', 'TEMP'],
-        ['1', mumero1],
-        ['2', mumero2],
-        ['3', mumero3],
-        ['4', mumero4],
-        ['5', mumero5]
+        ['1', (myObj.vm.temp)],
+        ['2', (myObj.vm.temp)],
+        ['3', (myObj.vm.temp)],
+        ['4', (myObj.vm.temp)],
+        ['5', (myObj.vm.temp)]
       ]);
    // }
-    var options  = {
+    var options_graf = {
       'title' : 'TEMP/DIA',
       'width' : 400,
       'height': 300
     };
     //instanciando e desenhando o grafico linhas
     var chart_div = new google.visualization.LineChart(document.getElementById('chart_div'));
-    chart_div.draw(data,options);
+    chart_div.draw(data,options_graf);
 
   })
 }
