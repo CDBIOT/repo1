@@ -18,9 +18,9 @@ content-type: application/json
 {
 //"_id": "2",
 "local": "sala",
-"temperatura": "16",
-"dia":"1",
-"mes":"05",
+"temperatura": "14",
+"dia":"18",
+"mes":"06",
 "ano":"2022"
 }
 ###
