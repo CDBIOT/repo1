@@ -131,6 +131,7 @@ async function getContent() {
 		.then(data=>{
 			console.log(data)
 			position = data.length;
+			console.log(position)
 			const myObj = JSON.parse(data)
 			//let divid = document.querySelector(".id")
 			//const list = document.querySelector('#fill_list')
@@ -170,24 +171,33 @@ const dados = {
 	"ano": anos
 	}
 
-const init = {
-	method: 'post',
-	headers: {
-"Content-type": 'application/json'
-
-	},
-	body: JSON.stringify(dados)
-	}
-	//mqtt_show.send (dados);
-
-// chamar post na api
-const response = await fetch('https://polar-beyond-82520.herokuapp.com/temps',init)
 //const response = await fetch('http://127.0.0.1:8081/temps')
-const datos = await response.json()
+const response = await fetch('https://polar-beyond-82520.herokuapp.com/temps',{
+method: 'POST',	mode: 'cors',
+headers: { "Content-type": 'application/json'},
+body: JSON.stringify({
+	local: local,
+	temperatura:temperatura,
+	dia: dias,
+	mes: meses,
+	ano: anos
+	})
+})
+.then((response) => {
+	if(res.status == 200)
+		{
+		alert('Cadastrada com sucesso');
+		console.log(res.json());
+		}else{
+			alert('Ocorreu um erro ao cadastrar!');
+			list();
+				}
 
-console.log(datos)
+}).catch((err) => {
+	alert('Ocorreu um erro no servidor \n Erro: '+ err);
+	})
+
 }
 
 </script>
-
 </html>
