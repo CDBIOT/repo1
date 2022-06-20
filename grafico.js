@@ -175,17 +175,23 @@ async function getData(){
   })
 }
 
-// function draw_table(data){
+ function draw_table(data){
 
-//   var table = document.getElementById('mytable');
-   
-//    for (var i = 0; i <data.length; i++)
-//    {
+   let table = document.getElementById('mytable');
+
+for (var i = 0; i <data.length; i++)
+   {
       
-//     var row = ` <tr>
-//                  <td>${data[i].Temp}</td>
-//                <tr>`
-//                table.innerHTML += row
-//    }
-//    }
+    let tr = table.insertRow();
+    let td_local = table.insertCell();
+    let td_temp = table.insertCell();
+    let td_dia = table.insertCell();
+    let td_mes = table.insertCell();
+    let td_ano = table.insertCell();
+    ` <tr>
+      <td>${data[i].temp}</td>
+      <tr>`
+      table.innerHTML += row
+    }
+}
   

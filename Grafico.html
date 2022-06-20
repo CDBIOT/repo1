@@ -35,7 +35,7 @@ google.charts.setOnLoadCallback(drawChart);
             <p>Draw Chart 2</p>
         </form>
         <form name="apaga" action="#" method="get">
-            <input type="image" src = "/imagens/blue/temp_btn.png" onClick="drawAjax()">
+            <input type="image" src = "/imagens/blue/temp_btn.png" onClick="draw_Chart2()">
             <p>Draw Ajax</p>
         </form>
         <form name="apaga" action="#" method="get">
@@ -60,10 +60,13 @@ google.charts.setOnLoadCallback(drawChart);
     <div class="container3">
         <div class="_dados">
             <h3>
-	         <table>
+	         <table><thead>
 	                <tr><th colspan = 2>TEMPERATURAS </th></tr>
+                </thead>
                     <tbody id = "mytable">
+
                     </tbody>
+                    <tfoot> </tfoot>
 	        </table>
                 <ul>
                 </ul>
