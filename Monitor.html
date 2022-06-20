@@ -187,17 +187,17 @@ body: JSON.stringify(
 })
 })	
 .then((response) => {
-	if(res.status == 200)
+	if(response.status == 200)
 		{
-		alert('Cadastrada com sucesso');
+		console.log('Cadastrada com sucesso');
 		console.log(res.json());
 		}else{
-			alert('Ocorreu um erro ao cadastrar!');
+			console.log('Ocorreu um erro ao cadastrar!');
 			list();
 				}
 
 }).catch((err) => {
-	alert('Ocorreu um erro no servidor \n Erro: '+ err);
+console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 	})
 
 }
