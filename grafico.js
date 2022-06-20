@@ -115,11 +115,11 @@ async function getData(){
   
     var dados_graf = new google.visualization.arrayToDataTable([
      ['Dia','Temp'],
-     ['01', numero1],
-     ['02', numero2],
-     ['03', numero3],
-     ['04', numero4],
-     ['05', numero5]
+     [01, parseInt(myObj.vm.temp)],
+     [02, parseInt(myObj.vm.temp)],
+     [03, parseInt(myObj.vm.temp)],
+     [04, parseInt(myObj.vm.temp)],
+     [05, parseInt(myObj.vm.temp)]
      ]);
 
     var options  = {
@@ -150,11 +150,7 @@ async function getData(){
         
       var data = google.visualization.arrayToDataTable([
         //var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
-        //var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
-        //var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
-        //var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
-       // var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
-  
+     
         ['DIA', 'TEMP'],
         [1, parseInt(myObj.vm.temp)],
         [2, parseInt(myObj.vm.temp)],
