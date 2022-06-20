@@ -176,12 +176,13 @@ const dados = {
 const response = await fetch('https://polar-beyond-82520.herokuapp.com/temps',{
 method: 'POST',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
-body: JSON.stringify({
-	local: local,
-	temperatura:temperatura,
-	dia: dias,
-	mes: meses,
-	ano: anos
+body: JSON.stringify(
+	{
+	"local": local,
+	"temperatura":temperatura,
+	"dia": dias,
+	"mes": meses,
+	"ano": anos
 	})
 })
 })	

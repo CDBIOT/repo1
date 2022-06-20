@@ -71,7 +71,7 @@ function draw_Chart2()
 {
  var data = google.visualization.arrayToDataTable();
       ['Hora', 'Temp']
-         for (var i = 0; i < hora1.length; i++)
+      for (var i = 0; i < hora1.length; i++)
           {
            var row = [hora1[i].Hora, hora1[i].Temp];
             data.push(row);
@@ -114,7 +114,7 @@ async function getData(){
    // console.log(Temp+i);
   
     var dados_graf = new google.visualization.arrayToDataTable([
-     ['Dia','Temp'],
+     ['Mês','Temp'],
      [01, parseInt(myObj.vm.temp)],
      [02, parseInt(myObj.vm.temp)],
      [03, parseInt(myObj.vm.temp)],
