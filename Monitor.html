@@ -130,11 +130,12 @@ async function getContent() {
 			return response.text()})
 		.then(data=>{
 			console.log(data)
+			position = data.length;
 			const myObj = JSON.parse(data)
 			//let divid = document.querySelector(".id")
 			//const list = document.querySelector('#fill_list')
-			var local = document.getElementById('local').innerHTML= myObj.temps[0].local;
-			var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[0].temperatura;
+			var local = document.getElementById('local').innerHTML= myObj.temps[position].local;
+			var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[position].temperatura;
 			var dia = document.getElementById('dia').innerHTML= myObj.temps[0].dia;
 			var mes = document.getElementById('mes').innerHTML= myObj.temps[0].mes;
 			var ano = document.getElementById('ano').innerText= myObj.temps[0].ano;
@@ -182,7 +183,6 @@ const datos = await response.json()
 
 console.log(datos)
 }
-
 
 </script>
 
