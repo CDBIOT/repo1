@@ -157,7 +157,7 @@ var temperatura = document.getElementById('temperatura').innerText= parseInt(myO
 var dias = document.getElementById('dia').innerText= parseInt(date.getDate());
 var meses = document.getElementById('mes').innerText= parseInt(date.getMonth()+ 1);
 var anos = document.getElementById('ano').innerText= parseInt(date.getFullYear());
-})			
+		
 
 //var dias = date.getDate();
 //var meses = date.getMonth()+ 1;
@@ -184,6 +184,7 @@ body: JSON.stringify({
 	ano: anos
 	})
 })
+})	
 .then((response) => {
 	if(res.status == 200)
 		{
