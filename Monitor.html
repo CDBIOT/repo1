@@ -149,7 +149,7 @@ return response.text()})
 .then(data=>{
 const myObj = JSON.parse(data)
 var local = document.getElementById('local').innerHTML= myObj.vm.local;
-var temperatura = document.getElementById('temperatura').innerHTML= myObj.vm.temp;
+var temperatura = document.getElementById('temperatura').innerText= parseInt(myObj.vm.temp);
 })			
 
 var local = myObj.vm.local;
@@ -161,8 +161,8 @@ var anos = date.getFullYear();
 console.log(local,temperatura,dias, meses, anos)
 
 const dados = {
-	"local": myObj.temps[0].local,
-	"temperatura": temperatura,
+	"local": local,
+	"temperatura":parseInt(myObj.vm.temp),
 	"dia": dias,
 	"mes": meses,
 	"ano": anos
