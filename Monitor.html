@@ -148,12 +148,12 @@ fetch('https://polar-beyond-82520.herokuapp.com/temps')
 return response.text()})
 .then(data=>{
 const myObj = JSON.parse(data)
-var local = document.getElementById('local').innerHTML= myObj.temps[0].local;
-var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[0].temperatura;
+var local = document.getElementById('local').innerHTML= myObj.vm.local;
+var temperatura = document.getElementById('temperatura').innerHTML= myObj.vm.temp;
 })			
 
-var local = local;
-var temperatura = temperatura;
+var local = myObj.vm.local;
+var temperatura = myObj.vm.temp;
 const date = new Date();
 var dias = date.getDate();
 var meses = date.getMonth()+ 1;
@@ -161,7 +161,7 @@ var anos = date.getFullYear();
 console.log(local,temperatura,dias, meses, anos)
 
 const dados = {
-	"local": local,
+	"local": myObj.temps[0].local,
 	"temperatura": temperatura,
 	"dia": dias,
 	"mes": meses,
