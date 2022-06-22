@@ -84,7 +84,7 @@ routers.delete('/temps/:id', async (req, res) => {
     try{
         await Temps.deleteOne({temperatura});
         res.status(200).json({message: 'Temperatura removida com sucesso'});
-        res.redirect('temps'
+        res.redirect('temps')
     }catch(error){
     res.status(500).json({error: error})
 }  
