@@ -26,17 +26,17 @@ var fs = require('fs');
     
  //Create temps
  routers.post('/temps', async (req, res) =>{
-    const {local, temperatura, dia, mes, ano } = req.body
+const {local, temperatura, dia, mes, ano } = req.body
    // const temps = req.params
- const temps = {local,temperatura, dia, mes, ano}
- const create_temp = new Temps(req.body);
- //temps.save()
+const temps = {local,temperatura, dia, mes, ano}
+const create_temp = new Temps(req.body);
+//temps.save()
     try{
         await Temps.create(temps)
         //temps.save()
         console.log(temps)
         res.status(201).json({message: "Temperatura inserida"})
-    }catch(error){
+        }catch(error){
         res.status(500).json({error: error})
     }  
 })
@@ -74,9 +74,9 @@ routers.patch('/temps/:id',async (req, res) =>{
 })
 
  //Delete
-routers.delete('/temps/:dia', async (req, res) => {
-    const dia= req.params.dia
-    const temps = await Temps.findByIdAndDelete({dia: dia})
+routers.delete('/temps/:id', async (req, res) => {
+    const id= req.params.id
+    const temps = await Temps.findByIdAndDelete({id: id})
     if(!temps){
     res.status(422).json({message:  'Temperatura não encontrada'});
     return

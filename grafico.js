@@ -18,7 +18,7 @@ function drawAjax(){
 //        }, 
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Mês');
-        data.addColumn('number', 'Faturamento Por Mês');
+        data.addColumn('number', 'Temperatura');
 
         for (var i = 0; i < jsonData.length; i++)
         {
