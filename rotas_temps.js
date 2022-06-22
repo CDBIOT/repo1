@@ -75,8 +75,8 @@ routers.patch('/temps/:id',async (req, res) =>{
 
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
-    const _id= req.params.id
-    const temps = await Temps.findByIdAndDelete({id: _id})
+    const id= req.params.id
+    const temps = await Temps.findByIdAndDelete({id: id})
     if(!temps){
     res.status(422).json({message:  'Temperatura não encontrada'});
     return
