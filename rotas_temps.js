@@ -53,9 +53,10 @@ routers.get('/temps', async (req, res) =>{
 
 //Read
 routers.get('/temps/:dia', async (req, res) =>{
+    const dia = req.params.dia
     try{
-       const temps = await Temps.findAll({dia})
-        res.status(200).json({temps})
+       const dias = await Temps.findAll({dia})
+        res.status(200).json({dias})
     }catch(error){
         res.status(500).json({error: error})
     }  
@@ -76,15 +77,17 @@ routers.patch('/temps/:id',async (req, res) =>{
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
     const id= req.params.id
-    const temps = await Temps.findByIdAndDelete({id: id})
+   // temps.remove({id: id})
+    const temps = await Temps.findByIdAndDelete({_id: id})
     if(!temps){
     res.status(422).json({message:  'Temperatura não encontrada'});
+    res.redirect('/temps')
     return
     }
     try{
         await Temps.deleteOne({temperatura});
         res.status(200).json({message: 'Temperatura removida com sucesso'});
-        res.redirect('temps')
+        res.redirect('/temps')
     }catch(error){
     res.status(500).json({error: error})
 }  

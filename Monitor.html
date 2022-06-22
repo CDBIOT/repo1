@@ -90,11 +90,11 @@
 </form>	
 <br>
 
-<form action="/temps" method = "delete">
+<form action="/temps" method = "post">
 	<table>
 	<tr><th colspan = 2>DELETAR</th></tr>
 	<tr>
-	<td><input type="text" value="id" name = "id" size="32" > </td>
+	<td><input type="text" value="_id" name = "_id" size="32" > </td>
 	<td><button type="submit">Deletar</button></td>
 	</tr>
 	</table>
@@ -178,15 +178,7 @@ const dados = {
 const response = fetch('https://polar-beyond-82520.herokuapp.com/temps',{
 method: 'POST',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
-body: JSON.stringify(dados
-	//{
-	//"local": (myObj.vm.local),
-	//"temperatura": parseInt(myObj.vm.temp),
-	//"dia": parseInt(myObj.vm.dia),
-	//"mes": parseInt(myObj.vm.mes),
-	//"ano": parseInt(myObj.vm.ano)
-	//}
-	)
+body: JSON.stringify(dados)
 })
 })	
 .then((response) => {
