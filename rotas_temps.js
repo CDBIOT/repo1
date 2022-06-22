@@ -66,7 +66,7 @@ routers.patch('/temps/:id',async (req, res) =>{
     const {local, temperatura, dia, mes, ano } = req.body
     const temps = {local, temperatura, dia, mes, ano}
     try{
-     const updateTemp = await Temps.updateOne({_id: id},temps);
+     const updateTemp = await Temps.updateOne({id: id},temps);
      res.status(200).json(temps);
     }catch(error){
     res.status(500).json({error: error})
@@ -84,6 +84,7 @@ routers.delete('/temps/:id', async (req, res) => {
     try{
         await Temps.deleteOne({temperatura});
         res.status(200).json({message: 'Temperatura removida com sucesso'});
+        res.redirect('temps'
     }catch(error){
     res.status(500).json({error: error})
 }  
