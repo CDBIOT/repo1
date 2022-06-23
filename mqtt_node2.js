@@ -15,7 +15,7 @@ const client = mqtt.connect(connectUrl, {
   reconnectPeriod: 1000,
 })
 
-const topic = 'Temp_sala'
+const topic = 'Sala'
 client.on('connect', () => {
   console.log('Connected')
   client.subscribe([topic], () => {
