@@ -91,29 +91,22 @@
 </table>
 </form>
 
-<br>
-<a ><img NAME="bar_04" src='imagens/Kit1.png' ALT=""></a>
 </div>
 </section>
 
+<br>
+<a ><img NAME="bar_04" src='imagens/Kit1.png' ALT=""></a>
 </body>
 
 
 <script type="text/javascript">
-
-	function Relogio() {
-		//  var disp;
-		  var hd=document.getElementById('hd');
-		  var md=document.getElementById('md');
-		  var sd=document.getElementById('sd');
-	  
-		  // add a zero in front of numbers<10
-		 // m=checkTime(m);
-		 // s=checkTime(s);
-		  document.getElementById('disp').innerHTML=hd+":"+md+":"+sd;
-		  
-	  }
 	
+setInterval(function(){
+	mqtt_show();
+//	getContent();
+
+},60000); 
+
 		function startTime() {
 			var today=new Date();
 			var h=today.getHours();
@@ -122,7 +115,7 @@
 			// add a zero in front of numbers<10
 			m=checkTime(m);
 			s=checkTime(s);
-			document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+			document.getElementById('txt').innerText= h+":"+m+":"+s;
 			t=setTimeout('startTime()',500);
 		}
 	   
@@ -139,20 +132,11 @@
 		var md=document.getElementById('md');
 		var sd=document.getElementById('sd');
 		document.getElementById('disp').innerHTML=hd+":"+md+":"+sd;
+		console.log(disp)
 
 	}
 		
-
-</script>
-
-<script type="text/javascript">
 	
-var contagem = setInterval(function(){
-	mqtt_show();
-//	getContent();
-	myFunction() ;
-
-},60000); 
 
 
 fs.writeFile('myfile.txt', 'Hello content!', function (err) {
@@ -176,27 +160,20 @@ async function mqtt_show() {
 	let mes 	= document.getElementById('mes').innerText  = parseInt(myObj.vm.mes);
 	let ano 	= document.getElementById('ano').innerText  = parseInt(myObj.vm.ano);
 
-const dados = {
-	"local": (myObj.vm.local),
-	"temperatura": parseInt(myObj.vm.temp),
-	"dia": parseInt(myObj.vm.dia),
-	"mes": parseInt(myObj.vm.mes),
-	"ano": parseInt(myObj.vm.ano)
+})
 }
 
+function myFunction() {
 const arrayTemps= [];
 for (var hora1 =0; hora1<11; hora1++)
-{
-hora1 = arrayTemps.push(temp);
-
-//arrayTemps.forEach(function (item, indice, array) {
-}
+	{
+		hora1 = arrayTemps.push(temp);
+	}
 console.log(arrayTemps);
 console.log(hora1);
 console.log(dados)
 console.log(response)
-
-})
 }
 
+</script>
 </html>
