@@ -138,8 +138,17 @@ async function getContent() {
 			return response.text()})
 		.then(data=>{
 			console.log(data)
-			position = data.length;
-			console.log(position)
+			position= data.keys
+			var tamanho= 0;  
+			for (var i in data) {
+   			 if (data.hasOwnProperty(i)) {
+      			  tamanho++;
+   				 }
+				}
+
+			console.log("tamanho: ",tamanho)
+			
+			console.log("position: "position)
 			const myObj = JSON.parse(data)
 			//let divid = document.querySelector(".id")
 			//const list = document.querySelector('#fill_list')
