@@ -144,19 +144,21 @@ async function getContent() {
    			 if (data.hasOwnProperty(i)) {
       			  tamanho++;
    				 }
-				}
-
+				}		
 			console.log("tamanho: ", tamanho)
-			
 			console.log("position: ", position)
+				
+				for (var i = 0; i < data.length; i++)
+				{	
 			const myObj = JSON.parse(data)
 			//let divid = document.querySelector(".id")
 			//const list = document.querySelector('#fill_list')
-			var local = document.getElementById('local').innerHTML= myObj.temps[5].local;
-			var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[0].temperatura;
-			var dia = document.getElementById('dia').innerHTML= myObj.temps[0].dia;
-			var mes = document.getElementById('mes').innerHTML= myObj.temps[0].mes;
-			var ano = document.getElementById('ano').innerText= myObj.temps[0].ano;
+			var local = document.getElementById('local').innerHTML= myObj.temps[i].local;
+			var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[i].temperatura;
+			var dia = document.getElementById('dia').innerHTML= myObj.temps[i].dia;
+			var mes = document.getElementById('mes').innerHTML= myObj.temps[i].mes;
+			var ano = document.getElementById('ano').innerText= myObj.temps[i].ano;
+		}
 		})			
 }
 
