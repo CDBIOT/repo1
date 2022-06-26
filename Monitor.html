@@ -138,6 +138,7 @@ async function getContent() {
 		.then(function (response){
 			return response.text()})
 		.then(data=>{
+		const myObj = JSON.parse(data)
 		console.log(data)
 		position= data.entries
 		var tamanho= 0;  
@@ -148,7 +149,7 @@ async function getContent() {
    			//	 }
 			//}		 
 	
-			for (const [key, value] of Object.entries (data)) {
+			for (const [key, value] of Object.entries (myObj)) {
 		//console.log(`${key}: ${value}`);
 		console.log(key + "-" + value);
 			}
@@ -157,7 +158,7 @@ async function getContent() {
 		console.log("position: ", position)
 			//for (var i = 0; i < data.length; i++)
 				{	
-			const myObj = JSON.parse(data)
+			//const myObj = JSON.parse(data)
 			//let divid = document.querySelector(".id")
 			//const list = document.querySelector('#fill_list')
 			var local = document.getElementById('local').innerHTML= myObj.temps[i].local;
