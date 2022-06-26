@@ -134,21 +134,24 @@ async function getContent() {
 						}
 		fetch('https://polar-beyond-82520.herokuapp.com/temps')
 		//fetch('http://127.0.0.1:8081/temps')
+		//fetch('http://127.0.0.1:5500/temps')
 		.then(function (response){
 			return response.text()})
 		.then(data=>{
-			console.log(data)
-			position= data.keys
-			var tamanho= 0;  
-			for (var i in data) {
-   			 if (data.hasOwnProperty(i)) {
+		console.log(data)
+		position= data.keys
+		var tamanho= 0;  
+			for (const i in data) {
+   			if (data.hasOwnProperty(i))
+			 {
       			  tamanho++;
    				 }
-				}		
-			console.log("tamanho: ", tamanho)
-			console.log("position: ", position)
+			}		
 				
-				for (var i = 0; i < data.length; i++)
+		console.log(`${i}: ${data[i]}`)
+		console.log("tamanho: ", tamanho)
+		console.log("position: ", position)
+			//for (var i = 0; i < data.length; i++)
 				{	
 			const myObj = JSON.parse(data)
 			//let divid = document.querySelector(".id")
@@ -159,6 +162,7 @@ async function getContent() {
 			var mes = document.getElementById('mes').innerHTML= myObj.temps[i].mes;
 			var ano = document.getElementById('ano').innerText= myObj.temps[i].ano;
 		}
+		
 		})			
 }
 

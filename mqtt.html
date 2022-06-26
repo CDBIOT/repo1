@@ -53,9 +53,9 @@
 <div class = temp_show>
 <form action="/mqtt" method = "get"></form>
 <table>
-<p >Temperatura do Quarto </p>
- <tr>
-<td><h1 id = "temp"> </h1><h1>   ºC</h1></td>
+	<tr><th colspan = 6> TEMPERATURA DO QUARTO </th></tr>
+ <tr><td><h1 id = "temp"> </h1>
+</td> <td><h1>   ºC</h1></td>
 </tr>
     <tr><th colspan = 6> TEMPERATURA DA SALA </th></tr>
     <tr>
@@ -74,14 +74,21 @@
 <table>
 <tr><td colspan = 6><h1>Relogio IOT</h1></tr></td>
 <tr><td>Hora </td> <td><h1 id = "txt"> </h1></td></tr>
-<tr><td><h2>Disparo </h2></td>
-<td><input type="text" 	name = "hd" id= "hd" value = "10" size="6" >
-	<input type="text"  name = "md" id= "md" value = "10"  size="6" > 
-	<input type="text" 	name = "sd" id= "sd" value = "10"  size="6" > </td> 
-	<tr></tr><td><h1 id = "disp"> </h1></td></tr>
-<tr><td><h2>Tempo ligado </h2></td><td><input type="text" id="tempo" value="" maxlength="16" ></td> <td><h2 id="tempo"></h2></td></tr>
+
+<tr><td><h2 colspan = 6>Disparo </h2></td>
+<td><input type="text" 	name = "horad"id= "hd" value = "10"  size="6" >
+	<input type="text"  name = "mind" id= "md" value = "10"  size="6" > 
+	<input type="text" 	name = "secd" id= "sd" value = "10"  size="6" > </td> </tr>
+	
+<tr><td><h2 colspan = 6>Tempo ligado </h2></td>
+	<td><h1 id = "disp"> </h1></td>
+	<tr>
+	<td><input type="text" id="tempo" value="" maxlength="10" ></td> </tr>
+	<td><h2 id="tempo"></h2></td></tr>
+
 <td rowspan =2>Estado<td><span id="rele">N/D</span></td>
 </tr>
+
 <tr><td>
 	<input type="button" id="btnOn"   value="Ligar"    onClick="setRelay(1)">
 	<input type="button" id="btnOff"  value="Desligar" onClick="setRelay(0)">
@@ -95,7 +102,9 @@
 </section>
 
 <br>
+<div class = img_kit>
 <a ><img NAME="bar_04" src='imagens/Kit1.png' ALT=""></a>
+</div>
 </body>
 
 
@@ -128,15 +137,42 @@ setInterval(function(){
 		}
 
 	function setdisp(){
+
+// Set the date we're counting down to
+var countDownDate = new Date("Jun 27, 2022 15:37:25").getTime();
+
 		var hd=document.getElementById('hd');
 		var md=document.getElementById('md');
 		var sd=document.getElementById('sd');
-		document.getElementById('disp').innerHTML=hd+":"+md+":"+sd;
 		console.log(disp)
-
-	}
-		
 	
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+	
+	  // Get today's date and time
+	  var now = new Date().getTime();
+	
+	  // Find the distance between now and the count down date
+	  var distance = countDownDate - now;
+	
+	  // Time calculations for days, hours, minutes and seconds
+	  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	
+	  // Display the result in the element with id="demo"
+	  document.getElementById("disp").innerHTML = days + "d " + hours + "h "
+	  + minutes + "m " + seconds + "s ";
+	
+	  // If the count down is finished, write some text
+	  if (distance < 0) {
+		clearInterval(x);
+		document.getElementById("disp").innerHTML = "EXPIRED";
+	  }
+	}, 1000);
+}
+
 
 
 fs.writeFile('myfile.txt', 'Hello content!', function (err) {
@@ -167,8 +203,10 @@ function myFunction() {
 const arrayTemps= [];
 for (var hora1 =0; hora1<11; hora1++)
 	{
-		hora1 = arrayTemps.push(temp);
+	hora1 = arrayTemps.push(temp);
 	}
+
+	
 console.log(arrayTemps);
 console.log(hora1);
 console.log(dados)
