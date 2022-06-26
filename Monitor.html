@@ -140,18 +140,18 @@ async function getContent() {
 		.then(data=>{
 		const myObj = JSON.parse(data)
 		console.log(data)
-		position= data.entries
+		position= myObj.entries
 		var tamanho= 0;  
-			 //for (const position in data) {
-   			//if (data.hasOwnProperty(position))
-			// {
-      		//	  tamanho++;
-   			//	 }
-			//}		 
+			 for (const position in data) {
+   			if (data.hasOwnProperty(position))
+			 {
+      			  tamanho++;
+   				 }
+			}		 
 	
 			for (const [key, value] of Object.entries (myObj)) {
-		//console.log(`${key}: ${value}`);
-		console.log(key + "-" + value);
+		console.log(`${key}: ${value}`);
+		//console.log(key + "-" + value);
 			}
 
 		console.log("tamanho: ", tamanho)
