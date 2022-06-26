@@ -141,14 +141,15 @@ async function getContent() {
 		console.log(data)
 		position= data.keys
 		var tamanho= 0;  
-			for (const i in data) {
+			for (const position in data) {
    			if (data.hasOwnProperty(i))
 			 {
       			  tamanho++;
    				 }
 			}		
-			for (const i in data) {
-		console.log(`${i}: ${data[i]}`);
+			position= data.keys
+			for (const position in data) {
+		console.log(`${position}: ${data[position]}`);
 			}
 		console.log("tamanho: ", tamanho)
 		console.log("position: ", position)
