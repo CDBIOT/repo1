@@ -148,9 +148,11 @@ async function getContent() {
    			//	 }
 			//}		 
 	
-			for (const [key, value] of Object.entries (temps)) {
-		console.log(`${key}: ${value}`);
+			for (const [key, value] of Object.entries (data)) {
+		//console.log(`${key}: ${value}`);
+		console.log(key + "-" + value);
 			}
+
 		console.log("tamanho: ", tamanho)
 		console.log("position: ", position)
 			//for (var i = 0; i < data.length; i++)
