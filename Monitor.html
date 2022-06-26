@@ -140,7 +140,7 @@ async function getContent() {
 		.then(data=>{
 		const myObj = JSON.parse(data)
 		console.log(data)
-		position= myObj.entries
+		position= myObj.temps.entries
 		var tamanho= 0;  
 			 for (const position in data) {
    			if (data.hasOwnProperty(position))
@@ -149,8 +149,12 @@ async function getContent() {
    				 }
 			}		 
 	
-			for (const [key, value] of Object.entries (myObj)) {
+			for (const [key, value] of Object.entries (myObj.temps)) {
 		console.log(`${key}: ${value}`);
+			}
+
+			for (var i in myObj.temps) {
+		console.log(i + " - " + myObj.temps[i])
 		//console.log(key + "-" + value);
 			}
 
