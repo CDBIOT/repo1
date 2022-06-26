@@ -148,10 +148,11 @@ async function getContent() {
       			  tamanho++;
    				 }
 			}		 
-	
-			for (const [key, value] of Object.entries (myObj.temps)) {
-		console.log(`${temps.key}: ${temps.value}`);
+			for (var k in myObj.temps){
+			for (const [key, value] of Object.entries (myObj.temps[k])) {
+		console.log(`${key}: ${value}`);
 			}
+		}
 
 			for (var i in myObj.temps) {
 		console.log(i + " - " + myObj.temps[i].temperatura)
