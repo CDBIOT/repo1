@@ -95,7 +95,7 @@ async function getData(){
     .then(data=>{
     console.log(data)
     const myObj = JSON.parse(data)
-      //for (var i = 0; i < 5; i++)
+    //for (var i in myObj.temps)
     {
      var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
      var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
@@ -103,6 +103,12 @@ async function getData(){
      var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
      var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
     }
+
+    for (const property in data){
+      console.log (`${propety}: ${data[property]}`);
+    }
+
+
   //     values.push(myObj);
   //     timeStamp.push(time);
   //     showGraph();	//Update Graphs
@@ -111,7 +117,6 @@ async function getData(){
 	//   var cell2 = row.insertCell(1);
 	//   cell1.innerHTML = Dia;
 	//   cell2.innerHTML = temp;
-   // console.log(Temp+i);
   
     var dados_graf = new google.visualization.arrayToDataTable([
      ['Mês','Temp'],
@@ -175,7 +180,7 @@ async function getData(){
 
    let table = document.getElementById('mytable');
 
-for (var i = 0; i <data.length; i++)
+   for (var i in myObj.temps)
    {
       
     let tr = table.insertRow();
@@ -184,10 +189,10 @@ for (var i = 0; i <data.length; i++)
     let td_dia = table.insertCell();
     let td_mes = table.insertCell();
     let td_ano = table.insertCell();
-    ` <tr>
-      <td>${data[i].temp}</td>
-      <tr>`
-      table.innerHTML += row
-    }
+  {`<tr>  <td>${myObj.temps[i].temp}</td>  <tr>`
+      table.innerHTML += row;
+      
+   }
+  }
 }
   
