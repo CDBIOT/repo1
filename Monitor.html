@@ -147,8 +147,9 @@ async function getContent() {
       			  tamanho++;
    				 }
 			}		
-				
-		console.log(`${i}: ${data[i]}`)
+			for (const i in data) {
+		console.log(`${i}: ${data[i]}`);
+			}
 		console.log("tamanho: ", tamanho)
 		console.log("position: ", position)
 			//for (var i = 0; i < data.length; i++)
