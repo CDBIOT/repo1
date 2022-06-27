@@ -256,19 +256,10 @@ async function list_temp(){
 
 		  for (const [key, value] of Object.entries (myObj.temps[k])) {
 	      console.log(`${key}: ${value}`);
-
-	      let tr = table.insertRow();
-	      let td_local = table.insertCell();
-	      let td_temp = table.insertCell();
-	      let td_dia = table.insertCell();
-	      let td_mes = table.insertCell();
-	      let td_ano = table.insertCell();
 	  
-      {
     	`<tr>  <td>${myObj.temps[i].temperatura}</td> <tr>`
 	    //console.log(i + " - " + myObj.temps[i].temperatura)
     	table.innerHTML += row;  
-    	}
     }
    }
   
