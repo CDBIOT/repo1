@@ -251,10 +251,16 @@ async function list_temp(){
 		const myObj = JSON.parse(data)
 
 	  let table = document.getElementById('mytable');
+	
 
 	  for (var k in myObj.temps){
 
 		  for (const [key, value] of Object.entries (myObj.temps[k])) {
+
+			var tr = table.insertRow();
+			var td_temperatura = tr.insertCell();
+			var td_dia = tr.insertCell();
+
 	      console.log(`${key}: ${value}`);
 	  
     	`<tr>  <td>${myObj.temps[k].temperatura}</td> <tr>`

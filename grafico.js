@@ -20,7 +20,7 @@ function drawAjax(){
         data.addColumn('number', 'Mês');
         data.addColumn('number', 'Temperatura');
 
-        for (var i = 0; i < jsonData.length; i++)
+        for (var i = 0; i < data.length; i++)
         {
             mes = resposta[i].Mes;
             total = resposta[i].Total;
@@ -49,7 +49,7 @@ function drawAjax(){
 //     var dataArray = [];
 //     $.each(result, function(i, obj) 
 //     {
-//       dataArray.push([myobj.h1, parseInt(myobj.h2)]);
+//       dataArray.push([myObj.temps[i], parseInt(myObj.temps[i])]);
 //     });
 //     data.addRows(dataArray);
 
@@ -191,8 +191,7 @@ async function getData(){
     let td_ano = table.insertCell();
   {`<tr>  <td>${myObj.temps[i].temp}</td>  <tr>`
       table.innerHTML += row;
-      
    }
   }
 }
-  
+
