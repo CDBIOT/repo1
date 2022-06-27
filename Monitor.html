@@ -95,7 +95,7 @@
             <h3>
 	         	<table>
 					<thead>
-	                <tr><th colspan = 2>TEMPERATURAS </th></tr>
+					<th>LOCAL </th><th >TEMPERATURAS </th><th>DIA </th><th> MES</th><th>ANO</th>
                 	</thead>
                     	<tbody id = "mytable">
 
@@ -258,14 +258,22 @@ async function list_temp(){
 		  for (const [key, value] of Object.entries (myObj.temps[k])) {
 
 			var tr = table.insertRow();
+			var td_local = tr.insertCell();
 			var td_temperatura = tr.insertCell();
 			var td_dia = tr.insertCell();
+			var td_mes = tr.insertCell();
+			var td_ano = tr.insertCell();
 
+			td_local.innerHTML = myObj.temps[k].local
 			td_temperatura.innerHTML = myObj.temps[k].temperatura
+			td_dia.innerHTML = myObj.temps[k].dia
+			td_mes.innerHTML = myObj.temps[k].mes
+			td_ano.innerHTML = myObj.temps[k].ano
 			
 	      console.log(`${key}: ${value}`);
 	  
-    	`<tr>  <td>${myObj.temps[k].temperatura}</td> <tr>`
+    	`<tr>  <td>${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
+
 	    //console.log(i + " - " + myObj.temps[i].temperatura)
     	//table.innerHTML += row;  
     }
