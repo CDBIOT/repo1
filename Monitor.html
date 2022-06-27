@@ -257,7 +257,7 @@ async function list_temp(){
 		  for (const [key, value] of Object.entries (myObj.temps[k])) {
 	      console.log(`${key}: ${value}`);
 	  
-    	`<tr>  <td>${myObj.temps[i].temperatura}</td> <tr>`
+    	`<tr>  <td>${myObj.temps[k].temperatura}</td> <tr>`
 	    //console.log(i + " - " + myObj.temps[i].temperatura)
     	table.innerHTML += row;  
     }
