@@ -261,11 +261,13 @@ async function list_temp(){
 			var td_temperatura = tr.insertCell();
 			var td_dia = tr.insertCell();
 
+			td_temperatura.innerHTML = myObj.temps[k].temperatura
+			
 	      console.log(`${key}: ${value}`);
 	  
     	`<tr>  <td>${myObj.temps[k].temperatura}</td> <tr>`
 	    //console.log(i + " - " + myObj.temps[i].temperatura)
-    	table.innerHTML += row;  
+    	//table.innerHTML += row;  
     }
    }
   
