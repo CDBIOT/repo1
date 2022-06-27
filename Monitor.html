@@ -82,13 +82,33 @@
 <form action="/temps" method = "get">
 <table>
 	<tr><th colspan =2>Consultar Temperaturas</th></tr>
-	<tr><td><h2><input type="text" name = "list" size="12" ></h2></td>
+	<tr>
+	<td><h2><input type="button" onclick=list_temp() value="LISTAR" />
 	<td><h2><button type="submit">Listar</button></h2></td>
 	</tr>
-
 </table>
 </form>	
 <br>
+
+<section class="table">
+        <div class="_dados">
+            <h3>
+	         	<table>
+					<thead>
+	                <tr><th colspan = 2>TEMPERATURAS </th></tr>
+                	</thead>
+                    	<tbody id = "mytable">
+
+                    	</tbody>
+                    		<tfoot> </tfoot>
+	        	</table>
+                <ul>
+                </ul>
+			</h3>
+		</div>
+</section>
+
+<table>
 
 <form action="/temps" method = "delete">
 	<table>
@@ -163,15 +183,14 @@ async function getContent() {
 		console.log("position: ", position)
 			//for (var i = 0; i < data.length; i++)
 				{	
-			//const myObj = JSON.parse(data)
-			//let divid = document.querySelector(".id")
-			//const list = document.querySelector('#fill_list')
 			var local = document.getElementById('local').innerHTML= myObj.temps[i].local;
 			var temperatura = document.getElementById('temperatura').innerHTML= myObj.temps[i].temperatura;
 			var dia = document.getElementById('dia').innerHTML= myObj.temps[i].dia;
 			var mes = document.getElementById('mes').innerHTML= myObj.temps[i].mes;
 			var ano = document.getElementById('ano').innerText= myObj.temps[i].ano;
 		}
+		//let divid = document.querySelector(".id")
+			//const list = document.querySelector('#fill_list')
 		
 		})			
 }
@@ -219,6 +238,42 @@ body: JSON.stringify(dados)
 }).catch((err) => {
 console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 	})
+}
+
+
+async function list_temp(){
+	//Obtem dados do banco de dados
+		const options = {method: 'GET',	mode: 'cors',cache: 'default'}
+		fetch('https://polar-beyond-82520.herokuapp.com/temps')
+		.then(function (response){
+			return response.text()})
+		.then(data=>{
+		const myObj = JSON.parse(data)
+
+	  let table = document.getElementById('mytable');
+
+	  for (var k in myObj.temps){
+
+		  for (const [key, value] of Object.entries (myObj.temps[k])) {
+	      console.log(`${key}: ${value}`);
+
+	      let tr = table.insertRow();
+	      let td_local = table.insertCell();
+	      let td_temp = table.insertCell();
+	      let td_dia = table.insertCell();
+	      let td_mes = table.insertCell();
+	      let td_ano = table.insertCell();
+	  
+      {
+    	`<tr>  <td>${myObj.temps[i].temperatura}</td> <tr>`
+	    //console.log(i + " - " + myObj.temps[i].temperatura)
+    	table.innerHTML += row;  
+    	}
+    }
+   }
+  
+  })
+
 }
 
 </script>
