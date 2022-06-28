@@ -44,13 +44,15 @@
   }
   th {
     font-size: 11px;
+    max-width: 100px;
     background: rgb(118,156,236);
-    text-align: right;
+    text-align: center;
     padding: 5px;
     border-radius: 3px 0px 0px 3px;
     width: 100%;
   }
   td {
+    max-width: 100px;
     font-size: 11px;
     background: #768cec;
     padding: 5px;
@@ -137,8 +139,16 @@
 img
 {
     border: 0;
+   
 }
+.img_kit img
+{
+  align-items: center;
+  display: flex;
+  width: 600px;
+  height: 300px;
 
+}
 
 .botãochart
 {
