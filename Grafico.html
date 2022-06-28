@@ -11,8 +11,9 @@
 <script>
 google.charts.load('current',{packages:['corechart']});
 google.charts.setOnLoadCallback(drawChart);
-google.charts.setOnLoadCallback(draw_Chart2);
+google.charts.setOnLoadCallback(drawAjax);
 google.charts.setOnLoadCallback(getData);
+google.charts.setOnLoadCallback(draw_table);
 </script>
 </head>
 <body>
@@ -33,16 +34,16 @@ google.charts.setOnLoadCallback(getData);
     <div class="container1">
      <div class="botão_chart">
         <form name="apaga" action="#" method="get">
-            <input type="image" src = "/imagens/blue/graph_btn.png" onClick="drawChart()">
-            <p>Draw Chart 2</p>
-        </form>
-        <form name="apaga" action="#" method="get">
-            <input type="image" src = "/imagens/blue/temp_btn.png" onClick="draw_Chart2()">
+            <input type="image" src = "/imagens/blue/graph_btn.png" onClick="drawAjax()">
             <p>Draw Ajax</p>
         </form>
         <form name="apaga" action="#" method="get">
-            <input type="image" src = "/imagens/blue/lamp_btn.png" onClick="getData()">
+            <input type="image" src = "/imagens/blue/temp_btn.png" onClick="getData()">
             <p>Get Data</p>
+        </form>
+        <form name="apaga" action="#" method="get">
+            <input type="image" src = "/imagens/blue/lamp_btn.png" onClick="drawChart()">
+            <p>Draw Chart</p>
         </form>
      </div>
     </div>
@@ -58,11 +59,19 @@ google.charts.setOnLoadCallback(getData);
     </div>
 </section>
 
-<tr><td><h1>Temp1</h1></td><td><h1 id = "Temp1"></h1></td></tr>
-<tr><td><h1>Temp2</h1></td><td><h1 id = "Temp2"></h1></td></tr>
-<tr><td><h1>Temp3</h1></td><td><h1 id = "Temp3"></h1></td></tr>
-<tr><td><h1>Temp4</h1></td><td><h1 id = "Temp4"></h1></td></tr>
-<tr><td><h1>Temp5</h1></td><td><h1 id = "Temp5"></h1></td></tr>
+<section class="table">
+    <div class="_dados">
+    <table>
+        <div class = "thead"> 
+        <thead>
+        <th>ID</th><th>LOCAL </th><th>TEMPERATURAS </th><th>DIA </th><th> MES</th><th>ANO</th>
+        </thead>
+        </div>
+            <tbody id = "mytable"></tbody>
+            <tfoot> </tfoot>
+     </table>
+   </div>
+</section>
 
 </table>
 
