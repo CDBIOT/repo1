@@ -10,23 +10,23 @@ setInterval(function()
 function drawAjax(){
 // //   google.charts.load('current',{ packages:['corechart']}).then(function () {
    $.ajax({
-      url: 'http://127.0.0.1:8081/temps',
+      url: 'https://polar-beyond-82520.herokuapp.com/temps',
       method: 'GET',
       dataType: "json",
       success: function(resposta) {
 //    drawChart(result);
 //        }, 
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Mês');
+        data.addColumn('number', 'Dia');
         data.addColumn('number', 'Temperatura');
 
-        for (var i = 0; i < data.length; i++)
+        for (var i in resposta.temps)
         {
-            mes = resposta[i].Mes;
-            total = resposta[i].Total;
-            data.addRow([mes, total]);
+            dia = resposta.temps[i].dia;
+            temperatura = resposta.temps[i].temperatura;
+            data.addRow([dia, temperatura]);
         }
-      console.log(resposta);  
+      //console.log(resposta);  
              
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(resposta);
@@ -49,7 +49,7 @@ function drawAjax(){
 //     var dataArray = [];
 //     $.each(result, function(i, obj) 
 //     {
-//       dataArray.push([myObj.temps[i], parseInt(myObj.temps[i])]);
+//       dataArray.push([myObj.dia[i], parseInt(myObj.tempemperatura[i])]);
 //     });
 //     data.addRows(dataArray);
 
@@ -67,68 +67,40 @@ function drawAjax(){
 //   }
 
 
-function draw_Chart2()
-{
- var data = google.visualization.arrayToDataTable();
-      ['Hora', 'Temp']
-      for (var i = 0; i < hora1.length; i++)
-          {
-           var row = [hora1[i].Hora, hora1[i].Temp];
-            data.push(row);
-          }
          
- var linhas = new google.visualization.LineChart(document.getElementById('linhas'));
-
- linhas.draw(data);
-}
         
 async function getData(){	
+
   const options = {
       method: 'GET',
       mode: 'cors',
       cache: 'default'
                      }
-    const response =fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
+    const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
     //const response = fetch('http://127.0.0.1:8081/mqtt')
     .then(function (response){
     return response.text()})
     .then(data=>{
-    console.log(data)
+    //console.log(data)
     const myObj = JSON.parse(data)
-    //for (var i in myObj.temps)
-    {
-     var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
-     var numero2 = document.getElementById('Temp2').innerText= parseInt(myObj.vm.temp);
-     var numero3 = document.getElementById('Temp3').innerText= parseInt(myObj.vm.temp);
-     var numero4 = document.getElementById('Temp4').innerText= parseInt(myObj.vm.temp);
-     var numero5 = document.getElementById('Temp5').innerText= parseInt(myObj.vm.temp);
-    }
-
-    for (const property in data){
-      console.log (`${propety}: ${data[property]}`);
-    }
-
-
-  //     values.push(myObj);
-  //     timeStamp.push(time);
-  //     showGraph();	//Update Graphs
-	//   var row = table.insertRow(1);	//Add after headings
-	//   var cell1 = row.insertCell(0);
-	//   var cell2 = row.insertCell(1);
-	//   cell1.innerHTML = Dia;
-	//   cell2.innerHTML = temp;
   
-    var dados_graf = new google.visualization.arrayToDataTable([
-     ['Mês','Temp'],
-     [01, parseInt(myObj.vm.temp)],
-     [02, parseInt(myObj.vm.temp)],
-     [03, parseInt(myObj.vm.temp)],
-     [04, parseInt(myObj.vm.temp)],
-     [05, parseInt(myObj.vm.temp)]
-     ]);
+    var dados_graf = new google.visualization.DataTable();
+    //var dados_graf = new google.visualization.arrayToDataTable([
+      dados_graf.addColumn('string', 'Dia');
+      dados_graf.addColumn('number', 'Temp');
+    //var dataArray = [];
 
+    //['Mês','Temp'],
+
+     for (var k in myObj.temps)
+     {
+     // var row = [myObj.temps[i].dia,  myObj.temps[i].temperatura],
+      var row = [`${myObj.temps[k].dia}`, `${myObj.temps[k].temperatura}`]
+      dados_graf.push(row);
+    }
+    
     var options  = {
-      'title' : 'TEMP/DIA',
+      'title' : 'DIVGRAF',
       'width' : 400,
       'height': 300
     };
@@ -136,6 +108,7 @@ async function getData(){
     var divgraf = new google.visualization.LineChart(document.getElementById('divgraf'));
     divgraf.draw(dados_graf,options);
   })  
+
 }
   function drawChart()
   {
@@ -144,54 +117,75 @@ async function getData(){
       mode: 'cors',
       cache: 'default'
                      }
-    const response =fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
+    const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
     //const response = fetch('http://127.0.0.1:8081/mqtt')
     .then(function (response){
     return response.text()})
     .then(data=>{
-    console.log(data)
+   // console.log(data)
     const myObj = JSON.parse(data)
-      //for (var i = 0; i < 5; i++){ 
+    for (var k in myObj.temps){ 
         
       var data = google.visualization.arrayToDataTable([
         //var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
      
         ['DIA', 'TEMP'],
-        [1, parseInt(myObj.vm.temp)],
-        [2, parseInt(myObj.vm.temp)],
-        [3, parseInt(myObj.vm.temp)],
-        [4, parseInt(myObj.vm.temp)],
-        [5, parseInt(myObj.vm.temp)]
+
+        [k, parseInt(myObj.temps[k].temperatura)],
+       
       ]);
-   // }
+    }
     var options_graf = {
-      'title' : 'TEMP/DIA',
+      'title' : 'CHART_DIV',
       'width' : 400,
       'height': 300
     };
     //instanciando e desenhando o grafico linhas
-    var chart_div = new google.visualization.LineChart(document.getElementById('chart_div'));
-    chart_div.draw(data,options_graf);
+    var linhas = new google.visualization.LineChart(document.getElementById('linhas'));
+    linhas.draw(data,options_graf);
 
   })
 }
 
- function draw_table(data){
+ function draw_table(){
+	//Obtem dados do banco de dados
+		const options = {method: 'GET',	mode: 'cors',cache: 'default'}
+		fetch('https://polar-beyond-82520.herokuapp.com/temps')
+		.then(function (response){
+			return response.text()})
+		.then(data=>{
+		const myObj = JSON.parse(data)
 
-   let table = document.getElementById('mytable');
+	  let table = document.getElementById('mytable');
+	
+	  for (var k in myObj.temps){
 
-   for (var i in myObj.temps)
-   {
-      
-    let tr = table.insertRow();
-    let td_local = table.insertCell();
-    let td_temp = table.insertCell();
-    let td_dia = table.insertCell();
-    let td_mes = table.insertCell();
-    let td_ano = table.insertCell();
-  {`<tr>  <td>${myObj.temps[i].temp}</td>  <tr>`
-      table.innerHTML += row;
-   }
+		  for (const [key, value] of Object.entries (myObj.temps[k])) {
+
+			var tr = table.insertRow();
+			var td_id = tr.insertCell();
+			var td_local = tr.insertCell();
+			var td_temperatura = tr.insertCell();
+			var td_dia = tr.insertCell();
+			var td_mes = tr.insertCell();
+			var td_ano = tr.insertCell();
+
+			td_id.innerHTML = myObj.temps[k]._id
+			td_local.innerHTML = myObj.temps[k].local
+			td_temperatura.innerHTML = myObj.temps[k].temperatura
+			td_dia.innerHTML = myObj.temps[k].dia
+			td_mes.innerHTML = myObj.temps[k].mes
+			td_ano.innerHTML = myObj.temps[k].ano
+			
+	      console.log(`${key}: ${value}`);
+	  
+    	`<tr><td>${myObj.temps[k]._id}</td>  <td> ${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
+
+	    //console.log(i + " - " + myObj.temps[i].temperatura)
+    	//table.innerHTML += row;  
+    }
   }
-}
+  
+})
 
+}

@@ -103,23 +103,19 @@
 
 <section class="table">
         <div class="_dados">
-            <h3>
 	         	<table>
+					<div class = "thead"> 
 					<thead>
 					<th>ID</th><th>LOCAL </th><th>TEMPERATURAS </th><th>DIA </th><th> MES</th><th>ANO</th>
                 	</thead>
+					</div>
                     	<tbody id = "mytable">
 
                     	</tbody>
                     		<tfoot> </tfoot>
 	        	</table>
-                <ul>
-                </ul>
-			</h3>
 		</div>
 </section>
-
-<table>
 
 </div>
 </body>
@@ -254,7 +250,6 @@ async function list_temp(){
 
 	  let table = document.getElementById('mytable');
 	
-
 	  for (var k in myObj.temps){
 
 		  for (const [key, value] of Object.entries (myObj.temps[k])) {
@@ -276,7 +271,7 @@ async function list_temp(){
 			
 	      console.log(`${key}: ${value}`);
 	  
-    	`<tr>  <td>${myObj.temps[k]._id}</td>  <td>${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
+    	`<tr><td>${myObj.temps[k]._id}</td>  <td>${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
 
 	    //console.log(i + " - " + myObj.temps[i].temperatura)
     	//table.innerHTML += row;  
