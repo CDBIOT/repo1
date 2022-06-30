@@ -7,69 +7,74 @@ setInterval(function()
 }, 10000);
 
 
-function drawAjax(){
-// //   google.charts.load('current',{ packages:['corechart']}).then(function () {
-   $.ajax({
-      url: 'https://polar-beyond-82520.herokuapp.com/temps',
-      method: 'GET',
-      dataType: "json",
-      success: function(resposta) {
-//    drawChart(result);
-//        }, 
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Dia');
-        data.addColumn('number', 'Temperatura');
+// function Dia(){
+// // //   google.charts.load('current',{ packages:['corechart']}).then(function () {
 
-        for (var i in resposta.temps)
-        {
-            dia = resposta.temps[i].dia;
-            temperatura = resposta.temps[i].temperatura;
-            data.addRow([dia, temperatura]);
-        }
-      //console.log(resposta);  
+//    var jsonData =$.ajax({
+//       url: 'https://polar-beyond-82520.herokuapp.com/temps',
+
+//       method: 'GET',
+//       dataType: "json",
+//       async: false
+//         }).responseText
+//     //  success: function(resposta) {
+// //    drawChart(result);
+// //        }, 
+
+//         var data = new google.visualization.DataTable(jsonData);
+//         data.addColumn('number', 'Dia');
+//         data.addColumn('number', 'Temperatura');
+
+//         for (var i in resposta.temps)
+//         {
+//             dia = resposta.temps[i].dia;
+//             temperatura = resposta.temps[i].temperatura;
+//             data.addRow([dia, temperatura]);
+//         }
+//       //console.log(resposta);  
              
-      // Create our data table out of JSON data loaded from server.
-      var data = new google.visualization.DataTable(resposta);
+//       // Create our data table out of JSON data loaded from server.
+//       var data = new google.visualization.DataTable(resposta);
       
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.LineChart(document.getElementById('graph_dia'));
-      chart.draw(data, {width: 400, height: 240});
+//       // Instantiate and draw our chart, passing in some options.
+//       var chart = new google.visualization.LineChart(document.getElementById('graph_dia'));
+//       chart.draw(data, {width: 400, height: 240});
 
-     }
- });
+//      }
+// });
 
-}
+//}
 
-// function drawChart(result)
-//  {
-//     var data = new google.visualization.DataTable();
-//     data.addColumn('string', 'DIA');
-//     data.addColumn('number', 'Temp');
+  function Dia(result)
+  {
+     var data = new google.visualization.DataTable();
+     data.addColumn('number', 'DIA');
+     data.addColumn('number', 'Temp');
 
-//     var dataArray = [];
-//     $.each(result, function(i, obj) 
-//     {
-//       dataArray.push([myObj.dia[i], parseInt(myObj.tempemperatura[i])]);
-//     });
-//     data.addRows(dataArray);
+     var dataArray = [];
+     $.each(result, function(i, MyObj) 
+     {
+       dataArray.push([myObj.dia[i], parseInt(myObj.tempemperatura[i])]);
+     });
+     data.addRows(dataArray);
 
-//     var piegraf_options = 
-//     {
-//       title : 'TEMP/DIA',
-//       width : 400,
-//       height: 300,
-//       is3D: true,
-//     };
+     var graf_options = 
+     {
+      title : 'TEMP/DIA',
+       width : 400,
+       height: 300,
+       is3D: true,
+     };
 
-//     console.log(data)
-//     var piechart = new google.visualization.PieChart(document.getElementById('piegraf'));
-//     piegraf.draw(data, piegraf_options);
-//   }
+     console.log(data)
+     var chart = new google.visualization.LineChart(document.getElementById('graph_dia'));
+     chart.draw(data, graf_options);
+   } 
 
 
          
         
-async function getData(){	
+async function Mes(){	
 
   const options = {
       method: 'GET',
@@ -94,10 +99,11 @@ async function getData(){
 
      for (var k in myObj.temps)
      {
-     // var row = [myObj.temps[i].dia,  myObj.temps[i].temperatura],
-      var row = [`${myObj.temps[k].dia}`, `${myObj.temps[k].temperatura}`]
-      dados_graf.push(row);
+      var row = [myObj.temps[k].dia,  myObj.temps[k].temperatura]
+      //var row = [`${myObj.temps[k].dia}`, `${myObj.temps[k].temperatura}`]
+    //dados_graf.push(row);
     }
+    
     
     var options  = {
       'title' : 'GRAPH_MES',
@@ -110,7 +116,7 @@ async function getData(){
   })  
 
 }
-  function drawChart()
+  function Ano()
   {
     const options = {
       method: 'GET',
@@ -128,11 +134,11 @@ async function getData(){
         
       var data = google.visualization.arrayToDataTable([
         //var numero1 = document.getElementById('Temp1').innerText= parseInt(myObj.vm.temp);
-     
+      
         ['DIA', 'TEMP'],
-
+        
         [k, parseInt(myObj.temps[k].temperatura)],
-       
+        
       ]);
     }
     var options_graf = {
@@ -158,9 +164,10 @@ async function getData(){
 
 	  let table = document.getElementById('mytable');
 	
-	  for (var k in myObj.temps){
-
-		  for (const [key, value] of Object.entries (myObj.temps[k])) {
+	  for (var k in myObj.temps)
+  {
+	//	  for (const [key, value] of Object.entries (myObj.temps[k])) 
+      {
 
 			var tr = table.insertRow();
 			var td_local = tr.insertCell();
@@ -175,9 +182,9 @@ async function getData(){
 			td_mes.innerHTML = myObj.temps[k].mes
 			td_ano.innerHTML = myObj.temps[k].ano
 			
-	      console.log(`${key}: ${value}`);
+	    //  console.log(`${key}: ${value}`);
 	  
-    	`<tr> <td> ${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
+   // `<tr> <td> ${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
 
 	    //console.log(i + " - " + myObj.temps[i].temperatura)
     	//table.innerHTML += row;  

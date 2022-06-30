@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/css.css" />
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<script src="user.js"></script>
 <title>Cadastro de usuarios</title> 
 </head>
+<body >
 <div class="botao_home">
 	<form name="home" action="/" method="get">
 		<div class="home_btn">
@@ -14,116 +16,31 @@
 	</form>
 </div>
 
-<body >
-		
-<script type="text/javascript">
-	function setdisp() {
-	  // var disp = id = "disp";
-		var hd=document.getElementById('hd').value;
-		var md=document.getElementById('md').value;
-		var sd=document.getElementById('sd').value;
-		
 
-		// add a zero in front of numbers<10
-	   // m=checkTime(m);
-	   // s=checkTime(s);
-		document.getElementById('disp').innerHTML=hd+":"+md+":"+sd;
-	}
-</script>
-	
+		
 <div class = msg >
 	
 <form action="/user" method = "post">
-	<p><h2>Cadastrar Usuario</h2></p>
+	<p><h1>Cadastrar Usuario<h1></h1></p>
+	<br>
 	<p></p><label>E-mail</label></p>
-	<input type="e-mail" value="E-mail"	name = "nome" size="12" > 
+	<input type="e-mail" value=""	name = "nome" size="12" >
+	<br> 
+	<br>
     <p><label>Password</label></p>
-
-	<input type="password" value="Password" name = "sobrenome" size="12" > 
+	<input type="password" value="" name = "sobrenome" size="12" > 
     <br>   <br>
 
     <p><button type="submit"> Login </button></p>
     <br>
-    <p> <button type="submit"> Submit </button></p>
+    
+	<br>
+			<a href = "cad_user.html">
+			<img NAME="bar_04" src="imagens/cad_user.png" ALT=""></a>
+		
 </form>
 
 </div>
-
 </body>
-
-<script>
-
-async function getContent() {
-		const options = {
-			method: 'GET',
-			mode: 'cors',
-			cache: 'default'
-		}
-
-		try{
-		fetch('http://127.0.0.1:8081/user').then(function (response){
-			return response.json();
-		})
-		.then(function(data){
-			console.log(data);
-		})
-	
-		console.log(response)
-
-		let output = ''
-		for (let user of users){
-			output += `<li>${user.local}</li>`
-		}
-		document.querySelector('user').innerHTML=output
-	
-		}catch (error){
-			console.log(error)
-		}
-}
-
-function show(user){
-	
-	//let output = ''
-	//for (let user of users){
-	//		output += `<li>${user.name}</li>`
-	//	}
-	//	document.querySelector('user').innerHTML=output
-		
-		const tbody = document.getElementById('tbody')
-		tbody.innerHTML = people.map( user=> {
-	//	people = document.createElement('user').innerHTML = person;
-	
-		//tbody.appendChild(people)
-		document.write("Novo usuario" + user.nome + " ")
-	
-	return `	<tr>
-			<h2 id = "user"></h2>	
-			<td>${user.id}</td>
-			<td>${user.nome}</td>
-			</tr>`
-		})
-	}
-
-</script>
-
-<script type="text/javascript">
-function altera(form2)
-{
-	var name=prompt("Digite a Sala:","A B C D E F G H");
-	
-	if (name!=null && name!="")
-	 
-	var TA=document.form2.input.value
-	var TB=document.form2.input.value
-
-		document.write("Sala A");
-		document.write(TA);
-		document.write("Sala B");
-		document.write(TB);
-}
-
-
-
-</script>
 
 </html>

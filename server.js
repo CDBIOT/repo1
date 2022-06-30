@@ -2,12 +2,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const routers = require('./rotas_temps');
+const routers = require('./rotas_temps','./rotas_user');
+
 const mqtt = require('./mqtt_node2');
 //const mongo = require('./mongo');
 //const db =  require('./database');
 var fs = require('fs');
 const Temps = require('./temps')
+const Person = require('./user')
 const db_atlas = require('./db_atlas')
 const cors = require('cors')
 
@@ -37,7 +39,7 @@ app.use((req, res, next) =>{
     console.log("MIDDLEWARE2");
     next()
 })
-const PORT = process.env.PORT || 8081
+const PORT = process.env.PORT || 8081 || 5500;
     app.listen(PORT,function(){
         console.log("Servidor Rodando");
         })

@@ -51,15 +51,15 @@ content-type: application/json
 
 {
 "local": "sala",
-"temperatura": "16",
-"dia": "13",
+"temperatura": "18",
+"dia": "22",
 "mes": "06",
 "ano": "2022"
 }
 
 
 ###
-DELETE http://localhost:8081/temps/20
+DELETE  https://polar-beyond-82520.herokuapp.com/temps/62b38d227247b37a533ed365
 
 
 

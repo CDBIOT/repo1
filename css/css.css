@@ -41,6 +41,9 @@
     display: block;
     width: 100%;
     margin-top: 20px;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
   }
   th {
     font-size: 11px;
@@ -69,10 +72,20 @@
     width: 90px;
   }
   .msg {
-    font-size: 14px;
+    font-size: 18px;
+    color: #333333;
     text-align: center;
     padding: 5px;
     border-radius: 3px;
+  }
+  .msg label
+  {
+  font-size: 18px;
+  color: #000000;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+
   }
   .div
   {
@@ -172,6 +185,14 @@ img
     margin-top: 20px;
     padding: 20px; 
    
+}
+
+.cad
+{
+align-items: center;
+display: flex;
+justify-content: space-between;
+background-color: rgb(100, 104, 200);
 }
 
 .chart

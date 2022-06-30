@@ -1,22 +1,16 @@
-//rotas_user
 const { response } = require('express');
 const express = require('express');
 const routers = express.Router();
 const app = express();
-const Person = require('./mongo')
+const Person = require('./user')
+var fs = require('fs');
 //const Temps = require('./temps')
-//app.use(mqtt);
 
-//const route = router.get('/',(req,res,next) => {
- //   res.status(200).sendFile(__dirname + "/index.html");
- //   });
 
  //Create
 routers.post('/user', async (req, res) =>{
-    const {nome, sobrenome, idade } = req.body
-    const person = {
-        nome,sobrenome,idade
-                    }
+    const {nome, email, senha } = req.body
+    const person = { nome,email,senha }
     try{
         await Person.create(person)
         res.status(201).json({message: "Pessoa inserida com sucesso"})
@@ -79,18 +73,14 @@ routers.post('/produtos',async(req, res) =>{
 routers.use('/', express.static(__dirname + '/'))
 routers.use('/css', express.static("/css"))
 routers.use('/imagens', express.static("/imagens"))
-routers.use('/grafico.js', express.static("/"))
+routers.use('/user.js', express.static("/"))
+routers.use('/rotas_user.js', express.static("/"))
  
- routers.get('/index.html',function(req,res){
-     res.sendFile(__dirname + "/index.html");
- });
- 
- routers.get("/Grafico",function(req,res){
-     res.sendFile(__dirname + "/Grafico.html");
- });
- 
- routers.get("/grafico",function(req,res){
-     res.sendFile(__dirname + "/grafico.js");
+ routers.get("/cad_user",function(req,res){
+    res.sendFile(__dirname + "/cad_user.html");
+});
+ routers.get("/user.js",function(req,res){
+     res.sendFile(__dirname + "/user.js");
  });
 
 module.exports = routers

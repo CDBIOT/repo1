@@ -41,6 +41,7 @@ const create_temp = new Temps(req.body);
     }  
 })
 
+
 //Read
 routers.get('/temps', async (req, res) =>{
     try{
@@ -98,10 +99,7 @@ routers.use('/css', express.static("/css"))
 routers.use('/imagens', express.static("/imagens"))
 routers.use('/grafico.js', express.static("/"))
 routers.use('/mqtt_node2.js', express.static("/"))
-
- routers.get('/index.html',function(req,res){
-     res.sendFile(__dirname + "/index.html");
- });
+//routers.use('/user.js', express.static("/"))
  
  routers.get("/mqtt_node2",function(req,res){
     res.sendFile(__dirname + "/mqtt_node2.js");

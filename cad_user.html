@@ -1,0 +1,64 @@
+
+<html>
+    <head>
+        
+    <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/css.css" />
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <script src="user.js"></script>
+
+    <title>Cadastro de usuarios</title> 
+    </head>
+    <body >
+    <div class="botao_home">
+        <form name="home" action="/" method="get">
+            <div class="home_btn">
+            <input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+            </div>
+        </form>
+    </div>
+
+<div class = "cad">
+	
+	<input type="button" onclick=getContent() value="Show" />
+	
+	<form action="/user" method = "post">
+        <h3>
+		<p><h2>Cadastrar Usuario</h2></p>
+		<label>Nome</label>
+		<input type="text" value=""	name = "nome" size="12" > <br>
+		<label>Email</label>
+		<input type="text" value="" name = "email" size="12" > <br>
+		<label>Senha</label>
+		<input type="text" value=""  name = "senha" size="12" > <br>
+		<button type="submit"> Cadastrar User</button>
+        </form>
+        </h3>
+	</form>
+	
+	<form action="/user" method = "get">
+		<p><h2>Consultar</h2></p>
+		<input type="text" name = "list" size="12" > 
+		<button type="submit">Listar</button>
+		
+	</form>	
+	
+	<form action="/user" method = "patch">
+        <h3>
+		<p><h2>Altera</h2></p>
+
+		<input type="text" value= "" name = "nome" size="12" > <br>
+		<input type="text" value= "" name = "email" size="12" > <br>
+		<input type="text" value= "" name = "senha" size="12" > 
+		<button type="submit">Alterar </button>
+	</form>
+
+	<form action="/user" method = "delete">
+			<p><h2>Deletar</h2></p>
+			<input type="text" value="ID" name = "id" size="12" > 
+			<button type="submit">Deletar</button>
+	</form>
+	</h3>
+</div>
+</body>
+</html>
