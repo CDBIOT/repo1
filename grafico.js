@@ -32,7 +32,7 @@ function drawAjax(){
       var data = new google.visualization.DataTable(resposta);
       
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.LineChart(document.getElementById('graph_dia'));
       chart.draw(data, {width: 400, height: 240});
 
      }
@@ -100,12 +100,12 @@ async function getData(){
     }
     
     var options  = {
-      'title' : 'DIVGRAF',
+      'title' : 'GRAPH_MES',
       'width' : 400,
       'height': 300
     };
     //instanciando e desenhando o grafico linhas
-    var divgraf = new google.visualization.LineChart(document.getElementById('divgraf'));
+    var divgraf = new google.visualization.LineChart(document.getElementById('graph_mes'));
     divgraf.draw(dados_graf,options);
   })  
 
@@ -136,12 +136,12 @@ async function getData(){
       ]);
     }
     var options_graf = {
-      'title' : 'CHART_DIV',
+      'title' : 'GRAPH_ANO',
       'width' : 400,
       'height': 300
     };
     //instanciando e desenhando o grafico linhas
-    var linhas = new google.visualization.LineChart(document.getElementById('linhas'));
+    var linhas = new google.visualization.LineChart(document.getElementById('graph_ano'));
     linhas.draw(data,options_graf);
 
   })

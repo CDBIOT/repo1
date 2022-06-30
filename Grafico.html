@@ -35,15 +35,15 @@ google.charts.setOnLoadCallback(draw_table);
      <div class="botão_chart">
         <form name="apaga" action="#" method="get">
             <input type="image" src = "/imagens/blue/graph_btn.png" onClick="drawAjax()">
-            <p>Draw Ajax</p>
+            <p>Dia</p>
         </form>
         <form name="apaga" action="#" method="get">
-            <input type="image" src = "/imagens/blue/temp_btn.png" onClick="getData()">
-            <p>Get Data</p>
+            <input type="image" src = "/imagens/blue/graph_btn.png" onClick="getData()">
+            <p>Mês</p>
         </form>
         <form name="apaga" action="#" method="get">
-            <input type="image" src = "/imagens/blue/lamp_btn.png" onClick="drawChart()">
-            <p>Draw Chart</p>
+            <input type="image" src = "/imagens/blue/graph_btn.png" onClick="drawChart()">
+            <p>Ano</p>
         </form>
      </div>
     </div>
@@ -52,9 +52,9 @@ google.charts.setOnLoadCallback(draw_table);
 <section class="chart">
      <div class="container2">
         <div class="charts">
-            <div id='chart_div'></div>
-            <div id='divgraf'></div>
-            <div id='linhas'></div>
+            <div id='graph_dia'></div>
+            <div id='graph_mes'></div>
+            <div id='graph_ano'></div>
         </div>
     </div>
 </section>
