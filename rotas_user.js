@@ -79,6 +79,7 @@ routers.use('/rotas_user.js', express.static("/"))
  routers.get("/cad_user",function(req,res){
     res.sendFile(__dirname + "/cad_user.html");
 });
+
  routers.get("/user.js",function(req,res){
      res.sendFile(__dirname + "/user.js");
  });

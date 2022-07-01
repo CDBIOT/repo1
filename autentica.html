@@ -18,10 +18,13 @@
 
 
 		
-<div class = msg >
+<div class = autenticacao >
 	
-<form action="/user" method = "post">
+<form action="/user" method = "get">
 	<p><h1>Cadastrar Usuario<h1></h1></p>
+	<br>
+	<img NAME="user" src="imagens/user.png" ALT=""></a>
+	<br>
 	<br>
 	<p></p><label>E-mail</label></p>
 	<input type="e-mail" value=""	name = "nome" size="12" >
@@ -33,14 +36,36 @@
 
     <p><button type="submit"> Login </button></p>
     <br>
-    
-	<br>
-			<a href = "cad_user.html">
-			<img NAME="bar_04" src="imagens/cad_user.png" ALT=""></a>
 		
 </form>
 
+<button onclick = "window.location.href = 'cad_user.html'" >Submit</button>
+<br>
+
 </div>
 </body>
+<script>
+
+	async function autentica() {
+		//Obtem dados do banco de dados
+			const options = {
+							method: 'POST',
+							mode: 'cors',
+							cache: 'default'
+							}
+			fetch('https://polar-beyond-82520.herokuapp.com/temps')
+			//fetch('http://127.0.0.1:8081/temps')
+			//fetch('http://127.0.0.1:5500/temps')
+			.then(function (response){
+				return response.text()})
+			.then(data=>{
+			const myObj = JSON.parse(data)
+			console.log(data)
+			})
+		}
+
+
+
+</script>
 
 </html>

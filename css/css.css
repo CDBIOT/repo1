@@ -152,7 +152,6 @@
 img
 {
     border: 0;
-   
 }
 .img_kit img
 {
@@ -186,15 +185,61 @@ img
     padding: 20px; 
    
 }
+.autenticacao 
+{
+  align-items: center;
+  font-size: 18px;
+  color: #333333;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+}
 
+.autenticacao img
+{
+height: 50;
+width: 50;
+}
+
+.autenticacao input
+{
+  align-items: center;
+  background-color: #043f7e;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 18px;
+  
+}
+.autenticacao button
+{
+  align-items: center;
+  background-color: #043f7e;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffff;
+  text-align: center;
+  padding: 8px;
+  border-radius: 18px;
+  border: 0;
+}
 .cad
 {
 align-items: center;
 display: flex;
 justify-content: space-between;
 background-color: rgb(100, 104, 200);
+
 }
 
+.cad button
+{
+background-color: #000000;
+color:rgb(2, 157, 199)
+
+}
 .chart
 {
     align-items: center;

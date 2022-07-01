@@ -3,6 +3,7 @@ const express = require('express');
 const routers = express.Router();
 const app = express();
 const Temps = require('./temps')
+const Person = require('./user')
 var fs = require('fs');
 //app.use(mqtt);
 
@@ -93,6 +94,58 @@ routers.delete('/temps/:id', async (req, res) => {
     res.status(500).json({error: error})
 }  
 });
+
+ //Create
+ routers.post('/user', async (req, res) =>{
+    const {nome, email, senha } = req.body
+    const person = { nome,email,senha }
+    try{
+        await Person.create(person)
+        res.status(201).json({message: "Pessoa inserida com sucesso"})
+    }catch(error){
+        res.status(500).json({error: error})
+    }  
+})
+
+//Read
+routers.get('/user', async (req, res) =>{
+    try{
+       const people = await Person.find()
+        res.status(200).json({people})
+    }catch(error){
+        res.status(500).json({error: error})
+    }  
+})
+
+//Update
+routers.patch('/user/:id',async (req, res) =>{
+    const id = req.params.id
+    const {nome,sobrenome,idade} = req.body
+    const person = {nome,sobrenome,idade,}
+    try{
+     const updatePerson = await Person.updateOne({_id: id},person);
+     res.status(200).json(person);
+    }catch(error){
+    res.status(500).json({error: error})
+}  
+})
+
+ //Delete
+ routers.delete('/user/:id', async (req, res) => {
+    const id= req.params.id
+    const person = await Person.findOne({_id: id})
+    if(!person){
+    res.status(422).json({message:  'Usuário não encontrado'});
+    return
+    }
+    try{
+        await Person.deleteOne({_id: id});
+        res.status(200).json({message: 'Usuário removido com sucesso'});
+    }catch(error){
+    res.status(500).json({error: error})
+}  
+});
+
 
 routers.use('/', express.static(__dirname + '/'))
 routers.use('/css', express.static("/css"))
