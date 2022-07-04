@@ -50,19 +50,50 @@ setInterval(function()
     .then(data=>{
     const myObj = JSON.parse(data);
     var dataArray = Array.from(myObj.temps);
-    console.log(dataArray)
+    console.log("dataArray: ", dataArray)
 
     var dataArray2=[];
-     dataArray2 = new google.visualization.DataTable();
-     dataArray2.addColumn('number', 'Dia');
-     dataArray2.addColumn('number', 'Temp');
-     
-      var row = [dataArray.temps.dia, dataArray.temps.temperatura];
-      // dataArray2.push([dataArray.temps[i], (dataArray.temps[i])]);
-      dataArray2.addRow(row);
-     //dataArray2.addRows(dataArray2);
-     console.log(dataArray2)
 
+    for (var i in dataArray){
+        dataArray2.push([dataArray[i].dia, (dataArray[i].temperatura)]);
+    }
+
+    for (var k in dataArray){
+    var data2 = new google.visualization.arrayToDataTable([
+       ['Mês','Temp'],
+       [[dataArray2[0][0]],[dataArray2[0][1]]],
+       [[dataArray2[1][0]],[dataArray2[1][1]]],
+       [[dataArray2[2][0]],[dataArray2[2][1]]],
+       [[dataArray2[3][0]],[dataArray2[3][1]]],
+       [[dataArray2[4][0]],[dataArray2[4][1]]],
+       [[dataArray2[5][0]],[dataArray2[5][1]]],
+       [[dataArray2[6][0]],[dataArray2[6][1]]],
+       [[dataArray2[7][0]],[dataArray2[7][1]]],
+       [[dataArray2[8][0]],[dataArray2[8][1]]],
+       [[dataArray2[10][0]],[dataArray2[10][1]]],
+       [[dataArray2[11][0]],[dataArray2[11][1]]],
+       [[dataArray2[12][0]],[dataArray2[12][1]]],
+       [[dataArray2[13][0]],[dataArray2[13][1]]],
+       [[dataArray2[14][0]],[dataArray2[14][1]]],
+       [[dataArray2[15][0]],[dataArray2[15][1]]],
+       [[dataArray2[16][0]],[dataArray2[16][1]]],
+       [[dataArray2[17][0]],[dataArray2[17][1]]],
+       [[dataArray2[18][0]],[dataArray2[18][1]]],
+       [[dataArray2[20][0]],[dataArray2[20][1]]],
+       [[dataArray2[21][0]],[dataArray2[21][1]]],
+       [[dataArray2[22][0]],[dataArray2[22][1]]],
+       [[dataArray2[23][0]],[dataArray2[23][1]]],
+       [[dataArray2[24][0]],[dataArray2[24][1]]],
+       [[dataArray2[25][0]],[dataArray2[25][1]]],
+       [[dataArray2[26][0]],[dataArray2[26][1]]],
+       [[dataArray2[27][0]],[dataArray2[27][1]]],
+       [[dataArray2[28][0]],[dataArray2[28][1]]],
+       [[dataArray2[30][0]],[dataArray2[30][1]]],
+      
+
+    ])
+  }
+    console.log("data2: ",data2)
      var graf_options = 
      {
       title : 'TEMP/DIA',
@@ -70,9 +101,12 @@ setInterval(function()
        height: 300,
        is3D: true,
      };
-    })
+  
+
      var chart = new google.visualization.LineChart(document.getElementById('graph_dia'));
-     chart.draw(dataArray2, graf_options);
+     chart.draw(data2, graf_options);
+     
+    })
    }  
         
 async function Mes(){	
@@ -90,25 +124,23 @@ async function Mes(){
     //console.log(data)
     const myObj = JSON.parse(data)
     var dataArray = Array.from(myObj.temps);
-    console.log(dataArray)
+    console.log("dataArray:",dataArray)
     dataArray2=[];
-    for (var k in dataArray)
-    {
-    //var row = [parseInt(myObj.temps[k].dia), parseInt(myObj.temps[k].temperatura)]
-     dataArray2.push([parseInt(myObj.temps[k].dia), parseInt(myObj.temps[k].temperatura)]);
-   }
-   console.log(dataArray2)
-    //var dados_graf = new google.visualization.DataTable();
-    for (var k in dataArray2)
-    {
-    var dados_graf = new google.visualization.arrayToDataTable([
+    for (var i in dataArray){
+      dataArray2.push([dataArray[i].dia, (dataArray[i].temperatura)]);
+  }
+   console.log("dataArray2:",dataArray2)
+
+   for (var k in dataArray)
+   {
+     var dados_graf = new google.visualization.arrayToDataTable([
       // dados_graf.addColumn('number', 'Dia')
       //dados_graf.addColumn('number', 'Temp')
-      ['Mês','Temp'],
-      [dataArray2[k],dataArray2[0]]
-    
-    ])
-  }
+      ['Mês','Temp'], 
+      [[dataArray[k]],[dataArray[k]]],
+     
+      ])
+    }
     console.log(dados_graf);
     var options  = {
       'title' : 'GRAPH_MES',
@@ -135,17 +167,18 @@ async function Mes(){
     .then(data=>{
  // console.log(data)
     const myObj = JSON.parse(data)
-    var dataArray = Array.from(myObj.temps);
+    var dataArray2 = Array.from(myObj.temps);
    
-   // dataArray.push( ['ANO', 'TEMP']);
-   for (var k in dataArray){ 
-    var dia = dataArray[0]
-    var temp = dataArray[1] 
+   // dataArray2.push( ['ANO', 'TEMP']);
+   for (var k in dataArray2){
+   // var dia = dataArray2[0]
+  //  var temp = dataArray2[1] 
+
     var data2 = google.visualization.arrayToDataTable([
     ['ANO', 'TEMP'],
-    [dataArray2[k],dataArray2[k]]
+    [[dataArray2[0]],[dataArray2[1]]]
     ]);
-    }
+  }
   console.log(data2)
     var options_graf = {
       'title' : 'GRAPH_ANO',
