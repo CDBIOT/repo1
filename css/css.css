@@ -256,7 +256,6 @@ color:rgb(2, 157, 199)
     float: left;
     margin-top: 20px;
     border-radius: 10px;
-   
 }
 
 .container1
@@ -295,7 +294,6 @@ display: block;
     display: flex;
     align-items: center;
     margin-top: 20px;
-   
 }
 ._dados 
 {
@@ -308,15 +306,12 @@ display: block;
     margin-top: 20px;
     border-radius: 10px;
     padding: 10px; 
-   
 }
 
 .thead th td 
 {
 max-width: 35px;
 background-color: rgb(120,160,236);
-
-
 }
 
 .Info__Response

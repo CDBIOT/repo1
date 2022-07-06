@@ -38,7 +38,7 @@ setInterval(function()
 
   function Dia(result)
   {
-    
+     
   const options = {
     method: 'GET',
     mode: 'cors',
@@ -54,62 +54,37 @@ setInterval(function()
 
     var dataArray2=[];
 
-    for (var i in dataArray){
+    dataArray2.push(['Dia','Temp']);
+
+    for (var i in dataArray)
+    {
         dataArray2.push([dataArray[i].dia, (dataArray[i].temperatura)]);
     }
 
-    for (var k in dataArray){
-    var data2 = new google.visualization.arrayToDataTable([
-       ['Mês','Temp'],
-       [[dataArray2[0][0]],[dataArray2[0][1]]],
-       [[dataArray2[1][0]],[dataArray2[1][1]]],
-       [[dataArray2[2][0]],[dataArray2[2][1]]],
-       [[dataArray2[3][0]],[dataArray2[3][1]]],
-       [[dataArray2[4][0]],[dataArray2[4][1]]],
-       [[dataArray2[5][0]],[dataArray2[5][1]]],
-       [[dataArray2[6][0]],[dataArray2[6][1]]],
-       [[dataArray2[7][0]],[dataArray2[7][1]]],
-       [[dataArray2[8][0]],[dataArray2[8][1]]],
-       [[dataArray2[10][0]],[dataArray2[10][1]]],
-       [[dataArray2[11][0]],[dataArray2[11][1]]],
-       [[dataArray2[12][0]],[dataArray2[12][1]]],
-       [[dataArray2[13][0]],[dataArray2[13][1]]],
-       [[dataArray2[14][0]],[dataArray2[14][1]]],
-       [[dataArray2[15][0]],[dataArray2[15][1]]],
-       [[dataArray2[16][0]],[dataArray2[16][1]]],
-       [[dataArray2[17][0]],[dataArray2[17][1]]],
-       [[dataArray2[18][0]],[dataArray2[18][1]]],
-       [[dataArray2[20][0]],[dataArray2[20][1]]],
-       [[dataArray2[21][0]],[dataArray2[21][1]]],
-       [[dataArray2[22][0]],[dataArray2[22][1]]],
-       [[dataArray2[23][0]],[dataArray2[23][1]]],
-       [[dataArray2[24][0]],[dataArray2[24][1]]],
-       [[dataArray2[25][0]],[dataArray2[25][1]]],
-       [[dataArray2[26][0]],[dataArray2[26][1]]],
-       [[dataArray2[27][0]],[dataArray2[27][1]]],
-       [[dataArray2[28][0]],[dataArray2[28][1]]],
-       [[dataArray2[30][0]],[dataArray2[30][1]]],
-      
-
-    ])
-  }
-    console.log("data2: ",data2)
-     var graf_options = 
-     {
-      title : 'TEMP/DIA',
-       width : 400,
-       height: 300,
-       is3D: true,
-     };
+    const dados_graf = {
+      chart: null,
+    
+    data2 : dataArray2,
+    element: '#graph_dia',
+    options  : {
+        'title' : 'TEMP/DIA',
+        'width' : 400,
+        'height': 300
+      }
+    }
+    dados_graf.chart = new google.visualization.LineChart(
+      document.querySelector(dados_graf.element));
+   
+    dados_graf.chart.draw(
+      google.visualization.arrayToDataTable(dados_graf.data2),
+      dados_graf.options
+      )
+    })  // final do query
   
-
-     var chart = new google.visualization.LineChart(document.getElementById('graph_dia'));
-     chart.draw(data2, graf_options);
-     
-    })
-   }  
+}  
         
 async function Mes(){	
+
 
   const options = {
       method: 'GET',
@@ -126,32 +101,35 @@ async function Mes(){
     var dataArray = Array.from(myObj.temps);
     console.log("dataArray:",dataArray)
     dataArray2=[];
+    dataArray2.push(['Mês','Temp']);
+
     for (var i in dataArray){
-      dataArray2.push([dataArray[i].dia, (dataArray[i].temperatura)]);
+      dataArray2.push([dataArray[i].mes, (dataArray[i].temperatura)]);
   }
    console.log("dataArray2:",dataArray2)
-
-   for (var k in dataArray)
-   {
-     var dados_graf = new google.visualization.arrayToDataTable([
-      // dados_graf.addColumn('number', 'Dia')
-      //dados_graf.addColumn('number', 'Temp')
-      ['Mês','Temp'], 
-      [[dataArray[k]],[dataArray[k]]],
-     
-      ])
-    }
-    console.log(dados_graf);
-    var options  = {
+  
+   const dados_graf = {
+    chart: null,
+  
+    data2 : dataArray2,
+    element: '#graph_mes',
+    options  : {
       'title' : 'GRAPH_MES',
       'width' : 400,
       'height': 300
-    };
-    //instanciando e desenhando o grafico linhas
-    var divgraf = new google.visualization.LineChart(document.getElementById('graph_mes'));
-    divgraf.draw(dados_graf,options);
-  })  
+    }
+  }
 
+  
+    dados_graf.chart = new google.visualization.LineChart(
+      document.querySelector(dados_graf.element));
+   
+
+    dados_graf.chart.draw(
+      google.visualization.arrayToDataTable(dados_graf.data2),
+      dados_graf.options
+      )
+    })  // final do query
 }
   function Ano()
   {
