@@ -140,11 +140,11 @@ async function Mes(){
     .then(data=>{
  // console.log(data)
     const myObj = JSON.parse(data)
-   var dataArray2 = Array.from(myObj.temps);
+   var dataArray = Array.from(myObj.temps);
    var dataArray2 = [];
        dataArray2.push( ['ANO', 'TEMP']);
 
-   for (var k in dataArray2){
+   for (var i in dataArray2){
 
     dataArray2.push([dataArray[i].ano, (dataArray[i].temperatura)]);
   }
