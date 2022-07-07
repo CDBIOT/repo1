@@ -67,7 +67,7 @@ setInterval(function()
     data2 : dataArray2,
     element: '#graph_dia',
     options  : {
-        'title' : 'TEMP/DIA',
+        'title' : 'Temperatura x Dia',
         'width' : 400,
         'height': 300
       }
@@ -84,8 +84,6 @@ setInterval(function()
 }  
         
 async function Mes(){	
-
-
   const options = {
       method: 'GET',
       mode: 'cors',
@@ -114,17 +112,14 @@ async function Mes(){
     data2 : dataArray2,
     element: '#graph_mes',
     options  : {
-      'title' : 'GRAPH_MES',
+      'title' : 'Temperatura X Mês',
       'width' : 400,
       'height': 300
     }
   }
-
-  
     dados_graf.chart = new google.visualization.LineChart(
       document.querySelector(dados_graf.element));
    
-
     dados_graf.chart.draw(
       google.visualization.arrayToDataTable(dados_graf.data2),
       dados_graf.options
@@ -145,27 +140,33 @@ async function Mes(){
     .then(data=>{
  // console.log(data)
     const myObj = JSON.parse(data)
-    var dataArray2 = Array.from(myObj.temps);
-   
-   // dataArray2.push( ['ANO', 'TEMP']);
-   for (var k in dataArray2){
-   // var dia = dataArray2[0]
-  //  var temp = dataArray2[1] 
+   var dataArray2 = Array.from(myObj.temps);
+   var dataArray2 = [];
+       dataArray2.push( ['ANO', 'TEMP']);
 
-    var data2 = google.visualization.arrayToDataTable([
-    ['ANO', 'TEMP'],
-    [[dataArray2[0]],[dataArray2[1]]]
-    ]);
+   for (var k in dataArray2){
+
+    dataArray2.push([dataArray[i].ano, (dataArray[i].temperatura)]);
   }
-  console.log(data2)
-    var options_graf = {
-      'title' : 'GRAPH_ANO',
-      'width' : 400,
-      'height': 300
-    };
-    //instanciando e desenhando o grafico linhas
-    var linhas = new google.visualization.LineChart(document.getElementById('graph_ano'));
-    linhas.draw(data2,options_graf);
+   
+    const dados_graf = {
+      chart: null,
+    
+      data2 : dataArray2,
+      element: '#graph_ano',
+      options  : {
+        'title' : 'Temperatura X Ano',
+        'width' : 400,
+        'height': 300
+      }
+    }
+    dados_graf.chart = new google.visualization.LineChart(
+      document.querySelector(dados_graf.element));
+   
+    dados_graf.chart.draw(
+      google.visualization.arrayToDataTable(dados_graf.data2),
+      dados_graf.options
+      )
   })
 }
 

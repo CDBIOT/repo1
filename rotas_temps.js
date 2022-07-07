@@ -73,23 +73,23 @@ routers.patch('/temps/:id',async (req, res) =>{
      res.status(200).json(temps);
     }catch(error){
     res.status(500).json({error: error})
-}  
+    }  
 })
 
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
-    const id= req.params.id
-   // temps.remove({id: id})
-    const temps = await Temps.findByIdAndDelete({_id: id})
+    const {id}= req.params.id
+    //temps.remove({id: req.body.id})
+    const temps = await Temps.deleteOne({"_id": id})
     if(!temps){
     res.status(422).json({message:  'Temperatura não encontrada'});
     res.redirect('/temps')
     return
     }
     try{
-        await Temps.deleteOne({temperatura});
+        await Temps.deleteOne({"_id": id});
         res.status(200).json({message: 'Temperatura removida com sucesso'});
-        res.redirect('/temps')
+        //res.redirect('/temps')
     }catch(error){
     res.status(500).json({error: error})
 }  
