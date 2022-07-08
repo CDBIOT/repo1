@@ -78,22 +78,34 @@ routers.patch('/temps/:id',async (req, res) =>{
 
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
-    const {id}= req.params.id
+    //const {id}= req.params.id
     //temps.remove({id: req.body.id})
-    const temps = await Temps.deleteOne({"_id": id})
-    if(!temps){
-    res.status(422).json({message:  'Temperatura não encontrada'});
-    res.redirect('/temps')
-    return
-    }
-    try{
-        await Temps.deleteOne({"_id": id});
-        res.status(200).json({message: 'Temperatura removida com sucesso'});
+    const temps = await Temps.deleteOne({_id: req.params.id}, (err) => {
+    //const temps = await Temps.deleteOne({_id: id})
+    if(err) return res.status(400).json({
+
+        error:true,
+        message: "Error: Artigo não foi apagado com sucesso!"
+    });
+   // if(!temps){
+   // res.status(422).json({message:  'Temperatura não encontrada'});
+    //res.redirect('/temps')
+    return res.json({
+
+        error: false,
+        message: "Artigo apagado com sucesso!"
+            })
+        })
+    })
+
+   // try{
+    //    await Temps.deleteOne({"_id": id});
+    //    res.status(200).json({message: 'Temperatura removida com sucesso'});
         //res.redirect('/temps')
-    }catch(error){
-    res.status(500).json({error: error})
-}  
-});
+   // }catch(error){
+  //  res.status(500).json({error: error})
+//}  
+//});
 
  //Create
  routers.post('/user', async (req, res) =>{
