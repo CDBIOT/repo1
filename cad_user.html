@@ -19,47 +19,41 @@
     </div>
 
 <div class = "cad">
-	
+	<div class = "box_cad">
 	<form action="/user" method = "post">
-        <h3>
-		<p><h2>Cadastrar Usuario</h2></p>
-		<label>Nome</label>
-		<input type="text" value=""	name = "nome" size="12" > <br>
-		<label>Email</label>
-		<input type="text" value="" name = "email" size="12" > <br>
-		<label>Senha</label>
-		<input type="text" value=""  name = "senha" size="12" > <br>
-		<button type="submit"> Cadastrar User</button>
+		<label>Cadastrar Usuario</label><br>
+		<input type="text" placeholder="Nome"	name = "nome" size="12" > <br>
+		<input type="text" placeholder="E-mail" name = "email" size="12" > <br>
+		<input type="text" placeholder="Senha" name = "senha" size="12" > <br>
+		<button type="submit"> Cadastrar </button>
         </form>
-        </h3>
+       
 	</form>
-	
-	<form action="/user" method = "get">
-		<p><h2>Consultar</h2></p>
-		<input type="text" name = "list" size="12" > 
-		<button type="submit">Listar</button>
-		
-	</form>	
+	</div>
+
+	<div class = "box_control">
+		<form action="/user" method = "get">
+		<label>Consultar</label><br>
+			<input type="text" name = "list" size="12" > 	<br>
+			<button type="submit">Listar</button>
+		</form>	
 	
 	<form action="/user" method = "patch">
-        <h3>
-		<p><h2>Altera</h2></p>
-		<label>Nome</label>
-		<input type="text" value= "" name = "nome" size="12" > <br>
-		<label>Email</label>
-		<input type="text" value= "" name = "email" size="12" > <br>
-		<label>Senha</label>
-		<input type="text" value= "" name = "senha" size="12" > 
+
+		<label>Altera</label><br>
+		<input type="text"  placeholder="Nome" name="nome" size="12" > <br>
+		<input type="text"  placeholder="E-mail" name="email" size="12" > <br>
+		<input type="text"  placeholder="Senha" name="senha" size="12" > <br>
 		<button type="submit">Alterar </button>
 	</form>
 
 	<form action="/user" method = "delete">
-			<p><h2>Deletar</h2></p>
-			<label> ID </label>
-			<input type="text" value="" name = "id" size="20" > 
+			<label>Deletar</label><br>
+			<input type="text" placeholder="Id"  name = "id" size="20" > 
 			<button type="submit">Deletar</button>
 	</form>
-	</h3>
+
+	</div>
 </div>
 </body>
 </html>
