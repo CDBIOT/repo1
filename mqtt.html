@@ -35,7 +35,7 @@
 	        <tr>
 		        <td>
 			        <a onclick = mqtt_show() >
-			        <img NAME="bar_04" src="imagens/blue/raio_btn.png" ALT=""></a>
+			        <img name="raio_btn" src="imagens/blue/raio_btn.png" ALT=""></a>
                 </td>	
             </tr>
         </table>
@@ -43,7 +43,7 @@
 	        <tr>
 		        <td>
 			        <a onclick = Relogio() >
-			        <img NAME="bar_04" src="imagens/blue/lamp_btn.png" ALT=""></a>
+			        <img name="lamp_btn" src="imagens/blue/lamp_btn.png" ALT=""></a>
                 </td>	
             </tr>
         </table>
@@ -53,11 +53,10 @@
 <div class = temp_show>
 <form action="/mqtt" method = "get"></form>
 <table>
-	<tr><th colspan = 6> TEMPERATURA DO QUARTO </th></tr>
- <tr><td><h1 id = "temp"> </h1>
-</td> <td><h1>   ºC</h1></td>
-</tr>
-    <tr><th colspan = 6> TEMPERATURA DA SALA </th></tr>
+	<tr><th colspan = 6>TEMPERATURA DO QUARTO </th></tr>
+		 <tr><td><h1 id = "temp"> </h1></td><td><h1>  ºC</h1></td></tr>
+
+    <tr><th colspan = 6> TEMPERATURA DA SALA</th></tr>
     <tr>
     <td><h1 id = "local"> </h1></td>
     <td><h1 id = "temp"> </h1></td>
@@ -72,21 +71,21 @@
 <form action="Relogio" method="post">
 <h3>
 <table>
-<tr><td colspan = 6><h1>Relogio IOT</h1></tr></td>
-<tr><td>Hora </td> <td><h1 id = "txt"> </h1></td></tr>
+<tr><th colspan = 6>Relogio IOT</th></tr>
+<tr><td><h1>Hora </h1></td> <td><h1 id = "txt"> </h1></td></tr>
 
-<tr><td><h2 colspan = 6>Disparo </h2></td>
+<tr><td><h1 colspan = 6>Disparo </h1></td>
 <td><input type="text" 	name = "horad"id= "hd" value = "10"  size="6" >
 	<input type="text"  name = "mind" id= "md" value = "10"  size="6" > 
 	<input type="text" 	name = "secd" id= "sd" value = "10"  size="6" > </td> </tr>
 	
-<tr><td><h2 colspan = 6>Tempo ligado </h2></td>
+<tr><td><h1 colspan = 6>Tempo ligado </h1></td>
 	<td><h1 id = "disp"> </h1></td>
 	<tr>
 	<td><input type="text" id="tempod" value="" maxlength="10" ></td> 
 	<td><h2 id="tempo"></h2></td></tr>
 
-<td rowspan =2>Estado<td><span id="rele">N/D</span></td>
+<td rowspan =2><h1>Estado</h1><td><span id="rele">N/D</span></td>
 </tr>
 
 <tr><td>
@@ -103,7 +102,7 @@
 
 <br>
 <div class = img_kit>
-<a ><img NAME="bar_04" src='imagens/Kit1.png' ALT=""></a>
+<a ><img name="img_kit" src='imagens/Kit1.png' ALT=""></a>
 </div>
 </body>
 
