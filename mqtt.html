@@ -31,22 +31,10 @@
 
 <section class=" Botoes_pagina0">
     <div class= "Botoes__pagina0">
-        <table>
-	        <tr>
-		        <td>
-			        <a onclick = mqtt_show() >
-			        <img name="raio_btn" src="imagens/blue/raio_btn.png" ALT=""></a>
-                </td>	
-            </tr>
-        </table>
-        <table>
-	        <tr>
-		        <td>
-			        <a onclick = Relogio() >
-			        <img name="lamp_btn" src="imagens/blue/lamp_btn.png" ALT=""></a>
-                </td>	
-            </tr>
-        </table>
+			<a onclick = mqtt_show()>
+		<img name="raio_btn" src="imagens/blue/raio_btn.png" ALT=""></a>
+			<a onclick = Relogio()>
+		<img name="lamp_btn" src="imagens/blue/lamp_btn.png" ALT=""></a>
 	</div>
 </section>
 
@@ -102,7 +90,7 @@
 
 <br>
 <div class = img_kit>
-<a ><img name="img_kit" src='imagens/Kit1.png' ALT=""></a>
+<img name="img_kit" src='imagens/Kit1.png' ALT="">
 </div>
 </body>
 
@@ -120,7 +108,7 @@ setInterval(function(){
 			var h=today.getHours();
 			var m=today.getMinutes();
 			var s=today.getSeconds();
-			// add a zero in front of numbers<10
+			
 			m=checkTime(m);
 			s=checkTime(s);
 			document.getElementById('txt').innerText= h+":"+m+":"+s;
@@ -137,7 +125,7 @@ setInterval(function(){
 
 	function setdisp(){
 
-// Set the date we're counting down to
+
 var countDownDate = new Date("Jun 27, 2022 15:37:25").getTime();
 
 		var hd=document.getElementById('hd');

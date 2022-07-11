@@ -69,6 +69,7 @@
     font-size: 12px;
     color: #ffffff;
   }
+
   input[type=submit] {
     border: 2px solid #333333;
     border-radius: 5px;
@@ -154,18 +155,14 @@
   border-radius: 10px;
 }
 
-img
-{
-  border: 0;
-}
-
 .img_kit img
 {
   align-items: center;
   justify-content: center;
-  display: flex;
-  position: center;
-  width: 600px;
+  display: flexbox;
+  position: relative;
+  text-align: center;
+  
   height: 300px;
 }
 
