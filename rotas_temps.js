@@ -78,9 +78,9 @@ routers.patch('/temps/:id',async (req, res) =>{
 
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
-    //const {id}= req.params.id
+    const id= req.params.id
     //temps.remove({id: req.body.id})
-    const temps = await Temps.deleteOne({_id: req.params.id}, (err) => {
+    const temps = await Temps.deleteOne({ _id: id}, (err) => {
     //const temps = await Temps.deleteOne({_id: id})
     if(err) return res.status(400).json({
 
