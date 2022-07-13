@@ -6,6 +6,8 @@ const Temps = require('./temps')
 const Person = require('./user')
 var fs = require('fs');
 //app.use(mqtt);
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
  routers.get('/mqtt',(req, res) =>{
     try{ 
@@ -129,6 +131,33 @@ routers.get('/user', async (req, res) =>{
     }  
 })
 
+//Cadastrar
+routers.post('/cadastrar', async (req, res) =>{
+
+    const senha= await bcrypt.hash("123456", 8);
+    console.log(senha);
+    return res.json({
+            erro: false,
+            message:  'Usuário cadastrado com sucesso'
+        });
+})
+
+//Login
+routers.post('/login', async (req, res) =>{
+   // $2a$08$VaEBCrDE50.Sy56I7nuUkeKr0HLt2W2.mQZbvtmMCte6Jq4Iw.6oe
+   console.log(req.body);
+    try{
+       const people = await Person.findOne({
+        attributes: ['nome', 'email', 'senha']
+
+    })
+        //res.status(200).json({people})
+        res.status(422).json({message:  'Usuário encontrado'});
+    }catch(error){
+        res.status(500).json({error: error})
+        res.status(422).json({message:  'Usuário não encontrado'});
+    }  
+})
 //Update
 routers.patch('/user/:id',async (req, res) =>{
     const id = req.params.id
