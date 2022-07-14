@@ -20,11 +20,11 @@
 
 <div class = "cad">
 	<div class = "box_cad">
-	<form action="/user" method = "post">
+	<form action="/cadastrar" method = "post">
 		<label>Cadastrar Usuario</label><br>
 		<input type="text" placeholder="Nome"	name = "nome" size="20" > <br>
 		<input type="text" placeholder="E-mail" name = "email" size="20" > <br>
-		<input type="text" placeholder="Senha" name = "senha" size="20" > <br><br>
+		<input type="text" placeholder="Senha" name = "senha0" size="20" > <br><br>
 		
 		<input type="checkbox" name = "agreement" id="agreement" >
 		<label for="agreement">Eu li e aceito os <a href= "#" >termos de uso</a></label><br><br>
@@ -37,8 +37,8 @@
 	<div class = "box_control">
 		<form action="/user" method = "get">
 		<label>Consultar</label><br>
-			<input type="text" name = "list" size="20" > 	<br>
-			<button type="submit" siz="20">Listar</button>
+		<input type="text" name = "list" size="20" > 	<br>
+		<button type="submit" siz="20">Listar</button>
 		</form>	
 	
 	<form action="/user" method = "patch">
@@ -46,7 +46,7 @@
 		<br><label>Altera</label><br>
 		<input type="text"  placeholder="Nome" name="nome" size="20" > <br>
 		<input type="text"  placeholder="E-mail" name="email" size="20" > <br>
-		<input type="text"  placeholder="Senha" name="senha" size="20" > <br>
+		<input type="text"  placeholder="Senha" name="senha0" size="20" > <br>
 		<button type="submit">Alterar </button>
 	</form>
 

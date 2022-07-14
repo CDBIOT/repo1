@@ -109,6 +109,8 @@ routers.delete('/temps/:id', async (req, res) => {
 //}  
 //});
 
+
+
  //Create
  routers.post('/user', async (req, res) =>{
     const {nome, email, senha } = req.body
@@ -134,29 +136,70 @@ routers.get('/user', async (req, res) =>{
 //Cadastrar
 routers.post('/cadastrar', async (req, res) =>{
 
-    const senha= await bcrypt.hash("123456", 8);
+    const {nome, email, senha0} = req.body
+    
+
+   if(!nome){
+    return res.status(422).json({message: 'O nome é obrigatório'})
+    }
+    if(!email){
+    return res.status(422).json({message: 'O email é obrigatório'})
+    }
+    if(!senha0){
+    return res.status(422).json({message: 'A senha é obrigatória'})
+    }
+    
+    const salt = await bcrypt.genSalt(12)
+        
+    const senha= await bcrypt.hash(senha0, salt);
+
+    const person = { nome, email, senha }
+
+    try{
+        await Person.create(person)
+        res.status(201).json({message: 'Usuário cadastrado com sucesso'})
+    }catch(error){
+        res.status(500).json({error: error})
+    }  
     console.log(senha);
-    return res.json({
-            erro: false,
-            message:  'Usuário cadastrado com sucesso'
-        });
 })
 
 //Login
 routers.post('/login', async (req, res) =>{
+    const {nome, senha0} = req.body
    // $2a$08$VaEBCrDE50.Sy56I7nuUkeKr0HLt2W2.mQZbvtmMCte6Jq4Iw.6oe
-   console.log(req.body);
-    try{
-       const people = await Person.findOne({
-        attributes: ['nome', 'email', 'senha']
+   if(!nome){
+    return res.status(422).json({message: 'O nome é obrigatório'})
+    }
+    if(!senha0){
+    return res.status(422).json({message: 'A senha é obrigatória'})
+    }
+    senha = senha0;
+    const people = await Person.findOne({ attributes: ['nome', 'senha']})
 
-    })
-        //res.status(200).json({people})
-        res.status(422).json({message:  'Usuário encontrado'});
+    if(!people){
+    return res.status(422).json({message:  'Usuário não encontrado'})
+    }
+   
+     //check if password match
+     const checkpass = await bcrypt.compare(senha0, people.senha)
+    if(!checkpass){
+    return res.status(404).json({message: 'Senha inválida'})
+   }
+
+    try{
+         const secret = process.env.SECRET
+        const token = jwt.sign ({
+        id: people._id,
+        },
+        secret
+        )
+        res.status(200).json({message: 'Usuário autenticado com sucesso', token})
     }catch(error){
-        res.status(500).json({error: error})
-        res.status(422).json({message:  'Usuário não encontrado'});
+         res.status(500).json({error: error})
     }  
+ 
+  
 })
 //Update
 routers.patch('/user/:id',async (req, res) =>{
