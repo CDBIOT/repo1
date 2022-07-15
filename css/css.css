@@ -71,7 +71,7 @@
   }
 
   input[type=submit] {
-    border: 2px solid black;
+    border: none;
     border-radius: 5px;
     padding: 5px;
     width: 90px;
@@ -86,7 +86,7 @@
   .msg label
   {
   font-size: 18px;
-  color: #000000;
+  color: #ffff;
   text-align: center;
   padding: 5px;
   border-radius: 3px;
@@ -298,21 +298,28 @@ color: blue;
 .cad button
 {
   align-items: center;
-  background-color: #dddfe0;
+  background-color: #fffe57;
   font-weight: 600;
   font-size: 12px;
-  color: #148eee;
+  color: #505050;
   text-align: center;
   padding: 5px 20px;
   margin: 5px;
   cursor: pointer;
-
+  border: none;
   border-radius: 6px;
  
 }
+
+.cad button:hover
+{
+background-color: deepskyblue;
+color: blue;
+
+}
 .cad input{
   align-items: center;
-  background-color: #16a4b8;
+  background-color: #fffe57;
   font-weight: 600;
   font-size: 12px;
   color: #fffe57;
@@ -323,8 +330,9 @@ color: blue;
   border-bottom: 2px solid #323232;
 }
 .cad input:focus{
+border: none;
 border-color: #1e64e7;
-
+border-bottom: 2px solid #7ef740;
 }
 .cad #agreement, #agreement-label{
 display:inline-block;
@@ -332,26 +340,28 @@ width: auto;
 font-size: 8px;
 
 }
+
 .cad label{
   font-family: Arial, Helvetica, sans-serif;
   align-items: center;
   font-size: 14px;
-  border-radius: 6px;
+  border-radius: 1px;
   padding: 5px;
   margin: 20px 20px 10px 10px;
-  color: #fffe57;
-  background-color: #888681
+  color: black;
+  background-color: #ffffff;
 
 }
 
 .cad .box_cad{
   height: 400px;
   width: 300px;
+  font-weight: 600;
   margin: 20px 20px 10px 10px;
   align-items: center;
   border-radius: 10px;
   padding: 20px 20px 10px 10px;
-  background-color: rgb(202, 202, 205);
+  background-color: #888680;
   box-shadow: 0px 13px 35px -6px #0f0874;;
 
 }
@@ -363,11 +373,33 @@ font-size: 8px;
   border-radius: 10px;
   margin: 20px 20px 10px 10px;
   padding: 20px 20px 10px 10px;
-  background-color: rgb(202, 202, 205);
+  background-color: #888680;
   box-shadow: 0px 13px 35px -6px #0f0874;;
 
 }
 
+.cad .box_control button
+{
+  align-items: center;
+  background-color: #fffe57;
+  font-weight: 600;
+  font-size: 12px;
+  color: #505050;
+  text-align: center;
+  padding: 5px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+ 
+}
+
+.cad .box_control button:hover
+{
+background-color: deepskyblue;
+color: blue;
+
+}
 
 
 .container3
