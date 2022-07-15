@@ -78,6 +78,15 @@ routers.patch('/temps/:id',async (req, res) =>{
     }  
 })
 
+routers.post('/temps/:id',async(req, res) =>{
+    const  id = req.params.id
+    
+    res.status(201).send({
+    mensagem: 'inserido',
+    produtoCriado: produto
+    })
+  });
+
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
     const id= req.params.id
