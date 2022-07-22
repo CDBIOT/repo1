@@ -85,7 +85,7 @@
   }
   .msg label
   {
-  font-size: 18px;
+  font-size: 36px;
   color: #ffff;
   text-align: center;
   padding: 5px;
@@ -125,10 +125,29 @@
 }
 .home_btn
 {
+
   display: flex;
   margin-top: 5px;
 }
+#logo
+{
+  display: inline-block;
+  margin: 20px 1px 20px 10px;
+  width: 150px;
+  height: 150px;
+  padding: 20px 5px 10px 10px;
 
+
+}
+#logo_toi
+{
+  display: inline-block;
+  margin: 80px 50px 1px 1px;
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+
+}
 .secao__Botoes {
     display: flex;
     align-items: center;
@@ -155,15 +174,20 @@
   border-radius: 10px;
 }
 
-.img_kit img
+#img_kit
 {
   align-items: center;
   justify-content: center;
-  display: flexbox;
+  
   position: relative;
   text-align: center;
-  
+  width: 600px;
   height: 300px;
+}
+#fio{
+
+  display: flex;
+  width: 1200px;
 }
 
 .botão_chart
