@@ -95,7 +95,7 @@
   .div
   {
   width: 400px;
-  height: 300px;
+  height: 200px;
   
   }
   
@@ -117,7 +117,7 @@
     border-radius: 10px;
     width: 100%;
     max-width: 1200px;
-    height: 200px;
+    height: 100px;
     
     position: space-between;
     margin: auto 20px auto 20px;;
@@ -125,29 +125,37 @@
 }
 .home_btn
 {
-
   display: flex;
   margin-top: 5px;
+  width: 85px;
+  height: 85px;
 }
 #logo
 {
   display: inline-block;
-  margin: 20px 1px 20px 10px;
-  width: 150px;
-  height: 150px;
-  padding: 20px 5px 10px 10px;
-
+  margin: 5px 1px 20px 10px;
+  width: 85px;
+  height: 85px;
+  padding: 5px 5px 10px 10px;
 
 }
 #logo_toi
 {
   display: inline-block;
-  margin: 80px 50px 1px 1px;
-  width: 300px;
-  height: 100px;
-  padding: 20px;
-
+  margin: 25px 50px 1px 1px;
+  width:150px;
+  height: 50px;
+  padding: 5px 5px 10px 10px;
 }
+
+#fio
+{
+  display: block;
+  width: 1200px;
+  padding: 5px 5px 10px 10px;
+  height: 20px;
+}
+
 .secao__Botoes {
     display: flex;
     align-items: center;
@@ -168,7 +176,11 @@
   background-image: linear-gradient(45deg, cyan, blue);
 }
 
-.Botoes__pagina0 IMG
+.w_box{
+display: inline-flexbox;
+
+}
+.Botoes__pagina0 
 {
   border: 0;
   border-radius: 10px;
@@ -184,10 +196,9 @@
   width: 600px;
   height: 300px;
 }
-#fio{
-
-  display: flex;
-  width: 1200px;
+#pasta_btn{
+height:85px;
+width: 85px;
 }
 
 .botão_chart
@@ -197,7 +208,7 @@
 
     width: 100%;
     max-width: 1200px;
-    height: 250px;
+    height: 150px;
 
     position: relative;
     float: left;
@@ -246,6 +257,7 @@
   border: none;
   box-shadow: 10px 10px 35px -6px #148eee;
 }
+
 
 .box
 {
