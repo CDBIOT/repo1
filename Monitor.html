@@ -6,25 +6,33 @@
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 
 <title>Monitor Page</title> 
-
 </head>
-
-
-<div class="botao_home">
-	<form name="home" action="/" method="get">
-		<div class="home_btn">
-		<input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
-		</div>
-	</form>
+<section class="Botoes">
+<div class="container">
+	<div class="botao_home">
+		<form name="home" action="/" method="get">
+			<div class="home_btn">
+			<input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+			</div>
+		</form>
+	</div>
 </div>
+<img id = "fio" src = "imagens/blue/fio azul.png" >
+</section>
 
 <section class=" Botoes_pagina0">
     <div class= "Botoes__pagina0">
-			<a onclick = cad_new_temp()>
-		<img id="pasta_btn" src="imagens/blue/pasta_btn.png" ALT=""></a>
-			<a onclick = getContent()>
+		<a onclick = getContent()>
 		<img  id="temp_btn" src="imagens/blue/temp_btn.png" ALT=""></a>
+		<label> Temperatura Atual</label>
+		<a onclick = list_temp()>
+		<img  id="temp_btn" src="imagens/blue/temp_btn.png" ALT=""></a>
+		<label> Tabela de Temperaturas </label>
+		<a onclick = cad_new_temp()>
+		<img id="pasta_btn" src="imagens/blue/pasta_btn.png" ALT=""></a>
+		<label> Cadastrar Temperatura</label>
 	</div>
+
 </section>
 
 <body>
@@ -35,24 +43,17 @@
 	<tr>
 	<td><h1 id = "m"> </h1></td>
 	<td><h1 id = "mes"> </h1></td>
-	<td><button type="submit" onclick= stop()  >STOP </button></td>
-	<td><button type="button" onclick= cad_new_temp() >CAD_NEW_TEMP </button></td>
 </tr>
 </table>
 </form>
 	
-<form >
-<li id= 'fill_list'></li>
-</form>
-
 <h3>
 	<table>
 		<tr><th colspan = 4>TEMPERATURAS </th></tr>
-		<tr><td><h2>Local: 	</h2></td><td colspan = 3><h2 id ='local'></h2></td></tr>       
-		<tr><td><h2>Temp: 	</h2></td><td colspan = 3><h2 id ='temperatura'></h2></td></tr>   
-		<tr><td><h2>Data: 	</h2></td><td><h2 id ='dia'></h2><td><h2 id ='mes'></h2></td><td><h2 id ='ano'></h2> </td></tr>
+		<tr><td><h1>Local: 	</h1></td><td colspan = 3><h2 id ='local'></h2></td></tr>       
+		<tr><td><h1>Temp: 	</h1></td><td colspan = 3><h2 id ='temperatura'></h2></td></tr>   
+		<tr><td><h1>Data: 	</h1></td><td><h2 id ='dia'></h2><td><h2 id ='mes'></h2></td><td><h2 id ='ano'></h2> </td></tr>
 	</table>
-	<input type="button" onclick=getContent() value="Get Content" />
 	</h3>
 	<br>
 	
@@ -60,16 +61,16 @@
 <form action="/temps" method = "post">
 	<table>
 	<tr><th colspan = 4>Cadastrar Temperatura</th></tr>
-	<td><h2>Local: </h2></td>
+	<td><h1>Local: </h1></td>
 	<td><h2><input type="text"  value="local" name = "local" size="5" > </h2></td></tr>
-	<td><h2>Temperatura: </h2></td>
+	<td><h1>Temperatura: </h2></td>
 	<td><h2><input type="text" value= 0 name = "temperatura" size="5" > </h2></td></tr>
-	<td><h2>Dia: </h2></td>
+	<td><h1>Dia: </h1></td>
 	<td><h2><input type="text"  value= 0 name = "dia" size="5" ></h2></td></tr>
-	<td><h2>Mes: </h2></td>
+	<td><h1>Mes: </h1></td>
 	<td><h2><input type="text" value= 0 name = "mes" size="5" ></h2></td></tr>
-	<td><h2>Ano: </h2></td>
-	<td><h2><input type="text" value= 0 name = "ano" size="5" ></h2></td></tr>
+	<td><h1>Ano: </h1></td>
+	<td><h1><input type="text" value= 0 name = "ano" size="5" ></h2></td></tr>
 	<td><h2><button type="submit"> Cadastrar Temperatura</button></h2></td>
 	</tr>
 	</table>
@@ -79,12 +80,12 @@
 <form action="/temps" method = "get">
 	<table>
 	<tr><th colspan = 4>Temperatura dia</th></tr>
-	<td><h2>Local: </h2></td>
-	<td><h2>Temperatura: </h2></td>
-	<td><h2>Dia: </h2></td>
+	<td><h1>Local: </h1></td>
+	<td><h1>Temperatura: </h1></td>
+	<td><h1>Dia: </h1></td>
 	<td><h2><input type="text" id = 'dia' value= 0 name = "dia" size="5" ></h2></td></tr>
-	<td><h2>Mes: </h2></td>
-	<td><h2>Ano: </h2></td>
+	<td><h1>Mes: </h1></td>
+	<td><h1>Ano: </h1></td>
     <td><h2><button type="submit"> Listar dia</button></h2></td>
 	<h2 id = "dia" id = "mes" id= "ano"></h2>
 	</tr>
@@ -92,18 +93,12 @@
 </form>
 <br>
 <form action="/temps" method = "get">
-<table>
-	<tr><th colspan =2>Consultar Temperaturas</th></tr>
-	<tr>
-	<td><h2><input type="button" onclick=list_temp() value="LISTAR" />
-	</tr>
-</table>
 </form>	
 <br>
 
 <form action="/temps" method = "delete">
 	<table>
-	<tr><th colspan = 2>DELETAR</th></tr>
+	<tr><th colspan = 2>Deletar</th></tr>
 	<tr>
 	<td><input type="text" id=" id" name = "id" size="32" > </td>
 	<td><button type="submit">Deletar</button></td>
@@ -117,17 +112,16 @@
 	         	<table>
 					<div class = "thead"> 
 					<thead>
-					<th>ID</th><th>LOCAL </th><th>TEMPERATURAS </th><th>DIA </th><th> MES</th><th>ANO</th>
+					<th> Id </th><th> Local </th><th> Temperaturas </th><th> Dia </th><th> Mes </th><th> Ano </th>
                 	</thead>
 					</div>
                     	<tbody id = "mytable">
 
                     	</tbody>
-                    		<tfoot> </tfoot>
+                    	<tfoot> </tfoot>
 	        	</table>
 		</div>
 </section>
-
 </div>
 </body>
 

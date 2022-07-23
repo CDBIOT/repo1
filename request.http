@@ -2,14 +2,18 @@ POST http://localhost:8081/user
 content-type: application/json
 
 {
-"nome": "lulu",
-"sobrenome": "sawahara",
+"nome": "adendo",
+"sobrenome": "adentro",
 "idade": 14
 }
 
 ###
-POST http://localhost:8081/temps
-content-type: application/json
+POST http://localhost:8081/cadastrar
+
+###
+POST http://localhost:8081/login
+
+
 
 ####
 POST https://polar-beyond-82520.herokuapp.com/temps
@@ -59,7 +63,7 @@ content-type: application/json
 
 
 ###
-DELETE  https://polar-beyond-82520.herokuapp.com/temps/62b38d227247b37a533ed365
+DELETE  https://polar-beyond-82520.herokuapp.com/temps/62ba1af4dd10d6f7d1d5bce0
 
 
 
