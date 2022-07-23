@@ -133,6 +133,7 @@ async function Mes(){
       mode: 'cors',
       cache: 'default'
                      }
+                     
     const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
     //const response = fetch('http://127.0.0.1:8081/mqtt')
     .then(function (response){
