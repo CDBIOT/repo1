@@ -78,13 +78,13 @@
   }
   
 input[type=image]{
-width: 50px;
-height: 50px;
+width: 120px;
+height: 120px;
 }
 
 img{
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
 }
 
 .msg {
@@ -129,7 +129,7 @@ img{
     border-radius: 10px;
     width: 100%;
     max-width: 1200px;
-    height: 100px;
+    height: 200px;
     
     position: space-between;
     margin: auto 20px auto 20px;;
@@ -138,16 +138,16 @@ img{
 .home_btn
 {
   display: flex;
-  margin-top: 5px;
-  width: 60px;
-  height: 60px;
+  margin: 5px 30px 20px 10px;
+  width: 120px;
+  height: 120px;
 }
 #logo
 {
   display: inline-block;
   margin: 5px 1px 20px 10px;
-  width: 85px;
-  height: 85px;
+  width: 150px;
+  height: 150px;
   padding: 5px 5px 10px 10px;
 
 }
@@ -155,8 +155,8 @@ img{
 {
   display: inline-block;
   margin: 25px 50px 1px 1px;
-  width:150px;
-  height: 50px;
+  width:250px;
+  height: 100px;
   padding: 5px 5px 10px 10px;
 }
 
@@ -206,8 +206,8 @@ border-radius: 10px;
 }
 
 #pasta_btn{
-height:85px;
-width: 85px;
+height:150px;
+width: 150px;
 }
 
 .botão_chart
@@ -282,8 +282,8 @@ width: 85px;
 
 .autenticacao img
 {
-height: 50;
-width: 50;
+height: 100;
+width: 100;
 box-shadow: 5px 13px 6px -6px #148eee
 }
 
