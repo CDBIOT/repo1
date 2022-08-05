@@ -93,7 +93,7 @@ routers.delete('/temps/:id', async (req, res) => {
     const id= req.params.id
     //temps.remove({id: req.body.id})
     const temps = await Temps.deleteOne({ _id: id}, (err) => {
-    //const temps = await Temps.deleteOne({_id: id})
+    
     if(err) return res.status(400).json({
 
         error:true,
@@ -168,6 +168,7 @@ routers.post('/cadastrar', async (req, res) =>{
     try{
         await Person.create(person)
         res.status(201).json({message: 'Usuário cadastrado com sucesso'})
+
     }catch(error){
         res.status(500).json({error: error})
     }  
@@ -184,31 +185,29 @@ routers.post('/login', async (req, res) =>{
     if(!senha0){
     return res.status(422).json({message: 'A senha é obrigatória'})
     }
-    senha = senha0;
-    const people = await Person.findOne({ attributes: ['nome', 'senha']})
+    const senha = senha0;
+    const user = await Person.findOne({ attributes: ['nome', 'senha']})
+    //const people = await Person.findOne({nome}).select('+senha0');
 
-    if(!people){
-    return res.status(422).json({message:  'Usuário não encontrado'})
+    if(!user){
+    return res.status(422).json({error:  'Usuário não encontrado'})
     }
    
      //check if password match
-     const checkpass = await bcrypt.compare(senha0, people.senha)
+     const checkpass = await bcrypt.compare(senha0, user.senha)
     if(!checkpass){
-    return res.status(404).json({message: 'Senha inválida'})
+    return res.status(404).json({error: 'Senha inválida'})
+    //return res.send({people});
    }
 
     try{
-         const secret = process.env.SECRET
-        const token = jwt.sign ({
-        id: people._id,
-        },
-        secret
-        )
+         const secret = process.env.secret
+        const token = jwt.sign ({id: user.id}, secret )
         res.status(200).json({message: 'Usuário autenticado com sucesso', token})
     }catch(error){
          res.status(500).json({error: error})
     }  
- 
+    res.send({user});
   
 })
 //Update
@@ -226,18 +225,22 @@ routers.patch('/user/:id',async (req, res) =>{
 
  //Delete
  routers.delete('/user/:id', async (req, res) => {
-    const id= req.params.id
+    const id = req.params.id
     const person = await Person.findOne({_id: id})
     if(!person){
     res.status(422).json({message:  'Usuário não encontrado'});
+    console.log(id);
     return
     }
     try{
         await Person.deleteOne({_id: id});
         res.status(200).json({message: 'Usuário removido com sucesso'});
+        console.log(id);
     }catch(error){
     res.status(500).json({error: error})
+    console.log(id);
 }  
+
 });
 
 
