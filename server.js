@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const routers = require('./rotas_temps','./rotas_user');
+require('dotenv').config()
 
 const mqtt = require('./mqtt_node2');
 //const mongo = require('./mongo');

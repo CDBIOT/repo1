@@ -93,8 +93,10 @@ routers.delete('/user/:id', async (req, res) => {
 
  //Delete
  routers.delete('/temps/:id', async (req, res) => {
+
     const id= req.params.id
-    const temperature = await Temps.findOne({_id: id})
+    const temperature = await Temps.findOne({id: id})
+
     if(!temperature){
     res.status(422).json({message:  'Usuário não encontrado'});
     return

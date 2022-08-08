@@ -185,30 +185,36 @@ routers.post('/login', async (req, res) =>{
     if(!senha0){
     return res.status(422).json({message: 'A senha é obrigatória'})
     }
+    //check if user exists
     const senha = senha0;
-    const user = await Person.findOne({ attributes: ['nome', 'senha']})
+
+    const user = await Person.findOne({ nome: nome})
     //const people = await Person.findOne({nome}).select('+senha0');
 
     if(!user){
-    return res.status(422).json({error:  'Usuário não encontrado'})
+    return res.status(404).json({error:  'Usuário não encontrado'})
     }
    
+
      //check if password match
      const checkpass = await bcrypt.compare(senha0, user.senha)
+
     if(!checkpass){
-    return res.status(404).json({error: 'Senha inválida'})
-    //return res.send({people});
+    return res.status(422).json({error: 'Senha inválida'})
    }
 
     try{
-         const secret = process.env.secret
-        const token = jwt.sign ({id: user.id}, secret )
-        res.status(200).json({message: 'Usuário autenticado com sucesso', token})
-    }catch(error){
-         res.status(500).json({error: error})
-    }  
-    res.send({user});
-  
+        const secret = process.env.SECRET
+        //secret = "321654"
+
+        const token = jwt.sign ({id: user._id}, secret )
+     res.status(200).json({message: 'Usuário autenticado com sucesso', token})
+
+     }catch(error){
+        console.log(error)
+          res.status(500).json({error: "Aconteceu um erro no servidor!",token})
+     }
+    res.send({user});  
 })
 //Update
 routers.patch('/user/:id',async (req, res) =>{
@@ -216,7 +222,7 @@ routers.patch('/user/:id',async (req, res) =>{
     const {nome,sobrenome,idade} = req.body
     const person = {nome,sobrenome,idade,}
     try{
-     const updatePerson = await Person.updateOne({_id: id},person);
+     const updatePerson = await Person.updateOne({id: _id},person);
      res.status(200).json(person);
     }catch(error){
     res.status(500).json({error: error})
@@ -226,7 +232,7 @@ routers.patch('/user/:id',async (req, res) =>{
  //Delete
  routers.delete('/user/:id', async (req, res) => {
     const id = req.params.id
-    const person = await Person.findOne({_id: id})
+    const person = await Person.findOne({id: _id})
     if(!person){
     res.status(422).json({message:  'Usuário não encontrado'});
     console.log(id);
