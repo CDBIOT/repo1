@@ -2,6 +2,7 @@ const { response } = require('express');
 const express = require('express');
 const routers = express.Router();
 const app = express();
+
 const Temps = require('./temps')
 const Person = require('./user')
 var fs = require('fs');
@@ -65,6 +66,7 @@ routers.get('/temps/:dia', async (req, res) =>{
         res.status(500).json({error: error})
     }  
 })
+
 //Update
 routers.patch('/temps/:id',async (req, res) =>{
     const id = req.params.id
@@ -77,7 +79,6 @@ routers.patch('/temps/:id',async (req, res) =>{
     res.status(500).json({error: error})
     }  
 })
-
 
 routers.post('/temps/:id',async(req, res) =>{
     const  id = req.params.id
@@ -121,7 +122,7 @@ routers.delete('/temps/:id', async (req, res) => {
 
 
 
- //Create
+ //Create user
  routers.post('/user', async (req, res) =>{
     const {nome, email, senha } = req.body
     const person = { nome,email,senha }
@@ -133,22 +134,86 @@ routers.delete('/temps/:id', async (req, res) => {
     }  
 })
 
-//Read
-routers.get('/user', async (req, res) =>{
+//Read user private page
+routers.get('/user',checkToken, async (req, res) =>{
     try{
        const people = await Person.find()
         res.status(200).json({people})
+        console.log(req.user._id + 'fez esta chamada')
     }catch(error){
         res.status(500).json({error: error})
     }  
 })
 
-//Cadastrar
+
+//Login com senha criptografada
+routers.post('/login', async (req, res) =>{
+    const {nome, senha0} = req.body
+   // $2a$08$VaEBCrDE50.Sy56I7nuUkeKr0HLt2W2.mQZbvtmMCte6Jq4Iw.6oe
+   if(!nome){
+    return res.status(422).json({message: 'O nome é obrigatório'})
+    }
+    if(!senha0){
+    return res.status(422).json({message: 'A senha é obrigatória'})
+    }
+    //check if user exists
+    const senha = senha0;
+
+    const user = await Person.findOne({ nome: nome})
+    //const people = await Person.findOne({nome}).select('+senha0');
+
+    if(!user){
+    return res.status(404).json({error:  'Usuário não encontrado'})
+    }
+   
+     //check if password match
+     const checkpass = await bcrypt.compare(senha0, user.senha)
+
+    if(!checkpass){
+    return res.status(422).json({error: 'Senha inválida'})
+   }
+
+    try{
+    const secret = process.env.SECRET
+        
+    const token = jwt.sign ({id: user._id}, secret )
+     res.status(200).json({message: 'Usuário autenticado com sucesso', token})
+
+     }catch(error){
+        console.log(error)
+          res.status(500).json({error: "Aconteceu um erro no servidor!",token})
+     }
+    res.send({user});  
+})
+
+//Funcão check token
+function checkToken(req, res, next) {
+
+const authHeader = req.headers.authorization;
+const token = authHeader && authHeader.split(' ')[1]
+
+if(!token){
+ return res.status(401).json({message: 'Acesso negado!'})
+ console.log("Tentativa de acesso")
+}
+   try {
+   const secret = process.env.SECRET
+   jwt.verify(token,secret,(err,decoded)=> {
+    if(err)return res.status(401).end();
+    req.userID = decoded.userId;
+    next()
+    })
+   } catch (error) {
+    res.status(401).json({msg: "Token Invalido!"})
+   }
+   
+}
+
+//Cadastrar usuario com senha criptografada 
 routers.post('/cadastrar', async (req, res) =>{
 
     const {nome, email, senha0} = req.body
     
-
    if(!nome){
     return res.status(422).json({message: 'O nome é obrigatório'})
     }
@@ -175,48 +240,8 @@ routers.post('/cadastrar', async (req, res) =>{
     console.log(senha);
 })
 
-//Login
-routers.post('/login', async (req, res) =>{
-    const {nome, senha0} = req.body
-   // $2a$08$VaEBCrDE50.Sy56I7nuUkeKr0HLt2W2.mQZbvtmMCte6Jq4Iw.6oe
-   if(!nome){
-    return res.status(422).json({message: 'O nome é obrigatório'})
-    }
-    if(!senha0){
-    return res.status(422).json({message: 'A senha é obrigatória'})
-    }
-    //check if user exists
-    const senha = senha0;
 
-    const user = await Person.findOne({ nome: nome})
-    //const people = await Person.findOne({nome}).select('+senha0');
-
-    if(!user){
-    return res.status(404).json({error:  'Usuário não encontrado'})
-    }
-   
-
-     //check if password match
-     const checkpass = await bcrypt.compare(senha0, user.senha)
-
-    if(!checkpass){
-    return res.status(422).json({error: 'Senha inválida'})
-   }
-
-    try{
-        const secret = process.env.SECRET
-        //secret = "321654"
-
-        const token = jwt.sign ({id: user._id}, secret )
-     res.status(200).json({message: 'Usuário autenticado com sucesso', token})
-
-     }catch(error){
-        console.log(error)
-          res.status(500).json({error: "Aconteceu um erro no servidor!",token})
-     }
-    res.send({user});  
-})
-//Update
+//Update usuario
 routers.patch('/user/:id',async (req, res) =>{
     const id = req.params.id
     const {nome,sobrenome,idade} = req.body
@@ -229,7 +254,7 @@ routers.patch('/user/:id',async (req, res) =>{
 }  
 })
 
- //Delete
+ //Delete usuario
  routers.delete('/user/:id', async (req, res) => {
     const id = req.params.id
     const person = await Person.findOne({id: _id})
@@ -249,13 +274,12 @@ routers.patch('/user/:id',async (req, res) =>{
 
 });
 
-
 routers.use('/', express.static(__dirname + '/'))
 routers.use('/css', express.static("/css"))
 routers.use('/imagens', express.static("/imagens"))
 routers.use('/grafico.js', express.static("/"))
 routers.use('/mqtt_node2.js', express.static("/"))
-//routers.use('/user.js', express.static("/"))
+
  
  routers.get("/mqtt_node2",function(req,res){
     res.sendFile(__dirname + "/mqtt_node2.js");

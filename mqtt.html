@@ -13,6 +13,7 @@
 	
 <body onload="startTime()">
 
+
 <section class="Botoes">
 	
 <div class="container">
@@ -26,7 +27,7 @@
 		<div class="home_btn">
 			<form name="home" action="/" method="get">
                 <a  href="autentica.html">
-			    <img NAME="bar_04" src="imagens/blue/gear_btn.png"  ALT=""></a>
+			    <img src="imagens/blue/gear_btn.png"  ALT=""></a>
 			</form>
 		</div>
 	</div>
@@ -35,28 +36,27 @@
 
 <section class=" Botoes_pagina0">
     <div class= "Botoes__pagina0">
-			<a onclick = mqtt_show()>
-		<img name="raio_btn" src="imagens/blue/raio_btn.png" ALT=""></a>
-		<label> Temperatura Atual </label>
+		
 			<a onclick = Relogio()>
 		<img name="lamp_btn" src="imagens/blue/lamp_btn.png" ALT=""></a>
 		<label> Set Time Light </label>
+		<label> Temperatura Atual </label>
 	</div>
 </section>
 
 <div class = temp_show>
 <form action="/mqtt" method = "get"></form>
 <table>
-	<tr><th colspan = 6>TEMPERATURA DO QUARTO </th></tr>
-		 <tr><td><h1 id = "temp"> </h1></td><td><h1>  ºC</h1></td></tr>
+	<tr><th colspan = 6><h1>TEMPERATURA DO QUARTO </h1></th></tr>
+	<tr><td><span id = "temp"> </span></td><td><span>  ºC</span></td></tr>
 
-    <tr><th colspan = 6> TEMPERATURA DA SALA</th></tr>
+    <tr><th colspan = 6> <h1>TEMPERATURA DA SALA</h1></th></tr>
     <tr>
-    <td><h1 id = "local"> </h1></td>
-    <td><h1 id = "temp"> </h1></td>
-	<td><h1 id = "dia"> </h1></td>
-    <td><h1 id = "mes"> </h1></td>
-    <td><h1 id = "ano"> </h1></td>
+    <td><span id = "local"> </td>
+    <td><span id = "temp"> </span></td>
+	<td><span id = "dia"> </span></td>
+    <td><span id = "mes"> </span></td>
+    <td><span id = "ano"> </span></td>
     </tr>
 </table>
 </form>
@@ -107,7 +107,7 @@ setInterval(function(){
 	mqtt_show();
 //	getContent();
 
-},60000); 
+},1000); 
 
 		function startTime() {
 			var today=new Date();

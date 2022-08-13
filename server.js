@@ -36,10 +36,6 @@ app.use(express.json());
 app.use(routers);
 
 
-app.use((req, res, next) =>{
-    console.log("MIDDLEWARE2");
-    next()
-})
 const PORT = process.env.PORT || 8081 || 5500;
     app.listen(PORT,function(){
         console.log("Servidor Rodando");
