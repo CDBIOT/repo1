@@ -134,16 +134,18 @@ routers.delete('/temps/:id', async (req, res) => {
     }  
 })
 
+
 //Read user private page
-routers.get('/user',checkToken, async (req, res) =>{
-    try{
-       const people = await Person.find()
-        res.status(200).json({people})
-        console.log(req.user._id + 'fez esta chamada')
-    }catch(error){
-        res.status(500).json({error: error})
-    }  
-})
+// routers.get('/user', async (req, res) =>{
+//     const id= req.params.id
+//     try{
+//        const people = await Person.findById(id, '-senha')
+//         res.status(200).json({people})
+//         console.log(req.user._id + 'fez esta chamada')
+//     }catch(error){
+//         res.status(500).json({error: error})
+//     }  
+// })
 
 
 //Login com senha criptografada
@@ -177,6 +179,7 @@ routers.post('/login', async (req, res) =>{
     const secret = process.env.SECRET
         
     const token = jwt.sign ({id: user._id}, secret )
+    const id  = user._id
      res.status(200).json({message: 'Usuário autenticado com sucesso', token})
 
      }catch(error){
@@ -187,23 +190,31 @@ routers.post('/login', async (req, res) =>{
 })
 
 //Funcão check token
-function checkToken(req, res, next) {
+function checkToken (req, res, next) {
 
-const authHeader = req.headers.authorization;
-const token = authHeader && authHeader.split(' ')[1]
+const authHeader = req.headers.authorization || req.body.token ||req.query.token;
+//const authHeader= req.params.token;
+//const authHeader =  req.query.token
 
-if(!token){
- return res.status(401).json({message: 'Acesso negado!'})
- console.log("Tentativa de acesso")
+const token = authHeader && authHeader.split(' ')[1];
+//const [Bearer ,token] = authHeader.split(' ')[1];
+
+console.log("token:", token)
+console.log("autHeader: ",authHeader)
+
+if(!authHeader){
+ return res.status(401).json({message: "Token incorreto"})
 }
    try {
    const secret = process.env.SECRET
    jwt.verify(token,secret,(err,decoded)=> {
-    if(err)return res.status(401).end();
+    if(err){ res.status(401).json({ message: "Token errado" });
     req.userID = decoded.userId;
-    next()
-    })
-   } catch (error) {
+    }else{
+
+    next();
+    }
+   })}catch (error) {
     res.status(401).json({msg: "Token Invalido!"})
    }
    
@@ -241,6 +252,38 @@ routers.post('/cadastrar', async (req, res) =>{
 })
 
 
+
+ //Delete usuario
+ routers.delete('/user/:id', async (req, res) => {
+    const id = req.params.id
+    const person = await Person.findById(id)
+    if(!person){
+    res.status(422).json({message:  'Usuário não encontrado'});
+
+    return
+    }
+    try{
+        await Person.deleteOne(person);
+        res.status(200).json({message: 'Usuário removido com sucesso'});
+    
+    }catch(error){
+    res.status(500).json({error: error})
+    console.log(id);
+}  
+
+});
+
+//Read 
+routers.get('/user',checkToken, async (req, res) =>{
+
+    try{
+        const people = await Person.find()
+        return res.status(422).json({people})
+    }catch(error){
+        res.status(500).json({error: error})
+    }  
+})
+
 //Update usuario
 routers.patch('/user/:id',async (req, res) =>{
     const id = req.params.id
@@ -252,26 +295,6 @@ routers.patch('/user/:id',async (req, res) =>{
     }catch(error){
     res.status(500).json({error: error})
 }  
-})
-
- //Delete usuario
- routers.delete('/user/:id', async (req, res) => {
-    const id = req.params.id
-    const person = await Person.findOne({id: _id})
-    if(!person){
-    res.status(422).json({message:  'Usuário não encontrado'});
-    console.log(id);
-    return
-    }
-    try{
-        await Person.deleteOne({_id: id});
-        res.status(200).json({message: 'Usuário removido com sucesso'});
-        console.log(id);
-    }catch(error){
-    res.status(500).json({error: error})
-    console.log(id);
-}  
-
 });
 
 routers.use('/', express.static(__dirname + '/'))
@@ -280,7 +303,7 @@ routers.use('/imagens', express.static("/imagens"))
 routers.use('/grafico.js', express.static("/"))
 routers.use('/mqtt_node2.js', express.static("/"))
 
- 
+
  routers.get("/mqtt_node2",function(req,res){
     res.sendFile(__dirname + "/mqtt_node2.js");
 });

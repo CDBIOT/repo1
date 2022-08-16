@@ -24,7 +24,7 @@
 		<input type="text" placeholder="Nome"	name = "nome" size="20" > <br>
 		<input type="text" placeholder="E-mail" name = "email" size="20" > <br>
 		<input type="text" placeholder="Senha" name = "senha0" size="20" > <br><br>
-		
+	
 		<input type="checkbox" name = "agreement" id="agreement" >
 		<label for="agreement">Eu li e aceito os <a href= "#" >termos de uso</a></label><br><br>
 		<button type="submit"> Cadastrar </button>
@@ -35,19 +35,19 @@
 
 	<div class = "box_control">
 		<form action="/user" method = "get">
-		<label>Consultar</label><br>
-		<input type="text" name = "list" size="20" > 	<br>
-		<button type="submit" >Listar</button>
-		</form>	
+			<label>Consultar</label><br>
+			<input type="text" id="token"  name = "token" > <br>
+			<button type="button"  onClick="autentica()">Listar</button>
+		</form>
 	
-	<form action="/user" method = "patch">
-
-		<br><label>Altera</label><br>
-		<input type="text"  placeholder="Nome" name="nome" size="20" > <br>
-		<input type="text"  placeholder="E-mail" name="email" size="20" > <br>
-		<input type="text"  placeholder="Senha" name="senha0" size="20" > <br>
-		<button type="submit">Alterar </button>
-	</form>
+		<form action="/user" method = "patch">
+			<br><label>Altera</label><br>
+			<input type="text"  placeholder="Nome" name="nome" size="20" > <br>
+			<input type="text"  placeholder="E-mail" name="email" size="20" > <br>
+			<input type="text"  placeholder="Senha" name="senha0" size="20" > <br>
+			<button type="submit">Alterar </button>
+		</form>
+	
 
 	<form action="/user" method = "delete">
 		<br><label>Deletar</label><br>
@@ -58,4 +58,33 @@
 	</div>
 </div>
 </body>
+
+<script>
+
+	async function autentica() {
+		//envio de token via submit
+		var myHeaders = new Headers();
+			myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDU5OTczMn0.d--z2aKV0VzS8neWKFLdPmUUVIMwLXvOxLAQip_xUpA");
+
+			const options = {
+							method: 'GET',
+							mode: 'cors',
+							cache: 'default',
+							headers: myHeaders,
+							redirect: 'follow'
+							};
+
+			//fetch('https://polar-beyond-82520.herokuapp.com/user')
+			fetch('http://127.0.0.1:8081/user',options)
+			.then(response=>response.text())
+			.then(result => console.log(result))
+  			.catch(error => console.log('error', error));
+			}
+		
+
+
+
+
+
+</script>
 </html>
