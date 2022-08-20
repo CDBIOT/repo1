@@ -178,8 +178,9 @@ routers.post('/login', async (req, res) =>{
     try{
     const secret = process.env.SECRET
         
-    const token = jwt.sign ({id: user._id}, secret )
+    const token = jwt.sign ({id: user._id}, secret)
     const id  = user._id
+     //localStorage.setItem(token)
      res.status(200).json({message: 'Usuário autenticado com sucesso', token})
 
      }catch(error){

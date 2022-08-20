@@ -63,9 +63,13 @@
 
 	async function autentica() {
 		//envio de token via submit
-		var myHeaders = new Headers();
-			myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDU5OTczMn0.d--z2aKV0VzS8neWKFLdPmUUVIMwLXvOxLAQip_xUpA");
 
+		const token = document.getElementById('token').value;
+		localStorage.token = token;
+		var myHeaders = new Headers();
+			//myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDk1ODg3NH0.oPzUBNWb_3xpisuM5RY7u2uTHl-wH7wSkSJ0aezqqQY");
+			myHeaders.append("Authorization", "Bearer "+localStorage.getItem("token"));
+			//myHeaders.append("Authorization", `Bearer ${token}`);
 			const options = {
 							method: 'GET',
 							mode: 'cors',
@@ -74,8 +78,8 @@
 							redirect: 'follow'
 							};
 
-			//fetch('https://polar-beyond-82520.herokuapp.com/user')
-			fetch('http://127.0.0.1:8081/user',options)
+			fetch('https://polar-beyond-82520.herokuapp.com/user')
+			//fetch('http://127.0.0.1:8081/user',options)
 			.then(response=>response.text())
 			.then(result => console.log(result))
   			.catch(error => console.log('error', error));
