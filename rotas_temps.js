@@ -167,7 +167,6 @@ routers.post('/login', async (req, res) =>{
     if(!user){
     return res.status(404).json({error:  'Usuário não encontrado'})
     }
-   
      //check if password match
      const checkpass = await bcrypt.compare(senha0, user.senha)
 
@@ -180,14 +179,29 @@ routers.post('/login', async (req, res) =>{
         
     const token = jwt.sign ({id: user._id}, secret)
     const id  = user._id
-     //localStorage.setItem(token)
-     res.status(200).json({message: 'Usuário autenticado com sucesso', token})
+    //const {token} = req.body
+    
+	//localStorage.setItem =("token",token);
+   // sessionStorage.setItem =("token",token);
 
+     res.status(200).json({message: 'Usuário autenticado com sucesso', token,user})
+     fetch('http://127.0.0.1:8081/user',{
+     method: 'GET',
+     headers: {
+        'Content-Type':    'application/json',
+        'token': ("Authorization", "Bearer " + token)
+     }
+     
+     .then(response=>response.text())
+     .then(result => localStorage.setItem =("token",token))
+       .catch(error => console.log('error', error))
+    }
+    )
      }catch(error){
         console.log(error)
           res.status(500).json({error: "Aconteceu um erro no servidor!",token})
      }
-    res.send({user});  
+    
 })
 
 //Funcão check token

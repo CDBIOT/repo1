@@ -37,7 +37,7 @@
 		<form action="/user" method = "get">
 			<label>Consultar</label><br>
 			<input type="text" id="token"  name = "token" > <br>
-			<button type="button"  onClick="autentica()">Listar</button>
+			<button type="button"  onClick = "autentica()">Listar</button>
 		</form>
 	
 		<form action="/user" method = "patch">
@@ -62,14 +62,16 @@
 <script>
 
 	async function autentica() {
-		//envio de token via submit
+		//requisição de token para pagina login
+		
 
-		const token = document.getElementById('token').value;
-		localStorage.token = token;
+		//envio de token via submit
+		let token = document.getElementById('token').value;
+		token = localStorage.getItem("token") ;
 		var myHeaders = new Headers();
 			//myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDk1ODg3NH0.oPzUBNWb_3xpisuM5RY7u2uTHl-wH7wSkSJ0aezqqQY");
-			myHeaders.append("Authorization", "Bearer "+localStorage.getItem("token"));
-			//myHeaders.append("Authorization", `Bearer ${token}`);
+			//myHeaders.append("Authorization", "Bearer " + localStorage.getItem(token));
+			myHeaders.append("Authorization", "Bearer " + token);
 			const options = {
 							method: 'GET',
 							mode: 'cors',
@@ -78,7 +80,7 @@
 							redirect: 'follow'
 							};
 
-			fetch('https://polar-beyond-82520.herokuapp.com/user')
+			fetch('https://polar-beyond-82520.herokuapp.com/user',options)
 			//fetch('http://127.0.0.1:8081/user',options)
 			.then(response=>response.text())
 			.then(result => console.log(result))
