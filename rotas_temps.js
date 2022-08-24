@@ -162,7 +162,6 @@ routers.post('/login', async (req, res) =>{
     const senha = senha0;
 
     const user = await Person.findOne({ nome: nome})
-    //const people = await Person.findOne({nome}).select('+senha0');
 
     if(!user){
     return res.status(404).json({error:  'Usuário não encontrado'})
@@ -176,27 +175,15 @@ routers.post('/login', async (req, res) =>{
 
     try{
     const secret = process.env.SECRET
-        
+    // gera token com informação de id do usuario + secret
     const token = jwt.sign ({id: user._id}, secret)
     const id  = user._id
-    //const {token} = req.body
-    
+
 	//localStorage.setItem =("token",token);
    // sessionStorage.setItem =("token",token);
 
      res.status(200).json({message: 'Usuário autenticado com sucesso', token,user})
-     fetch('http://127.0.0.1:8081/user',{
-     method: 'GET',
-     headers: {
-        'Content-Type':    'application/json',
-        'token': ("Authorization", "Bearer " + token)
-     }
-     
-     .then(response=>response.text())
-     .then(result => localStorage.setItem =("token",token))
-       .catch(error => console.log('error', error))
-    }
-    )
+
      }catch(error){
         console.log(error)
           res.status(500).json({error: "Aconteceu um erro no servidor!",token})
@@ -208,8 +195,6 @@ routers.post('/login', async (req, res) =>{
 function checkToken (req, res, next) {
 
 const authHeader = req.headers.authorization || req.body.token ||req.query.token;
-//const authHeader= req.params.token;
-//const authHeader =  req.query.token
 
 const token = authHeader && authHeader.split(' ')[1];
 //const [Bearer ,token] = authHeader.split(' ')[1];

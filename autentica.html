@@ -28,7 +28,8 @@
 	
 	<input type="nome"  	placeholder="Usuario"	name = "nome" 	size="12" ><br><br>
 	<input type="password"  placeholder = "Senha" 	name = "senha0" size="12" > <br>  <br>
-    <button type="submit"> Login </button>  <br> <br>
+	<button type="submit">Login</button>
+	<button type="button"  onClick = "autentica()">LOGIN</button><br>  <br>
 </form>
 
 <button onclick = "window.location.href = 'cad_user.html'" >Cadastre-se</button><br>
@@ -37,21 +38,20 @@
 </body>
 <script>
 
-	async function autentica() {
+async function autentica() {
 
 		//envio de token via submit para localStorage
-		//const token = document.getElementById('token').value;
-		localStorage.setItem =(token);
-		
-		//envio de token via submit
+
 		//let token = document.getElementById('token').value;
 		//token = localStorage.getItem("token") ;
 		var myHeaders = new Headers();
 			//myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDk1ODg3NH0.oPzUBNWb_3xpisuM5RY7u2uTHl-wH7wSkSJ0aezqqQY");
 			//myHeaders.append("Authorization", "Bearer " + localStorage.getItem(token));
+			//const token = document.getElementById('token').value;
+			localStorage.setItem =(token);
 			myHeaders.append("Authorization", "Bearer " + token);
 			const options = {
-							method: 'GET',
+							method: 'POST',
 							mode: 'cors',
 							cache: 'default',
 							headers: myHeaders,
@@ -59,13 +59,11 @@
 							};
 
 			fetch('https://polar-beyond-82520.herokuapp.com/user',options)
-			//fetch('http://127.0.0.1:8081/user',options)
+			//fetch('http://127.0.0.1:8081/login',options)
 			.then(response=>response.text())
 			.then(result => console.log(result))
   			.catch(error => console.log('error', error));
 			
-		
-	
 			}
 		
 </script>

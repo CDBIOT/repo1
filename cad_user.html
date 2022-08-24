@@ -63,15 +63,12 @@
 
 	async function autentica() {
 		//requisição de token para pagina login
-		
 
-		//envio de token via submit
 		let token = document.getElementById('token').value;
-		token = localStorage.getItem("token") ;
+		localStorage.setItem =("token",token);
 		var myHeaders = new Headers();
-			//myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDk1ODg3NH0.oPzUBNWb_3xpisuM5RY7u2uTHl-wH7wSkSJ0aezqqQY");
 			//myHeaders.append("Authorization", "Bearer " + localStorage.getItem(token));
-			myHeaders.append("Authorization", "Bearer " + token);
+			myHeaders.append("Authorization", "Bearer " + token); //pega token enviado pelo formulário
 			const options = {
 							method: 'GET',
 							mode: 'cors',
