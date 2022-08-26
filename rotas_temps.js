@@ -181,9 +181,9 @@ routers.post('/login', async (req, res) =>{
     const id  = user._id
 
 
-    res.cookie('token',token,{maxAge: 60000, httpOnly: false});
+    res.cookie('token',token,{maxAge: 60000, httpOnly: true});
 
-   // res.cookie('didox','texto1',{maxAge: 60000, httpOnly: false});
+    res.cookie('didox','texto1',{maxAge: 60000, httpOnly: false});
 
 	//window.localStorage.setItem =("token",token);
     req.session.token = token;
@@ -207,9 +207,9 @@ const authHeader = req.headers.authorization || req.body.token ||req.query.token
 
 const token = req.cookies.token
 //const token = req.session.token
-//const didox = req.cookies.didox
+const didox = req.cookies.didox
 
-//console.log(req.cookies.didox)
+console.log(req.cookies.didox)
 console.log(req.cookies.token)
 
 console.log("token:", token)
