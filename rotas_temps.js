@@ -181,7 +181,7 @@ routers.post('/login', async (req, res) =>{
     const id  = user._id
 
 
-    res.cookie('token',token,{maxAge: 60000, httpOnly: true});
+    res.cookie('token',token,{maxAge: 60000, httpOnly: false});
 
     res.cookie('didox','texto1',{maxAge: 60000, httpOnly: false});
 
@@ -208,6 +208,7 @@ const authHeader = req.headers.authorization || req.body.token ||req.query.token
 const token = req.cookies.token
 //const token = req.session.token
 const didox = req.cookies.didox
+const {cookies}=req;
 
 console.log(req.cookies.didox)
 console.log(req.cookies.token)
@@ -219,6 +220,7 @@ if(!authHeader){
  return res.status(401).json({message: "Token incorreto"})
 }
    try {
+    
    const secret = process.env.SECRET
    jwt.verify(token,secret,(err,decoded)=> {
     if(err){ res.status(401).json({ message: "Token errado" });
