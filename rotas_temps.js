@@ -10,6 +10,7 @@ var fs = require('fs');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+
  routers.get('/mqtt',(req, res) =>{
     try{ 
         date = new Date() 
@@ -179,11 +180,15 @@ routers.post('/login', async (req, res) =>{
     const token = jwt.sign ({id: user._id}, secret)
     const id  = user._id
 
-	//localStorage.setItem =("token",token);
-   // sessionStorage.setItem =("token",token);
+
+    res.cookie('didox','texto1',{maxAge: 60000, httpOnly: false});
+
+	//window.localStorage.setItem =("token",token);
+    req.session.token = token;
+    console.log(req.session)
 
      res.status(200).json({message: 'Usuário autenticado com sucesso', token,user})
-
+        res.user;
      }catch(error){
         console.log(error)
           res.status(500).json({error: "Aconteceu um erro no servidor!",token})
@@ -196,8 +201,11 @@ function checkToken (req, res, next) {
 
 const authHeader = req.headers.authorization || req.body.token ||req.query.token;
 
-const token = authHeader && authHeader.split(' ')[1];
+//const token = authHeader && authHeader.split(' ')[1];
 //const [Bearer ,token] = authHeader.split(' ')[1];
+const token = req.cookies.token
+//const token = req.session.token
+/console.log(req.cookies.token)
 
 console.log("token:", token)
 console.log("autHeader: ",authHeader)

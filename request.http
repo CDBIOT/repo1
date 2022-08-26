@@ -2,17 +2,25 @@ POST http://localhost:8081/user
 content-type: application/json
 
 {
-"nome": "adendo",
-"sobrenome": "adentro",
-"idade": 14
+"token": "aeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDY4ODM1M30.U45e1OajdtcrfAVrkfdcp5a2SN4yHr_OCoFU1LM-BqY"
+
 }
 
 ###
 POST http://localhost:8081/cadastrar
 
 ###
-POST http://localhost:8081/login
+GET  http://localhost:8081/login
+content-type: application/json
+headers
+{
+//"_id": "2",
+"nome": "cris",
+"senha0": "123"
+}
 
+###
+DELETE http://localhost:8081/user/
 
 
 ####
@@ -27,9 +35,9 @@ content-type: application/json
 "mes":"06",
 "ano":"2022"
 }
-###
 
-GET http://localhost:8081/temps
+###
+GET http://localhost:8081/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDUyNDEwMX0.F5dFIeqRXdpqTyXCJbE-wJyZCW7pv2SZoV5ETC2I2xA
 
 ###
 GET https://polar-beyond-82520.herokuapp.com/temps

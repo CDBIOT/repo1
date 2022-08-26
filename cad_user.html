@@ -77,8 +77,8 @@
 							redirect: 'follow'
 							};
 
-			fetch('https://polar-beyond-82520.herokuapp.com/user',options)
-			//fetch('http://127.0.0.1:8081/user',options)
+			//fetch('https://polar-beyond-82520.herokuapp.com/user',options)
+			fetch('http://127.0.0.1:8081/user',options)
 			.then(response=>response.text())
 			.then(result => console.log(result))
   			.catch(error => console.log('error', error));
