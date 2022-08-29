@@ -54,8 +54,22 @@
 			<input type="text" placeholder="Id"  id ="id" name = "id" size="20" > 
 			<button type="submit">Deletar</button>
 	</form>
+	
+<div class="table">
+    <table>
+        <div class = "thead"> 
+        <thead>
+            <tr><th>ID </th><th>NOME </th><th>EMAIL</h1> <th> SENHA </th></tr>
+        </thead>
+        </div>
+            <tbody id = "user_table"></tbody>
+            <tfoot> </tfoot>
+     </table>   
+    </div>
+</div>  
 
 	</div>
+
 </div>
 </body>
 
@@ -80,9 +94,38 @@
 			fetch('https://polar-beyond-82520.herokuapp.com/user',options)
 			//fetch('http://127.0.0.1:8081/user',options)
 			.then(response=>response.text())
-			.then(result => console.log(result))
-  			.catch(error => console.log('error', error));
+			.then(data=>{
+			const myObj = JSON.parse(data)
+		
+			let table = document.getElementById('user_table');
+			
+			  for (var k in myObj.people)
+		  {
+			//	  for (const [key, value] of Object.entries (myObj.temps[k])) 
+			  {
+					var tr = table.insertRow();
+					var td_id = tr.insertCell();
+					var td_nome = tr.insertCell();
+					var td_email = tr.insertCell();
+					var td_senha = tr.insertCell();
+		
+					td_id.innerHTML = myObj.people[k]._id
+					td_nome.innerHTML = myObj.people[k].nome
+					td_email.innerHTML = myObj.temps[k].email
+					td_senha.innerHTML = myObj.temps[k].senha
+				
+					
+				//  console.log(`${key}: ${value}`);
+			  
+		   // `<tr> <td> ${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
+		
+				//console.log(i + " - " + myObj.temps[i].temperatura)
+				//table.innerHTML += row;  
 			}
+		  }
+		})
+		  
+	}
 		
 
 
