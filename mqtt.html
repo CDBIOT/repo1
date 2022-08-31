@@ -63,9 +63,9 @@
 
 <br>
 <form action="Relogio" method="post">
-<h3>
+
 <table>
-<tr><th colspan = 6>Relogio IOT</th></tr>
+<tr><th colspan = 6><h1>RELOGIO IOT</h1></th></tr>
 <tr><td><h1>Hora </h1></td> <td><h1 id = "txt"> </h1></td></tr>
 
 <tr><td><h1 colspan = 6>Disparo </h1></td>
@@ -87,7 +87,7 @@
 	<input type="button" id="btnOff"  value="Desligar" onClick="setRelay(0)">
 	<input type="button" id="btndisp" value="Setar"    onClick="setdisp()">
 </td></tr>
-</h3>
+
 </table>
 </form>
 
@@ -214,8 +214,6 @@ for (var hora1 =0; hora1<11; hora1++)
 	{
 	hora1 = arrayTemps.push(temp);
 	}
-
-	
 console.log(arrayTemps);
 console.log(hora1);
 console.log(dados)
