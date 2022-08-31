@@ -334,5 +334,10 @@ routers.get("/mqtt.html",function(req,res){
  routers.get("/grafico",function(req,res){
      res.sendFile(__dirname + "/grafico.js");
  });
+ 
+ routers.get("/admin",function(req,res){
+    res.sendFile(__dirname + "/admin.html");
+});
+
 
 module.exports = routers

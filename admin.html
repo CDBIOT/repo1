@@ -1,0 +1,129 @@
+
+<html>
+    <head>
+    <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/css.css" />
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <script src="user.js"></script>
+
+<title>Cadastro de usuarios</title> 
+</head>
+<body >
+	
+<section class="Botoes">
+<div class="container">
+<div class="botao_home">
+    <div class="botao_home">
+        <form name="home" action="/" method="get">
+            <div class="home_btn">
+            <input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<img id = "fio" src = "imagens/blue/fio azul.png" >
+</section>
+
+
+	<div class = "box_control">
+		<form action="/user" method = "get">
+			<label>Consultar</label><br>
+			<input type="text" id="token"  name = "token" > <br>
+			<button type="button"  onClick = "autentica()">Listar</button>
+		</form>
+	
+		<form action="/user" method = "patch">
+			<br><label>Altera</label><br>
+			<input type="text"  placeholder="Nome" name="nome" size="20" > <br>
+			<input type="text"  placeholder="E-mail" name="email" size="20" > <br>
+			<input type="text"  placeholder="Senha" name="senha0" size="20" > <br>
+			<button type="submit">Alterar </button>
+		</form>
+	
+
+	<form action="/user" method = "delete">
+		<br><label>Deletar</label><br>
+			<input type="text" placeholder="Id"  id ="id" name = "id" size="20" > 
+			<button type="submit">Deletar</button>
+	</form>
+	
+<div class="table">
+    <table>
+        <div class = "thead"> 
+        <thead>
+            <tr><th>ID </th><th>NOME </th><th>EMAIL</h1> <th> SENHA </th></tr>
+        </thead>
+        </div>
+            <tbody id = "user_table"></tbody>
+            <tfoot> </tfoot>
+     </table>   
+    </div>
+</div>  
+
+	</div>
+
+</div>
+</body>
+
+<script>
+
+	async function autentica() {
+		//requisição de token para pagina login
+
+		let token = document.getElementById('token').value;
+		localStorage.setItem =("token",token);
+		var myHeaders = new Headers();
+			//myHeaders.append("Authorization", "Bearer " + localStorage.getItem(token));
+			myHeaders.append("Authorization", "Bearer " + token); //pega token enviado pelo formulário
+			const options = {
+							method: 'GET',
+							mode: 'cors',
+							cache: 'default',
+							headers: myHeaders,
+							redirect: 'follow'
+							};
+
+			fetch('https://polar-beyond-82520.herokuapp.com/user',options)
+			//fetch('http://127.0.0.1:8081/user',options)
+			.then(response=>response.text())
+			.then(data=>{
+			const myObj = JSON.parse(data)
+		
+			let table = document.getElementById('user_table');
+			
+			  for (var k in myObj.people)
+		  {
+			//	  for (const [key, value] of Object.entries (myObj.temps[k])) 
+			  {
+					var tr = table.insertRow();
+					var td_id = tr.insertCell();
+					var td_nome = tr.insertCell();
+					var td_email = tr.insertCell();
+					var td_senha = tr.insertCell();
+		
+					td_id.innerHTML = myObj.people[k]._id
+					td_nome.innerHTML = myObj.people[k].nome
+					td_email.innerHTML = myObj.people[k].email
+					td_senha.innerHTML = myObj.people[k].senha
+				
+					
+				//  console.log(`${key}: ${value}`);
+			  
+		   // `<tr> <td> ${myObj.temps[k].local}</td> <td>${myObj.temps[k].temperatura}</td> <td>${myObj.temps[k].dia}</td> <td>${myObj.temps[k].mes}</td> <td>${myObj.temps[k].ano}</td> <tr>`
+		
+				//console.log(i + " - " + myObj.temps[i].temperatura)
+				//table.innerHTML += row;  
+			}
+		  }
+		})
+		  
+	}
+		
+
+
+
+
+
+</script>
+</html>

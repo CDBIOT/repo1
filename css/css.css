@@ -351,7 +351,7 @@ color: blue;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(45deg, cyan, blue);
+  background-image: linear-gradient(45deg, white, blue);
   outline: none;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
@@ -362,23 +362,22 @@ color: blue;
 .cad button
 {
   align-items: center;
-  background-color: #fffe57;
+  background-color: blue;
   font-weight: 600;
   font-size: 12px;
-  color: #505050;
+  color: #ffff;
   text-align: center;
-  padding: 5px 20px;
-  margin: 5px;
+  padding: 5px 100px;
+  margin: 10px 10px;
   cursor: pointer;
   border: none;
   border-radius: 6px;
- 
 }
 
 .cad button:hover
 {
-background-color: deepskyblue;
-color: blue;
+background-color: gray;
+color: black;
 
 }
 .cad input{
@@ -387,7 +386,7 @@ color: blue;
   font-weight: 600;
   font-size: 12px;
   color: rgb(10, 10, 100 );
-  text-align: center;
+  text-align: left;
   padding: 5px 15px;
   margin-top: 10px;
   border: none;
@@ -418,15 +417,15 @@ font-size: 8px;
 }
 
 .cad .box_cad{
-  height: 400px;
+  height: 280px;
   width: 300px;
   font-weight: 600;
   margin: 20px 20px 10px 10px;
   align-items: center;
   border-radius: 10px;
   padding: 20px 20px 10px 10px;
-  background-color: #888680;
-  box-shadow: 0px 13px 35px -6px #0f0874;;
+  background-color: #ffff;
+  box-shadow: 0px 13px 35px -6px gray;;
 
 }
 
