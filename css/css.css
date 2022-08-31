@@ -291,14 +291,14 @@ width: 150px;
 
 .box
 {
-  background-color: rgba(200,200,200,0.6);
+  background-color: white;
   width: 350px;
   height: 380px;
   
   border-radius: 10px;
   flex-direction: row;
   padding: 10px 20px 10px 10px;
-  box-shadow: 10px 10px 35px -6px #148eee;;
+  box-shadow: 10px 10px 35px -6px gray;
 }
 
 .autenticacao img
@@ -311,40 +311,40 @@ box-shadow: 5px 13px 6px -6px #148eee
 .autenticacao input
 {
   align-items: center;
-  background-color: #dddddd;
+  background-color: white;
   font-weight: 600;
   font-size: 12px;
   color: #148eee;
-  text-align: center;
-  padding: 5px 15px;
-  border-radius: 6px;
+  text-align: left;
+  padding: 5px 80px;
+
   outline: none;
-  border: bottom;
+  border: none;
+  border-bottom: 2px solid gray;
 }
 .autenticacao button
 {
   align-items: center;
-  background-color: #dddfe0;
+  background-color: blue;
   font-weight: 600;
   font-size: 12px;
-  color: #148eee;;
+  color: #ffff;
   text-align: center;
-  padding: 10px 25px;
+  padding: 10px 80px;
+  margin: 10px;
   cursor: pointer;
 
   border-radius: 6px;
   border: none;
-  box-shadow: 5px 13px 6px -6px #148eee;
+  box-shadow: 5px 13px 6px -6px gray;
 }
 
-.autenticacao button:hover
-{
-background-color: deepskyblue;
-color: blue;
-
+.autenticacao button:hover{
+background-color: gray;
+color: black;
 }
-.cad
-{
+
+.cad{
   width: 100vw;
   height: 500px;
  
@@ -359,8 +359,8 @@ color: blue;
   border: none;
   box-shadow: 10px 10px 35px -6px #148eee;
 }
-.cad button
-{
+
+.cad button{
   align-items: center;
   background-color: blue;
   font-weight: 600;
@@ -374,8 +374,7 @@ color: blue;
   border-radius: 6px;
 }
 
-.cad button:hover
-{
+.cad button:hover{
 background-color: gray;
 color: black;
 
@@ -394,9 +393,9 @@ color: black;
 }
 .cad input:focus{
 border: none;
-border-color: #1e64e7;
 border-bottom: 2px solid #7ef740;
 }
+
 .cad #agreement, #agreement-label{
 display:inline-block;
 width: auto;
@@ -417,7 +416,7 @@ font-size: 8px;
 }
 
 .cad .box_cad{
-  height: 280px;
+  height: 350px;
   width: 300px;
   font-weight: 600;
   margin: 20px 20px 10px 10px;
