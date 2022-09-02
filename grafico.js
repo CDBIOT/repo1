@@ -212,3 +212,17 @@ async function Mes(){
 })
 
 }
+
+var texto = "janeiro";
+
+var select = document.querySelector("#grafico");
+
+for(var i=0; i < select.option.length; i++){
+
+  if(select.option[i].text == texto){
+    select.selectedIndex = i;
+    break; 
+  }
+
+}
+
