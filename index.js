@@ -1,3 +1,5 @@
+let select = document.querySelector('#grafico').value
+let optionValue = select.options[select.selectedIndex].value
 // Carrega o modulo HTTP do Node
 var http = require("http");
 
@@ -11,7 +13,7 @@ http.createServer(function(req, res){
   res.end(contents);
   return res.end();
  
-}).listen(8000, '127.0.0.1');
+})
 
-// Imprime no console a URL de acesso ao servidor
-console.log('Servidor executando em http://127.0.0.1:8081/');
+
+console.log(optionValue);
