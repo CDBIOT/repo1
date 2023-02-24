@@ -53,17 +53,3 @@ async function getContent() {
 }
 
 
-function altera(form2)
-{
-	var name=prompt("Digite a Sala:","A B C D E F G H");
-	
-	if (name!=null && name!="")
-	 
-	var TA=document.form2.input.value
-	var TB=document.form2.input.value
-
-		document.write("Sala A");
-		document.write(TA);
-		document.write("Sala B");
-		document.write(TB);
-}

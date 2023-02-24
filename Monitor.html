@@ -155,7 +155,7 @@ async function getContent() {
 						mode: 'cors',
 						cache: 'default'
 						}
-		fetch('https://polar-beyond-82520.herokuapp.com/temps')
+		fetch(`https://server-orpin-zeta.vercel.app/temps`)
 		//fetch('http://127.0.0.1:8081/temps')
 		//fetch('http://127.0.0.1:5500/temps')
 		.then(function (response){
@@ -201,7 +201,7 @@ async function getContent() {
 async function cad_new_temp(){
 
 const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-fetch('https://polar-beyond-82520.herokuapp.com/mqtt')
+fetch('https://server-orpin-zeta.vercel.app/mqtt')
 .then(function (response){
 return response.text()})
 .then(data=>{
@@ -222,7 +222,7 @@ const dados = {
 	}
 
 //const response = await fetch('http://127.0.0.1:8081/temps')
-const response = fetch('https://polar-beyond-82520.herokuapp.com/temps',{
+const response = fetch(`https://server-orpin-zeta.vercel.app/temps`,{
 method: 'POST',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
 body: JSON.stringify(dados)
@@ -247,7 +247,7 @@ console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 async function list_temp(){
 	//Obtem dados do banco de dados
 		const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-		fetch('https://polar-beyond-82520.herokuapp.com/temps')
+		fetch(`https://server-orpin-zeta.vercel.app/temps`)
 		.then(function (response){
 			return response.text()})
 		.then(data=>{
