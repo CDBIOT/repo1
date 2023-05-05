@@ -44,8 +44,8 @@ setInterval(function()
     mode: 'cors',
     cache: 'default'
                    }
-  const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
-  .then(function (response){
+   const response = fetch('http://127.0.0.1:8081/temps')
+     .then(function (response){
     return response.text()})
     .then(data=>{
     const myObj = JSON.parse(data);
@@ -89,8 +89,8 @@ async function Mes(){
       mode: 'cors',
       cache: 'default'
                      }
-    const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
-    //const response = fetch('http://127.0.0.1:8081/mqtt')
+    //const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
+    const response = fetch('http://127.0.0.1:8081/temps')
     .then(function (response){
     return response.text()})
     .then(data=>{
@@ -134,8 +134,8 @@ async function Mes(){
       cache: 'default'
                      }
                      
-    const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
-    //const response = fetch('http://127.0.0.1:8081/mqtt')
+    //const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
+    const response = fetch('http://127.0.0.1:8081/temps')
     .then(function (response){
     return response.text()})
     .then(data=>{
@@ -174,7 +174,8 @@ async function Mes(){
  function draw_table(){
 	//Obtem dados do banco de dados
 		const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-		fetch('https://polar-beyond-82520.herokuapp.com/temps')
+    const response = fetch('http://127.0.0.1:8081/temps')
+		//fetch('https://polar-beyond-82520.herokuapp.com/temps')
 		.then(function (response){
 			return response.text()})
 		.then(data=>{

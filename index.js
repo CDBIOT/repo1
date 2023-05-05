@@ -1,19 +1,45 @@
-let select = document.querySelector('#grafico').value
-let optionValue = select.options[select.selectedIndex].value
-// Carrega o modulo HTTP do Node
-var http = require("http");
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser')
+const routers = require('./rotas_temps','./rotas_user');
+require('dotenv').config()
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const mqtt = require('./mqtt_node2');
 
+//const mongo = require('./mongo');
+//const db =  require('./database');
 var fs = require('fs');
-var contents = fs.readFileSync('Grafico.php');
-// Cria um servidor HTTP e uma escuta de requisições para a porta 8000
-http.createServer(function(req, res){
-  var contents = fs.readFileSync('Grafico.php');
-  // Configura o cabeçalho da resposta com um status HTTP e um Tipo de Conteúdo
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end(contents);
-  return res.end();
- 
-})
+const Temps = require('./temps')
+const Person = require('./user')
+const db_atlas = require('./db_atlas')
+const cors = require('cors')
+
+app.use(cors());
+
+app.use((req,res,next) => {
+    console.log("Cors habilitado");
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Header",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if (req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
+        res.status(200).send({})
+    }
+    
+   next()
+   })
+app.use(cookieParser())
+app.use(session({secret: '123456' , token: 'token'}))
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+app.use(express.json());
+
+app.use(routers);
 
 
-console.log(optionValue);
+const PORT = process.env.PORT || 8081 || 5500;
+    app.listen(PORT,function(){
+        console.log("Servidor Rodando");
+        })
+

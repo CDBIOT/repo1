@@ -324,20 +324,28 @@ routers.use('/mqtt_node2.js', express.static("/"))
 });
 
 routers.get("/mqtt.html",function(req,res){
-    res.sendFile(__dirname + "/mqtt.html");
+    res.sendFile(__dirname + "/src/pages/mqtt.html");
 });
  
- routers.get("/Grafico",function(req,res){
-     res.sendFile(__dirname + "/Grafico.html");
+ routers.get("/Grafico.html",function(req,res){
+     res.sendFile(__dirname + "/src/pages/Grafico.html");
  });
  
- routers.get("/grafico",function(req,res){
+ routers.get("/Monitor.html",function(req,res){
+    res.sendFile(__dirname + "/src/pages/Monitor.html");
+});
+
+ routers.get("/grafico.html",function(req,res){
      res.sendFile(__dirname + "/grafico.js");
  });
  
- routers.get("/admin",function(req,res){
-    res.sendFile(__dirname + "/admin.html");
+ routers.get("/autentica.html",function(req,res){
+    res.sendFile(__dirname + "/src/pages/admin.html");
 });
 
+
+routers.get("/",function(req,res){
+    res.sendFile(__dirname + "/src/pages/index.html");
+});
 
 module.exports = routers
