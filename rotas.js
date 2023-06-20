@@ -109,17 +109,6 @@ routers.delete('/user/:id', async (req, res) => {
 }  
 });
 
-routers.post('/produtos',async(req, res) =>{
-    const  produto = {
-    //Utiliza as inf do form html
-      nome: req.body.nome,
-      preco: req.body.preco
-    }
-    res.status(201).send({
-    mensagem: 'inserido',
-    produtoCriado: produto
-    })
-  });
 
 routers.use('/', express.static(__dirname + '/'))
 routers.use('/css', express.static("/css"))

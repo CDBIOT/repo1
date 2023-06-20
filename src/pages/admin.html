@@ -2,9 +2,9 @@
 <html>
     <head>
     <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/css.css" />
-        <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        <script src="user.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../css/css.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+        <script src="../../user.js"></script>
 
 <title>Cadastro de usuarios</title> 
 </head>
@@ -16,13 +16,13 @@
     <div class="botao_home">
         <form name="home" action="/" method="get">
             <div class="home_btn">
-            <input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+            <input type="image" src="../..imagens/blue/home_btn.png" onClick="this.form.submit()">
             </div>
         </form>
     </div>
 </div>
 </div>
-<img id = "fio" src = "imagens/blue/fio azul.png" >
+<img id = "fio" src = "../../imagens/blue/fio azul.png" >
 </section>
 
 
@@ -84,8 +84,8 @@
 							redirect: 'follow'
 							};
 
-			fetch('https://polar-beyond-82520.herokuapp.com/user',options)
-			//fetch('http://127.0.0.1:8081/user',options)
+			//fetch('https://polar-beyond-82520.herokuapp.com/user',options)
+			fetch('http://127.0.0.1:8081/user',options)
 			.then(response=>response.text())
 			.then(data=>{
 			const myObj = JSON.parse(data)

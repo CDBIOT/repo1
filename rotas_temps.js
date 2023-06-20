@@ -340,9 +340,8 @@ routers.get("/mqtt.html",function(req,res){
  });
  
  routers.get("/autentica.html",function(req,res){
-    res.sendFile(__dirname + "/src/pages/admin.html");
+    res.sendFile(__dirname + "/src/pages/autentica.html");
 });
-
 
 routers.get("/",function(req,res){
     res.sendFile(__dirname + "/src/pages/index.html");

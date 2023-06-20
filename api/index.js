@@ -1,18 +1,18 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const routers = require('./rotas_temps','./rotas_user');
+const routers = require('../rotas_temps','../rotas_user');
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const mqtt = require('./mqtt_node2');
+const mqtt = require('../mqtt_node2');
 
 //const mongo = require('./mongo');
 //const db =  require('./database');
 var fs = require('fs');
-const Temps = require('./temps')
-const Person = require('./user')
-const db_atlas = require('./db_atlas')
+const Temps = require('../temps')
+const Person = require('../user')
+const db_atlas = require('../db_atlas')
 const cors = require('cors')
 
 app.use(cors());

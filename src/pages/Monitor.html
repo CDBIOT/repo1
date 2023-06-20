@@ -2,8 +2,8 @@
 <head>
 	
 <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/css.css" />
-	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/css.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
 
 <title>Monitor Page</title> 
 
@@ -13,14 +13,14 @@
 	<div class="botao_home">
 		<form name="home" action="/" method="get">
 			<div class="home_btn">
-			<input type="image" src="imagens/blue/home_btn.png" onClick="this.form.submit()">
+			<input type="image" src="../../imagens/blue/home_btn.png" onClick="this.form.submit()">
 			</div>
 		</form>
 	</div>
 
 </div>
 
-<img id = "fio" src = "imagens/blue/fio azul.png" >
+<img id = "fio" src = "../../imagens/blue/fio azul.png" >
 </section>
 
 <section class=" Botoes_pagina0">
@@ -28,7 +28,7 @@
     <div class= "Botoes__pagina0">
 		
 		<a onclick = cad_new_temp()>
-		<img id="pasta_btn" src="imagens/blue/pasta_btn.png" ALT=""></a>
+		<img id="pasta_btn" src="../../imagens/blue/pasta_btn.png" ALT=""></a>
 		<label> Cadastrar Temperatura</label>
 		
 		<label> Temperatura Atual</label>
@@ -65,15 +65,15 @@
 	<table>
 	<tr><th colspan = 4>Cadastrar Temperatura</th></tr>
 	<td><h1>Local: </h1></td>
-	<td><h2><input type="text"  value="local" name = "local" size="5" > </h2></td></tr>
+	<td><h2><input type="text"  value=local name = "local" size="5" > </h2></td></tr>
 	<td><h1>Temperatura: </h2></td>
-	<td><h2><input type="text" value= 0 name = "temperatura" size="5" > </h2></td></tr>
+	<td><h2><input type="text" value= temperatura name = "temperatura" size="5" > </h2></td></tr>
 	<td><h1>Dia: </h1></td>
-	<td><h2><input type="text"  value= 0 name = "dia" size="5" ></h2></td></tr>
+	<td><h2><input type="text"  value= dia name = "dia" size="5" ></h2></td></tr>
 	<td><h1>Mes: </h1></td>
-	<td><h2><input type="text" value= 0 name = "mes" size="5" ></h2></td></tr>
+	<td><h2><input type="text" value= mes name = "mes" size="5" ></h2></td></tr>
 	<td><h1>Ano: </h1></td>
-	<td><h1><input type="text" value= 0 name = "ano" size="5" ></h2></td></tr>
+	<td><h1><input type="text" value=ano name = "ano" size="5" ></h2></td></tr>
 	<td><h2><button type="submit"> Cadastrar Temperatura</button></h2></td>
 	</tr>
 	</table>
@@ -147,8 +147,9 @@ function stop(){
 setInterval(function()
 	{
 	getContent();
+	cad_new_temp();
 		
-	}, 10000);
+	}, 60000);
 
 
 async function getContent() {
@@ -176,13 +177,13 @@ async function getContent() {
 			}		 
 			for (var k in myObj.temps){
 			for (const [key, value] of Object.entries (myObj.temps[k])) {
-		console.log(`${key}: ${value}`);
+		//console.log(`${key}: ${value}`);
 			}
 		}
 
 			for (var i in myObj.temps) {
 		console.log(i + " - " + myObj.temps[i].temperatura)
-		console.log(i + " - " + myObj.temps[i].temperatura)
+		
 			}
 
 		console.log("tamanho: ", i)
@@ -205,24 +206,24 @@ async function cad_new_temp(){
 
 const options = {method: 'GET',	mode: 'cors',cache: 'default'}
 //fetch('https://server-orpin-zeta.vercel.app/mqtt')
-fetch('http://127.0.0.1:8081/temps')
+fetch('http://127.0.0.1:8081/mqtt')
 .then(function (response){
 return response.text()})
 .then(data=>{
 const myObj 	= JSON.parse(data)
 const date 		= new Date();
-var local 		= document.getElementById('local').innerHTML= myObj.vm.local;
+var local 		= document.getElementById('local').innerText= myObj.vm.local;
 var temperatura = document.getElementById('temperatura').innerText= parseInt(myObj.vm.temp);
 var dias 		= document.getElementById('dia').innerText= parseInt(date.getDate());
 var meses		= document.getElementById('mes').innerText= parseInt(date.getMonth()+ 1);
 var anos		= document.getElementById('ano').innerText= parseInt(date.getFullYear());
 		
 const dados = {
-	"local": (myObj.vm.local),
-	"temperatura": parseInt(myObj.vm.temp),
-	"dia": parseInt(myObj.vm.dia),
-	"mes": parseInt(myObj.vm.mes),
-	"ano": parseInt(myObj.vm.ano)
+	local: local,
+	temperatura: temperatura,
+	dia: dias,
+	mes: meses,
+	ano: anos
 	}
 
 const response = fetch('http://127.0.0.1:8081/temps',{
