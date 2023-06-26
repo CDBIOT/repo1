@@ -313,8 +313,8 @@ routers.patch('/user/:id',async (req, res) =>{
 });
 
 routers.use('/', express.static(__dirname + '/'))
-routers.use('/css', express.static("/css"))
-routers.use('/imagens', express.static("/imagens"))
+routers.use('/css', express.static(__dirname + "/css"))
+routers.use('/imagens', express.static(__dirname +"/imagens"))
 routers.use('/grafico.js', express.static("/"))
 routers.use('/mqtt_node2.js', express.static("/"))
 
@@ -324,15 +324,15 @@ routers.use('/mqtt_node2.js', express.static("/"))
 });
 
 routers.get("/mqtt.html",function(req,res){
-    res.sendFile(__dirname + "/src/pages/mqtt.html");
+    res.sendFile(__dirname + "/pages/mqtt.html");
 });
  
  routers.get("/Grafico.html",function(req,res){
-     res.sendFile(__dirname + "/src/pages/Grafico.html");
+     res.sendFile(__dirname + "/pages/Grafico.html");
  });
  
  routers.get("/Monitor.html",function(req,res){
-    res.sendFile(__dirname + "/src/pages/Monitor.html");
+    res.sendFile(__dirname + "/pages/Monitor.html");
 });
 
  routers.get("/grafico.html",function(req,res){
@@ -340,11 +340,11 @@ routers.get("/mqtt.html",function(req,res){
  });
  
  routers.get("/autentica.html",function(req,res){
-    res.sendFile(__dirname + "/src/pages/autentica.html");
+    res.sendFile(__dirname + "/pages/autentica.html");
 });
 
 routers.get("/",function(req,res){
-    res.sendFile(__dirname + "/src/pages/index.html");
+    res.sendFile(__dirname + "/pages/index.html");
 });
 
 module.exports = routers
