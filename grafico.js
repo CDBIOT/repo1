@@ -1,3 +1,5 @@
+const { data } = require("jquery");
+
 setInterval(function()
 {
 //	getData();
