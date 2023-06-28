@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../../css/css.css" />
-<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/css/css.css" />
+<link rel="stylesheet" type="text/css" href="/css/reset.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <script>
 
@@ -14,32 +14,31 @@
 <body onload="startTime()">
 
 
-
 <section class="Botoes">
 	
 <div class="container">
 <div class="botao_home">
 	<form name="home" action="/" method="get">
 		<div class="home_btn">
-		<input type="image" src="../../imagens/blue/home_btn.png" onClick="this.form.submit()">
+		<input type="image" src="/imagens/blue/home_btn.png" onClick="this.form.submit()">
 		</div>
 	</form>
 </div>
 		<div class="home_btn">
 			<form name="home" action="/" method="get">
                 <a  href="autentica.html">
-			    <img src="../../imagens/blue/gear_btn.png"  ALT=""></a>
+			    <img src="/imagens/blue/gear_btn.png"  ALT=""></a>
 			</form>
 		</div>
 	</div>
-<img id = "fio" src = "../../imagens/blue/fio azul.png" >
+<img id = "fio" src = "/imagens/blue/fio azul.png" >
 </section>
 
 <section class=" Botoes_pagina0">
     <div class= "Botoes__pagina0">
 		
 			<a onclick = Relogio()>
-		<img name="lamp_btn" src="../../imagens/blue/lamp_btn.png" ALT=""></a>
+		<img name="lamp_btn" src="/imagens/blue/lamp_btn.png" ALT=""></a>
 		<label> Set Time Light </label>
 		<label> Temperatura Atual </label>
 	</div>
@@ -97,7 +96,7 @@
 
 <br>
 <div class = img_kit>
-<img id="img_kit" src='../../imagens/Kit1.png' ALT="">
+<img id="img_kit" src='/imagens/Kit1.png' ALT="">
 </div>
 </body>
 
@@ -194,7 +193,7 @@ async function mqtt_show() {
 	const options = {method: 'GET',	mode: 'cors',cache: 'default'}
 	//const response =fetch(`https://server-orpin-zeta.vercel.app/mqtt`)
 	//const response =fetch(URI)
-	const response = fetch('http://127.0.0.1:8081/mqtt')
+	const response = fetch('https://repo1-iota.vercel.app/mqtt')
 	.then(function (response){
 	return response.text()})
 	.then(data=>{
