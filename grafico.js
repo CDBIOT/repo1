@@ -47,6 +47,7 @@ setInterval(function()
     cache: 'default'
                    }
    const response = fetch('https://repo1-iota.vercel.app/temps',options)
+   
      .then(function (response){
     return response.text()})
     .then(data=>{
