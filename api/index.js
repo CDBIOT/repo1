@@ -43,3 +43,5 @@ const PORT = process.env.PORT || 8081 || 5500;
         console.log("Servidor Rodando");
         })
 
+  //      "src": "api/index.js",
+  //"src": "!{api/**,package.json,middleware.[jt]s}",
