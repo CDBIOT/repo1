@@ -46,7 +46,7 @@ setInterval(function()
     mode: 'cors',
     cache: 'default'
                    }
-   const response = fetch('https://repo1-iota.vercel.app/temps')
+   const response = fetch('https://repo1-iota.vercel.app/temps',options)
      .then(function (response){
     return response.text()})
     .then(data=>{
@@ -135,8 +135,7 @@ async function Mes(){
       mode: 'cors',
       cache: 'default'
                      }
-                     
-    //const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
+
     const response = fetch('https://repo1-iota.vercel.app/temps',options)
     .then(function (response){
     return response.text()})
