@@ -159,9 +159,8 @@ async function getContent() {
 						mode: 'cors',
 						cache: 'default'
 						}
-		//fetch(`https://server-orpin-zeta.vercel.app/temps`)
-		fetch('http://127.0.0.1:8081/temps')
-		//fetch('http://127.0.0.1:5500/temps')
+		fetch('https://repo1-iota.vercel.app/mqtt')
+		//fetch('http://127.0.0.1:8081/temps')
 		.then(function (response){
 			return response.text()})
 		.then(data=>{
@@ -205,8 +204,8 @@ async function getContent() {
 async function cad_new_temp(){
 
 const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-//fetch('https://server-orpin-zeta.vercel.app/mqtt')
-fetch('http://127.0.0.1:8081/mqtt')
+fetch('https://repo1-iota.vercel.app/mqtt/mqtt')
+//fetch('http://127.0.0.1:8081/mqtt')
 .then(function (response){
 return response.text()})
 .then(data=>{
@@ -226,8 +225,8 @@ const dados = {
 	ano: anos
 	}
 
-const response = fetch('http://127.0.0.1:8081/temps',{
-//const response = fetch(`https://server-orpin-zeta.vercel.app/temps`,{
+//const response = fetch('http://127.0.0.1:8081/temps',{
+const response = fetch('https://repo1-iota.vercel.app/temps',{
 method: 'POST',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
 body: JSON.stringify(dados)
@@ -252,8 +251,8 @@ console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 async function list_temp(){
 	//Obtem dados do banco de dados
 		const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-		fetch('http://127.0.0.1:8081/temps')
-		//fetch(`https://server-orpin-zeta.vercel.app/temps`)
+		//fetch('http://127.0.0.1:8081/temps')
+		fetch('https://repo1-iota.vercel.app/temps')
 		.then(function (response){
 			return response.text()})
 		.then(data=>{
