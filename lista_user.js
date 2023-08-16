@@ -32,7 +32,7 @@ async function getContent() {
 		}
 
 		try{
-		fetch('http://127.0.0.1:8081/user').then(function (response){
+		fetch('https://repo1-iota.vercel.app/user').then(function (response){
 			return response.json();
 		})
 		.then(function(data){
