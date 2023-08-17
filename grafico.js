@@ -8,6 +8,11 @@ setInterval(function()
   // draw_Chart2();
 }, 10000);
 
+function getDate()
+{
+  let initDate = document.getElementById('initDate');
+
+}
 
 //  function Dia(){
 // // // //   google.charts.load('current',{ packages:['corechart']}).then(function () {
