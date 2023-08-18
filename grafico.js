@@ -51,7 +51,7 @@ function getDate()
     mode: 'cors',
     cache: 'default'
                    }
-   const response = fetch('https://repo1-iota.vercel.app/temps',options)
+   const response = fetch('https://repo1-beta.vercel.app/temps',options)
    
      .then(function (response){
     return response.text()})
@@ -98,7 +98,7 @@ async function Mes(){
       cache: 'default'
                      }
     //const response =fetch('https://polar-beyond-82520.herokuapp.com/temps')
-     fetch('https://repo1-iota.vercel.app/temps',options)
+     fetch('https://repo1-beta.vercel.app/temps',options)
     .then(function (response){
     return response.text()})
     .then(data=>{
@@ -141,7 +141,7 @@ async function Mes(){
       cache: 'default'
                      }
 
-    const response = fetch('https://repo1-iota.vercel.app/temps',options)
+    const response = fetch('https://repo1-beta.vercel.app/temps',options)
     .then(function (response){
     return response.text()})
     .then(data=>{
@@ -180,7 +180,7 @@ async function Mes(){
  function draw_table(){
 	//Obtem dados do banco de dados
 		const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-    const response = fetch('https://repo1-iota.vercel.app/temps',options)
+    const response = fetch('https://repo1-beta.vercel.app/temps',options)
 		//fetch('https://polar-beyond-82520.herokuapp.com/temps')
 		.then(function (response){
 			return response.text()})
