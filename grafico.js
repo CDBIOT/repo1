@@ -1,4 +1,4 @@
-const { data } = require("jquery");
+//const { data } = require("jquery");
 
 setInterval(function()
 {
