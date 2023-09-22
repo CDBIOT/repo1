@@ -92,25 +92,18 @@ routers.post('/temps/:id',async(req, res) =>{
 
  //Delete
 routers.delete('/temps/:id', async (req, res) => {
-    const id= req.params.id
-    //temps.remove({id: req.body.id})
-    const temps = await Temps.deleteOne({ _id: id}, (err) => {
-    
-    if(err) return res.status(400).json({
-
-        error:true,
-        message: "Error: Artigo não foi apagado com sucesso!"
-    });
-   // if(!temps){
-   // res.status(422).json({message:  'Temperatura não encontrada'});
-    //res.redirect('/temps')
-    return res.json({
-
-        error: false,
-        message: "Artigo apagado com sucesso!"
+    const id= req.params.id //temps.remove({id: req.body.id})
+    try{
+    await Temps.deleteOne({_id: id}) 
+        return res.json({
+            message: "Artigo apagado com sucesso!",
+            id
             })
-        })
-    })
+    }catch(error){
+         return res.status(400).json({
+        message: "Error: Artigo não foi apagado com sucesso!"
+    })}
+})
 
    // try{
     //    await Temps.deleteOne({"_id": id});
