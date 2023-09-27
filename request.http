@@ -7,6 +7,9 @@ content-type: application/json
 }
 
 ###
+GET https://repo1-beta.vercel.app/mqtt
+
+###
 POST http://localhost:8081/cadastrar
 
 ###
@@ -20,7 +23,7 @@ headers
 }
 
 ###
-DELETE http://localhost:8081/user/
+DELETE https://repo1-beta.vercel.app/650dd8634cd1674851ffa8ae
 
 
 ####
@@ -38,9 +41,6 @@ content-type: application/json
 
 ###
 GET http://localhost:8081/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDUyNDEwMX0.F5dFIeqRXdpqTyXCJbE-wJyZCW7pv2SZoV5ETC2I2xA
-
-###
-GET https://polar-beyond-82520.herokuapp.com/temps
 
 ###
 GET http://localhost:8081/temps/mqtt
