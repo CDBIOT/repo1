@@ -11,6 +11,10 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 
+routers.get('/mqtt_pub', mqtt.onLight)
+
+
+
  routers.get('/mqtt',(req, res) =>{
     try{ 
         date = new Date() 

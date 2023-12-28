@@ -24,11 +24,12 @@ client.on('connect', () => {
 client.on('message', (topic, payload) => {
       temp = payload
       local= topic
-     // console.log('Received Message:', topic, payload.toString())
+      console.log('Received Message repo1:', topic, payload.toString())
       //res.status(200).json({m})
     })
   })
 })
+
 setInterval(() => {
 client.on('message', (topic, payload) => {
   temp = payload.toString()
@@ -59,4 +60,32 @@ client.on('message', (topic, payload) => {
     //  console.error(error)
 //    }
  // })
-module.exports = mqtt
+
+
+ 
+ client.publish(topic, 1, { qos: 0, retain: true }, (error) => {
+  if (error) {
+      console.error(error)
+    }
+  })
+ 
+ 
+  const onLight=(async (req,res)=>{
+ 
+ try{
+   await client.publish(topic, 0, { qos: 0, retain: true }, (error) => {
+     if (error) {
+           console.error(error)
+         }
+       })
+ 
+     }catch(error){
+       res.status(500).json({error: error})
+     }
+  })
+ 
+module.exports =  {
+
+  onLight,
+  mqtt
+}
