@@ -1,18 +1,27 @@
-if(process.env.NODE_ENV == "production"){
+const mongoose = require('mongoose')
+require('dotenv').config()
 
-module.exports = {MONGODB_URI: "mongodb+srv://cdb:abcdeF12345@cluster0.mvho6.mongodb.net/test"},
-//module.exports = {URI: "https://polar-beyond-82520.herokuapp.com/"},
-{
-useNewUrlParser: true,
-useUnifiedTopology: true
-}
-}else{
-module.exports ={MONGODB_URI:"mongodb://localhost/Temps"},
-//module.exports ={URI: "http://127.0.0.1:8081/temps"}
-{
+// if(process.env.NODE_ENV == "production"){
+//     module.exports = 
+//    {
+const MONGODB_URI = 'mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_PASS+'@cluster0.mvho6.mongodb.net/'
+    +process.env.DB_NAME+'?retryWrites=true&w=majority'
+    //},
+  // {
+   // useNewUrlParser: true,
+    //useUnifiedTopology: true
+  //  },
+ //   }
+mongoose.set('strictQuery', false);
+mongoose.connect(MONGODB_URI,{
     useNewUrlParser: true,
     useUnifiedTopology: true
-    }
-}
-
-
+    }).then(()=> 
+   
+    console.log("MongodB " +process.env.DB_NAME +" conectado com sucesso!")
+    )
+.catch((err) => {
+    console.log("Houve um erro ao se conectar ao mongodB: " +process.env.DB_NAME + err)
+   
+})
+     
