@@ -5,7 +5,7 @@ const app = express();
 
 const Temps = require('./temps')
 const Person = require('./user')
-const mqtt = require('./mqtt')
+const mqtt_node = require('./mqtt_node')
 var fs = require('fs');
 //app.use(mqtt);
 const bcrypt = require('bcryptjs')
@@ -16,7 +16,7 @@ routers.get('/mqtt_pub', mqtt.onLight)
 
 
 
- routers.get('/mqtt',(req, res) =>{
+ routers.get('/mqtt_node',(req, res) =>{
     try{ 
         date = new Date() 
         var vm = {
