@@ -7,7 +7,7 @@ const routers = require('../rotas_temps','../rotas_user');
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const mqtt = require('../mqtt_node2');
+const mqtt_node = require('../mqtt_node');
 
 //const mongo = require('./mongo');
 //const db =  require('./database');
