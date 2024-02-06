@@ -22,7 +22,7 @@ client.on('connect', function () {
 
     console.log('Subscribe to topic Temp_sala')
     if (!err) {
-      client.publish('bh/inTopic', '1')
+      //client.publish('bh/inTopic', '1')
     }
   })
   client.end()
