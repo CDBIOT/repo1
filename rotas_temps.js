@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken')
 
 
 
- routers.get('/mqtt_node',(req, res) =>{
+ routers.get('/mqtt',(req, res) =>{
     try{ 
         date = new Date() 
         var vm = {
