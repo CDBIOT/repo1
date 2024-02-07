@@ -16,7 +16,7 @@ client.on('connect', function () {
   console.log('Connected')
   client.subscribe('Temp_sala', function (err) {
     if (!err) {
-      client.publish('bh/inTopic', '1')
+      //client.publish('bh/inTopic', '1')
     }
   })
 })
