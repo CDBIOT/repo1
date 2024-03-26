@@ -13,9 +13,9 @@ const jwt = require('jsonwebtoken')
 
 
 //routers.get('/mqtt_pub', mqtt.onLight)
-routers.get('/mqtt_on', mqtt.onLight)
+//routers.get('/mqtt_on', mqtt.onLight)
 
-routers.get('/mqtt_off', mqtt.offLight)
+//routers.get('/mqtt_off', mqtt.offLight)
 
 
 
