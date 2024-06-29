@@ -14,6 +14,9 @@ app.get("/Grafico",function(req,res){
     res.sendFile(__dirname + "/Grafico.html");
 });
 
+app.get("/BotWaMe",function(req,res){
+    res.sendFile(__dirname + "/BotWaMe.html");
+});
 app.get("/grafico",function(req,res){
     res.sendFile(__dirname + "/grafico.js");
 });
