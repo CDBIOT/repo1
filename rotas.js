@@ -121,6 +121,10 @@ routers.use('/grafico.js', express.static("/"))
  
  routers.get("/Grafico",function(req,res){
      res.sendFile(__dirname + "/Grafico.html");
+     
+ routers.get("/BotWaMe",function(req,res){
+    res.sendFile(__dirname + "/BotWaMe.html");
+});
  });
  
  routers.get("/grafico",function(req,res){

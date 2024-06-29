@@ -5,7 +5,7 @@ const app = express();
 
 const Temps = require('./temps')
 const Person = require('./user')
-const mqtt = require('./mqtt')
+//const mqtt = require('./mqtt')
 var fs = require('fs');
 //app.use(mqtt);
 const bcrypt = require('bcryptjs')
