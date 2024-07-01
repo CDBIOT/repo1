@@ -20,7 +20,6 @@
 
 </div>
 
-<img id = "fio" src = "../../imagens/blue/fio azul.png" >
 </section>
 
 <section class=" Botoes_pagina0">
@@ -154,11 +153,7 @@ setInterval(function()
 
 async function getContent() {
 	//Obtem dados do banco de dados
-		const options = {
-						method: 'GET',
-						mode: 'cors',
-						cache: 'default'
-						}
+	const options = {method: 'GET',	mode: 'cors',cache: 'default'}
 		fetch('https://repo1-beta.vercel.app/mqtt',options)
 		//fetch('http://127.0.0.1:8081/temps')
 		.then(function (response){
