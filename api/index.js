@@ -41,10 +41,10 @@ app.use(express.json());
 app.use(routers);
 
 
-const PORT = process.env.PORT || 8081 || 5500;
-    app.listen(PORT,function(){
-        console.log("Servidor Rodando");
-        })
+// const PORT = process.env.PORT || 8081 || 5500;
+//     app.listen(PORT,function(){
+//         console.log("Servidor Rodando");
+//         })
 
   //      "src": "api/index.js",
   //"src": "!{api/**,package.json,middleware.[jt]s}",

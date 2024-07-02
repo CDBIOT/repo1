@@ -5,17 +5,17 @@ const app = express();
 
 const Temps = require('./temps')
 const Person = require('./user')
-const mqtt = require('./mqtt')
+const mqtt = require('./mqttio','./mqtt_node','./mqtt_node2')
 var fs = require('fs');
 //app.use(mqtt);
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 
-routers.get('/mqtt_pub', mqtt.onLight)
-routers.get('/mqtt_on', mqtt.onLight)
+//routers.get('/mqtt_pub', mqtt.onLight)
+//routers.get('/mqtt_on', mqtt.onLight)
 
-routers.get('/mqtt_off', mqtt.offLight)
+//routers.get('/mqtt_off', mqtt.offLight)
 
 
 

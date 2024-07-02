@@ -11,7 +11,7 @@ const options = {
   clientId: 'cdbiot123',
   username: 'test',
   password: 'test',
- reconnectPeriod: 1000,
+ reconnectPeriod: 10000,
 }
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
@@ -22,10 +22,13 @@ client.on('connect', function () {
 
     console.log('Subscribe to topic Temp_sala')
     if (!err) {
-      //client.publish('bh/inTopic', '1')
+      client.publish('room_light', '0')
+      console.log('Enviado comando 0 para room_light')
     }
   })
   client.end()
+
+
 
 })
 
@@ -33,7 +36,7 @@ client.on('message', function (topic, message) {
   // message is Buffer
   m = message.toString();
   console.log(message.toString())
-  client.end()
+ // client.end()
 })
 
  //Page published
