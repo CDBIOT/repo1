@@ -13,6 +13,7 @@ const host = 'broker.mqtt-dashboard.com'
 const protocol = "mqtt"
 const port = '8884'
 
+
 function connectToBroker(){
 
 const connectUrl = `mqtt://${host}:${port}`
@@ -52,14 +53,16 @@ client.on('message', (topic,message, payload) => {
     })
  }
 
-function publishMessage(topic,message){
-    console.log(`Sending Topic: ${topic}, Message: ${message}`);
-    //client.publish(topic,message,{qos: 0, retain: false});
-    //client.end()
-}
 
+ function publishMessage(topic,message){
+  // message = '1';
+   //topic = 'topic1';
+     console.log(`Sending Topic: ${topic}, Message: ${message}`);
+   //  client.publish(topic,message,{qos: 0, retain: false});
+     //client.end()
+ }
 connectToBroker();
-publishMessage("room_light","1");
+publishMessage("room_light","0");
 
 module.exports = {
     connectToBroker,

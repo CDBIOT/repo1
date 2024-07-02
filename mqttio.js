@@ -11,7 +11,7 @@ const options = {
   clientId: 'cdbiot123',
   username: 'test',
   password: 'test',
- reconnectPeriod: 10000,
+ reconnectPeriod: 100000,
 }
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
@@ -20,10 +20,10 @@ client.on('connect', function () {
 
   client.subscribe('Teste1', function (err) {
 
-    console.log('Subscribe to topic Temp_sala')
+    console.log('Subscribe to topic room_light')
     if (!err) {
-      client.publish('room_light', '1')
-      console.log('Enviado comando 1 para room_light')
+      client.publish('room_light', '0')
+      console.log('Enviado comando 0 para room_light ')
     }
   })
  // client.end()

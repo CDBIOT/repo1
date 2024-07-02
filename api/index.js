@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const routers = require('../rotas_temps','../rotas_user');
+const routers = require('../rotas_temps','../rotas_user','../publisher','../subscriber');
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
