@@ -45,7 +45,7 @@ app.use(routers);
 
 
 
-const PORT = process.env.PORT || 8081 || 5500;
+const PORT = process.env.PORT || 3000 || 5500;
     app.listen(PORT,function(){
         console.log("Servidor Rodando");
         })

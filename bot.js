@@ -7,7 +7,7 @@ const http = require('http');
 const fileUpload = require('express-fileupload');
 //const axios = require('axios');
 const mime = require('mime-types');
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000 || 8000;
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -27,11 +27,11 @@ debug: true
 }));
  //app.use("/", express.static(__dirname + "/"))
 
- app.get('/', (req, res) => {
-   res.sendFile('index.html', {
-     root: __dirname
- });
- });
+//  app.get('/api', (req, res) => {
+//    res.sendFile('index.html', {
+//      root: __dirname
+//  });
+//  });
 // 
 const client = new Client({
   authStrategy: new LocalAuth({ clientId: 'bot-zdg' }),
@@ -51,8 +51,9 @@ const client = new Client({
 client.initialize();
 
 io.on('connection', function(socket) {
-  socket.emit('message', '© BOT-ZDG - Iniciado');
+  socket.emit('message', '© BOT - Iniciado');
   socket.emit('qr', './icon.svg');
+  console.log(`Socket conectado: ${socket.id}`)
 
 client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
@@ -323,7 +324,7 @@ client.on('message', async msg => {
 	}
 });
 
-console.log("\nA Comunidade ZDG é a oportunidade perfeita para você aprender a criar soluções incríveis usando as APIs, sem precisar de experiência prévia com programação. Com conteúdo exclusivo e atualizado, você terá tudo o que precisa para criar robôs, sistemas de atendimento e automações do zero. O curso é projetado para iniciantes e avançados, e oferece um aprendizado prático e passo a passo para que você possa criar soluções incríveis.")
+console.log("\nApp incríveis.")
 console.log("\nIncreva-se agora acessando link: comunidadezdg.com.br\n")
     
 // server.listen(port, function() {

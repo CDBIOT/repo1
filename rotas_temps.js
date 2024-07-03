@@ -344,8 +344,8 @@ routers.get("/mqtt.html",function(req,res){
     res.sendFile(__dirname + "/pages/autentica.html");
 });
 
-routers.get("/Botpress",function(req,res){
-    res.sendFile(__dirname + "/pages/Botpress.html");
+routers.get("/socketio",function(req,res){
+    res.sendFile(__dirname + "/pages/socketio.html");
 });
 
 routers.get("/",function(req,res){

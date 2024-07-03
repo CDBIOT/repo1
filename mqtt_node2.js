@@ -12,7 +12,7 @@ const client = mqtt.connect(connectUrl, {
   connectTimeout: 4000,
   username: 'emqx',
   password: 'public',
-  reconnectPeriod: 1000,
+  reconnectPeriod: 100000,
 })
 
 const topic = 'Sala'
