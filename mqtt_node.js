@@ -17,7 +17,7 @@ client.on('connect', function () {
   console.log('Connected')
   client.subscribe('Temp_sala', function (err) {
     if (!err) {
-      client.publish('room_light', '1')
+      client.publish('room_light', '0')
       console.log('Connected topic room mqtt_node ')
     }
   })

@@ -22,8 +22,8 @@ client.on('connect', function () {
 
     console.log('Subscribe to topic room_light')
     if (!err) {
-      client.publish('room_light', '1')
-      console.log('Enviado comando 1 para room_light ')
+      client.publish('room_light', '0')
+      console.log('Enviado comando 0 para room_light ')
     }
   })
  // client.end()
