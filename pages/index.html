@@ -17,11 +17,8 @@ google.charts.load('current',{packages:['corechart']});
 google.charts.setOnLoadCallback(Dia);
 google.charts.setOnLoadCallback(draw_table);
 </script>
+<script> const socket = io();</script>
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  const socket = io();
-</script>
 
 </head>
 <body> 
@@ -60,13 +57,13 @@ google.charts.setOnLoadCallback(draw_table);
 	    <a href="Monitor.html">
 	    <img src="/imagens/blue/temp_btn.png"  ALT=""></a>
 		<label>Temperature</label>
-  		 </div>
-
-		   <div class=" w_box">
-			<a href="BotWaMe.html">
-			<img src="/imagens/blue/user.png"  ALT=""></a>
-			<label>CHATBOT</label>
-			   </div>
+  		</div>
+			
+		<div class=" w_box">
+		<a href="/pages/socketio.html">
+		<img src="/imagens/blue/user.png"  ALT=""></a>
+		<label>CHATBOT</label>
+		</div>
     </div>
 </section>
 	
@@ -79,39 +76,41 @@ google.charts.setOnLoadCallback(draw_table);
 		</form>
 	</div>
 
+</section>
+<section class="chart">
 
-	<div id="app">
+	<div class="chart_1">
 		<h1>Whatsapp API</h1>
-		
-		<img src="" alt="QR Code" id="qrcode">
+		<img src="/imagens/icon.svg" alt="QR Code" id="qrcode">
 		<h3>Logs:</h3>
 		<ul class="logs"></ul>
 	</div>
 
 </section>
-	<script>
-		$(document).ready(function() {
-			var socket = io();
-
-			socket.on('message', function(msg) {
-				$('.logs').append($('<li>').text(msg));
-			});
-
-			socket.on('qr', function(src) {
-				$('#qrcode').attr('src', src);
-				$('#qrcode').show();
-			});
-
-			socket.on('ready', function(data) {
-				$('#qrcode').hide();
-			});
-
-			socket.on('authenticated', function(data) {
-				$('#qrcode').hide();
-			});
-		});
-	</script>
 	
+<script>
+	$(document).ready(function() {
+		//var socket = io();
+
+		socket.on('message', function(msg) {
+			$('.logs').append($('<li>').text(msg));
+		});
+
+		socket.on('qr', function(src) {
+			$('#qrcode').attr('src', src);
+			$('#qrcode').show();
+		});
+
+		socket.on('ready', function(data) {
+			$('#qrcode').hide();
+		});
+
+		socket.on('authenticated', function(data) {
+			$('#qrcode').hide();
+		});
+	});
+</script>
+
 
 </body>
 </html>
