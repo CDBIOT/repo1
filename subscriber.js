@@ -25,7 +25,7 @@ const options = {
     clientId: 'cdbiot123',
     username: 'test',
     password: 'test',
-   reconnectPeriod: 1000,
+   reconnectPeriod: 100000,
   }
 
 const client = mqtt.connect(connectUrl,options)
