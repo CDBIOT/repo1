@@ -51,7 +51,7 @@ const client = new Client({
 client.initialize();
 
 io.on('connection', function(socket) {
-  socket.emit('message', '© BOT - Iniciado');
+  socket.emit('message', '© BOT CDB - Iniciado');
   socket.emit('qr', './icon.svg');
   console.log(`Socket conectado: ${socket.id}`)
 
@@ -59,25 +59,25 @@ client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
     qrcode.toDataURL(qr, (err, url) => {
       socket.emit('qr', url);
-      socket.emit('message', '© BOT-ZDG QRCode recebido, aponte a câmera  seu celular!');
+      socket.emit('message', '© BOT-CDB QRCode recebido, aponte a câmera  seu celular!');
     });
 });
 
 client.on('ready', () => {
-    socket.emit('ready', '© BOT-ZDG Dispositivo pronto!');
-    socket.emit('message', '© BOT-ZDG Dispositivo pronto!');
+    socket.emit('ready', '© BOT-CDB Dispositivo pronto!');
+    socket.emit('message', '© BOT-CDB Dispositivo pronto!');
     socket.emit('qr', './check.svg')	
     console.log('© BOT-ZDG Dispositivo pronto');
 });
 
 client.on('authenticated', () => {
-    socket.emit('authenticated', '© BOT-ZDG Autenticado!');
-    socket.emit('message', '© BOT-ZDG Autenticado!');
+    socket.emit('authenticated', '© BOT-CDB Autenticado!');
+    socket.emit('message', '© BOT-CDB Autenticado!');
     console.log('© BOT-ZDG Autenticado');
 });
 
 client.on('auth_failure', function() {
-    socket.emit('message', '© BOT-ZDG Falha na autenticação, reiniciando...');
+    socket.emit('message', '© BOT CDB Falha na autenticação, reiniciando...');
     console.error('© BOT-ZDG Falha na autenticação');
 });
 
@@ -86,7 +86,7 @@ client.on('change_state', state => {
 });
 
 client.on('disconnected', (reason) => {
-  socket.emit('message', '© BOT-ZDG Cliente desconectado!');
+  socket.emit('message', '© BOT CDB Cliente desconectado!');
   console.log('© BOT-ZDG Cliente desconectado', reason);
   client.initialize();
 });
