@@ -5,6 +5,7 @@ const socketIO = require('socket.io');
 const qrcode = require('qrcode');
 const http = require('http');
 const fileUpload = require('express-fileupload');
+const fs = require('fs');
 //const axios = require('axios');
 const mime = require('mime-types');
 const port = process.env.PORT || 3000 || 8000;
@@ -83,285 +84,142 @@ const createSession = function(id, description) {
     })
   });
 
-client.initialize();
+  client.initialize();
 
-io.on('connection', function(socket) {
-  socket.emit('message', '© BOT CDB - Iniciado');
-  socket.emit('qr', './icon.svg');
-  console.log(`Socket conectado: ${socket.id}`)
-
-client.on('qr', (qr) => {
+  client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
     qrcode.toDataURL(qr, (err, url) => {
-      socket.emit('qr', url);
-      socket.emit('message', '© BOT-CDB QRCode recebido, aponte a câmera  seu celular!');
+      io.emit('qr', { id: id, src: url });
+      io.emit('message', { id: id, text: 'QR Code received, scan please!' });
     });
-});
+  });
 
-client.on('ready', () => {
-    socket.emit('ready', '© BOT-CDB Dispositivo pronto!');
-    socket.emit('message', '© BOT-CDB Dispositivo pronto!');
-    socket.emit('qr', './check.svg')	
-    console.log('© BOT-ZDG Dispositivo pronto');
-});
+  client.on('ready', () => {
+    io.emit('ready', { id: id });
+    io.emit('message', { id: id, text: 'Whatsapp is ready!' });
 
-client.on('authenticated', () => {
-    socket.emit('authenticated', '© BOT-CDB Autenticado!');
-    socket.emit('message', '© BOT-CDB Autenticado!');
-    console.log('© BOT-ZDG Autenticado');
-});
+    const savedSessions = getSessionsFile();
+    const sessionIndex = savedSessions.findIndex(sess => sess.id == id);
+    savedSessions[sessionIndex].ready = true;
+    setSessionsFile(savedSessions);
+  });
 
-client.on('auth_failure', function() {
-    socket.emit('message', '© BOT CDB Falha na autenticação, reiniciando...');
-    console.error('© BOT-ZDG Falha na autenticação');
-});
+  client.on('authenticated', () => {
+    io.emit('authenticated', { id: id });
+    io.emit('message', { id: id, text: 'Whatsapp is authenticated!' });
+  });
 
-client.on('change_state', state => {
-  console.log('© BOT-ZDG Status de conexão: ', state );
-});
+  client.on('auth_failure', function() {
+    io.emit('message', { id: id, text: 'Auth failure, restarting...' });
+  });
 
 client.on('disconnected', (reason) => {
-  socket.emit('message', '© BOT CDB Cliente desconectado!');
-  console.log('© BOT-ZDG Cliente desconectado', reason);
+  io.emit('message', { id: id, text: 'Whatsapp is disconnected!' });
+  client.destroy();
   client.initialize();
+
+  // Menghapus pada file sessions
+  const savedSessions = getSessionsFile();
+  const sessionIndex = savedSessions.findIndex(sess => sess.id == id);
+  savedSessions.splice(sessionIndex, 1);
+  setSessionsFile(savedSessions);
+
+  io.emit('remove-session', id);
 });
+
+// Tambahkan client ke sessions
+sessions.push({
+  id: id,
+  description: description,
+  client: client
+});
+
+// Menambahkan session ke file
+const savedSessions = getSessionsFile();
+const sessionIndex = savedSessions.findIndex(sess => sess.id == id);
+
+if (sessionIndex == -1) {
+  savedSessions.push({
+    id: id,
+    description: description,
+    ready: false,
+  });
+  setSessionsFile(savedSessions);
+}
+}
+
+const init = function(socket) {
+const savedSessions = getSessionsFile();
+
+if (savedSessions.length > 0) {
+  if (socket) {
+    socket.emit('init', savedSessions);
+  } else {
+    savedSessions.forEach(sess => {
+      createSession(sess.id, sess.description);
+    });
+  }
+}
+}
+
+
+init();
+
+// Socket IO
+io.on('connection', function(socket) {
+  init(socket);
+
+  socket.on('create-session', function(data) {
+    console.log('Create session: ' + data.id);
+    createSession(data.id, data.description);
+  });
 });
 
 // Send message
-app.post('/zdg-message', [
-  body('number').notEmpty(),
-  body('message').notEmpty(),
-], async (req, res) => {
-  const errors = validationResult(req).formatWith(({
-    msg
-  }) => {
-    return msg;
-  });
-
-  if (!errors.isEmpty()) {
-    return res.status(422).json({
-      status: false,
-      message: errors.mapped()
-    });
-  }
-
-  const number = req.body.number;
-  const numberDDI = number.substr(0, 2);
-  const numberDDD = number.substr(2, 2);
-  const numberUser = number.substr(-8, 8);
+app.post('/send-message', async (req, res) => {
+  const sender = req.body.sender;
+  const number = phoneNumberFormatter(req.body.number);
   const message = req.body.message;
 
-  if (numberDDI !== "55") {
-    const numberZDG = number + "@c.us";
-    client.sendMessage(numberZDG, message).then(response => {
-    res.status(200).json({
-      status: true,
-      message: 'BOT-ZDG Mensagem enviada',
-      response: response
-    });
-    }).catch(err => {
-    res.status(500).json({
-      status: false,
-      message: 'BOT-ZDG Mensagem não enviada',
-      response: err.text
-    });
-    });
-  }
-  else if (numberDDI === "55" && parseInt(numberDDD) <= 30) {
-    const numberZDG = "55" + numberDDD + "9" + numberUser + "@c.us";
-    client.sendMessage(numberZDG, message).then(response => {
-    res.status(200).json({
-      status: true,
-      message: 'BOT-ZDG Mensagem enviada',
-      response: response
-    });
-    }).catch(err => {
-    res.status(500).json({
-      status: false,
-      message: 'BOT-ZDG Mensagem não enviada',
-      response: err.text
-    });
-    });
-  }
-  else if (numberDDI === "55" && parseInt(numberDDD) > 30) {
-    const numberZDG = "55" + numberDDD + numberUser + "@c.us";
-    client.sendMessage(numberZDG, message).then(response => {
-    res.status(200).json({
-      status: true,
-      message: 'BOT-ZDG Mensagem enviada',
-      response: response
-    });
-    }).catch(err => {
-    res.status(500).json({
-      status: false,
-      message: 'BOT-ZDG Mensagem não enviada',
-      response: err.text
-    });
-    });
-  }
-});
+  const client = sessions.find(sess => sess.id == sender)?.client;
 
-
-// Send media
-app.post('/zdg-media', [
-  body('number').notEmpty(),
-  body('caption').notEmpty(),
-  body('file').notEmpty(),
-], async (req, res) => {
-  const errors = validationResult(req).formatWith(({
-    msg
-  }) => {
-    return msg;
-  });
-
-  if (!errors.isEmpty()) {
+  // Make sure the sender is exists & ready
+  if (!client) {
     return res.status(422).json({
       status: false,
-      message: errors.mapped()
+      message: `The sender: ${sender} is not found!`
+    })
+  }
+
+  /**
+   * Check if the number is already registered
+   * Copied from app.js
+   * 
+   * Please check app.js for more validations example
+   * You can add the same here!
+   */
+  const isRegisteredNumber = await client.isRegisteredUser(number);
+
+  if (!isRegisteredNumber) {
+    return res.status(422).json({
+      status: false,
+      message: 'The number is not registered'
     });
   }
 
-  const number = req.body.number;
-  const numberDDI = number.substr(0, 2);
-  const numberDDD = number.substr(2, 2);
-  const numberUser = number.substr(-8, 8);
-  const caption = req.body.caption;
-  const fileUrl = req.body.file;
-
-  let mimetype;
-  const attachment = await axios.get(fileUrl, {
-    responseType: 'arraybuffer'
-  }).then(response => {
-    mimetype = response.headers['content-type'];
-    return response.data.toString('base64');
+  client.sendMessage(number, message).then(response => {
+    res.status(200).json({
+      status: true,
+      response: response
+    });
+  }).catch(err => {
+    res.status(500).json({
+      status: false,
+      response: err
+    });
   });
-
-  const media = new MessageMedia(mimetype, attachment, 'Media');
-
-  if (numberDDI !== "55") {
-    const numberZDG = number + "@c.us";
-    client.sendMessage(numberZDG, media, {caption: caption}).then(response => {
-    res.status(200).json({
-      status: true,
-      message: 'BOT-ZDG Imagem enviada',
-      response: response
-    });
-    }).catch(err => {
-    res.status(500).json({
-      status: false,
-      message: 'BOT-ZDG Imagem não enviada',
-      response: err.text
-    });
-    });
-  }
-  else if (numberDDI === "55" && parseInt(numberDDD) <= 30) {
-    const numberZDG = "55" + numberDDD + "9" + numberUser + "@c.us";
-    client.sendMessage(numberZDG, media, {caption: caption}).then(response => {
-    res.status(200).json({
-      status: true,
-      message: 'BOT-ZDG Imagem enviada',
-      response: response
-    });
-    }).catch(err => {
-    res.status(500).json({
-      status: false,
-      message: 'BOT-ZDG Imagem não enviada',
-      response: err.text
-    });
-    });
-  }
-  else if (numberDDI === "55" && parseInt(numberDDD) > 30) {
-    const numberZDG = "55" + numberDDD + numberUser + "@c.us";
-    client.sendMessage(numberZDG, media, {caption: caption}).then(response => {
-    res.status(200).json({
-      status: true,
-      message: 'BOT-ZDG Imagem enviada',
-      response: response
-    });
-    }).catch(err => {
-    res.status(500).json({
-      status: false,
-      message: 'BOT-ZDG Imagem não enviada',
-      response: err.text
-    });
-    });
-  }
 });
 
-client.on('message', async msg => {
-
-  const nomeContato = msg._data.notifyName;
-  let groupChat = await msg.getChat();
-  
-  // if (groupChat.isGroup) return null;
-
-  if (msg.type.toLowerCase() == "e2e_notification") return null;
-  
-  if (msg.body == "") return null;
-  
-  if (msg.from.includes("@g.us")) return null;
-
-  if (msg.body !== null && msg.body === "1") {
-    //msg.reply("*COMUNIDADE ZDG*\n\n🤪 _Usar o WPP de maneira manual é prejudicial a saúde_\r\n\r\nhttps://comunidadezdg.com.br/ \r\n\r\n⏱️ As inscrições estão *ABERTAS*\n\nAssista o vídeo abaixo e entenda porque tanta gente comum está economizando tempo e ganhando dinheiro explorando a API do WPP, mesmo sem saber nada de programação.\n\n📺 https://youtu.be/mr0BvO9quhw");
-    msg.reply("Na *Comunidade ZDG* você vai integrar APIs, automações com chatbots e sistemas de atendimento multiusuário para whatsapp. Com *scripts para copiar e colar e suporte todos os dias no grupo de alunos*.\n\nhttps://comunidadezdg.com.br/ \n\n*⏱️ API do WPP\n\n📺 https://www.youtube.com/watch?v=AoRhC_X6p5w")
-  } 
-  
-  else if (msg.body !== null && msg.body === "2") {
-    msg.reply("*" + nomeContato + "*, na Comunidade ZDG, você vai:\n\n- ");
-  }
-  
-  else if (msg.body !== null && msg.body === "3") {
-    msg.reply("*" + nomeContato + "*, " + "essas são as principais APIs que a ZDG vai te ensinar a usar com o WhatsApp:\nBaileys, Venom-BOT, WPPConnect, WPPWeb-JS e Cloud API (Api Oficial)\n\n*Essas são as principais integrações que a ZDG vai te ensinar a fazer com o WhatsApp:*\nBubble, WordPress (WooCommerce e Elementor), Botpress, N8N, DialogFlow, ChatWoot e plataformas como Hotmart, Edduz, Monetizze, Rd Station, Mautic, Google Sheets, Active Campaing, entre outras.");
-  }
-  
-  else if (msg.body !== null && msg.body === "4") {
-
-        const contact = await msg.getContact();
-        setTimeout(function() {
-            msg.reply(`@${contact.number}` + ' seu contato já foi encaminhado para o Pedrinho');  
-            client.sendMessage('5515998566622@c.us','Contato ZDG. https://wa.me/' + `${contact.number}`);
-	    //client.sendMessage('5515998566622@c.us',`${contact.number}`);
-          },1000 + Math.floor(Math.random() * 1000));
-  
-  }
-  
-  else if (msg.body !== null && msg.body === "4") {
-    msg.reply("Seu contato já foi encaminhado para o Pedrinho");
-  }
-  
-  else if (msg.body !== null && msg.body === "5") {
-    msg.reply("*" + nomeContato + "*, " + "aproveite o conteúdo e aprenda em poucos minutos como colocar sua API de WPP no ar, gratuitamente:\r\n\r\n🎥 https://youtu.be/sF9uJqVfWpg");
-  }
-  
-  else if (msg.body !== null && msg.body === "7") {
-    msg.reply("*" + nomeContato + "*, " + ", https://youtu.be/StRiSLS5ckg\nRodrigo: Eu sou desenvolvedor de sistemas, https://youtu.be/sAJUDsUHZOw\nDarley:");
-  }
-
-	 else if (msg.body !== null || msg.body === "0" || msg.type === 'ptt' || msg.hasMedia) {
-    msg.reply("*COMUNIDADE ZDG*\n\n🤪 _Usar o WPP de maneira manual é prejudicial a saúde_\r\n\r\nhttps://comunidadezdg.com.br/ \r\n\r\n⏱️ As inscrições estão *ABERTAS*");
-    const foto = MessageMedia.fromFilePath('./foto.jpeg');
-    client.sendMessage(msg.from, foto)
-    delay(3000).then(async function() {
-      try{
-        const media = MessageMedia.fromFilePath('./comunidade.ogg');
-        client.sendMessage(msg.from, media, {sendAudioAsVoice: true})
-        //msg.reply(media, {sendAudioAsVoice: true});
-      } catch(e){
-        console.log('audio off')
-      }
-		});
-    delay(8000).then(async function() {
-      const saudacaoes = ['Olá ' + nomeContato + ', tudo bem?', 'Oi ' + nomeContato + ', como vai você?', 'Opa ' + nomeContato + ', tudo certo?'];
-      const saudacao = saudacaoes[Math.floor(Math.random() * saudacaoes.length)];
-      msg.reply(saudacao + " Esse é um atendimento automático, e não é monitorado por um humano. Caso queira falar com um atendente, escolha a opção 4. \r\n\r\nEscolha uma das opções abaixo para iniciarmos a nossa conversa: \r\n\r\n*[ 1 ]* - Quero garantir minha vaga na Comunidade ZDG. \r\n*[ 2 ]* - O que vou receber entrando para a turma da ZDG? \r\n*[ 3 ]*- Quais tecnologias e ferramentas eu vou aprender na comunidade ZDG? \r\n*[ 4 ]- Gostaria de falar com o Pedrinho, mas obrigado por tentar me ajudar.* \r\n*[ 5 ]*- Quero aprender como montar minha API de GRAÇA.\r\n*[ 6 ]*- Quero conhecer todo o conteúdo programático da Comunidade ZDG.\r\n*[ 7 ]*- Gostaria de conhecer alguns estudos de caso.  \r\n*[ 8 ]*- In *ENGLISH* please! \r\n*[ 16 ]*- En *ESPAÑOL* por favor.");
-		});
-    
-	}
-});
-
-console.log("\nApp incríveis.")
-console.log("\nIncreva-se agora acessando link: comunidadezdg.com.br\n")
-    
 // server.listen(port, function() {
-//         console.log('Aplicação rodando na porta *: ' + port + ' . Acesse no link: http://localhost:' + port);
+//   console.log('App running on *: ' + port);
 // });
