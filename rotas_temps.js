@@ -2,10 +2,11 @@ const { response } = require('express');
 const express = require('express');
 const routers = express.Router();
 const app = express();
-
+const bot = require('./bot')
 const Temps = require('./temps')
 const Person = require('./user')
 const mqtt = require('./mqttio','./mqtt_node','./mqtt_node2')
+const publisher =require('./publisher')
 var fs = require('fs');
 //app.use(mqtt);
 const bcrypt = require('bcryptjs')
@@ -13,10 +14,12 @@ const jwt = require('jsonwebtoken')
 
 
 //routers.get('/mqtt_pub', mqtt.onLight)
-//routers.get('/mqtt_on', mqtt.onLight)
+//routers.get('/mqtt_on', publisher)
 
 //routers.get('/mqtt_off', mqtt.offLight)
 
+//routers.get('/bot',bot)
+//routers.use(qrcode);
 
 
  routers.get('/mqtt',(req, res) =>{
@@ -322,6 +325,11 @@ routers.use('/mqtt_node2.js', express.static("/"))
 
  routers.get("/mqtt_node2",function(req,res){
     res.sendFile(__dirname + "/mqtt_node2.js");
+});
+
+
+routers.get("/bot",function(req,res){
+    res.sendFile(__dirname + "/bot.js");
 });
 
 routers.get("/mqtt.html",function(req,res){

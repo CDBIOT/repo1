@@ -62,7 +62,7 @@ client.on('message', (topic,message, payload) => {
      //client.end()
  }
 connectToBroker();
-publishMessage("room_light","0");
+publishMessage("room_light","1");
 
 module.exports = {
     connectToBroker,

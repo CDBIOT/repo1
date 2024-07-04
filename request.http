@@ -7,13 +7,13 @@ content-type: application/json
 }
 
 ###
-GET https://repo1-beta.vercel.app/mqtt
+GET http://localhost:3000/mqtt_on
 
 ###
 POST http://localhost:8081/cadastrar
 
 ###
-GET  http://localhost:8081/login
+GET  http://localhost:3000/mqtt_on
 content-type: application/json
 headers
 {

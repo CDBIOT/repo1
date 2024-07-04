@@ -2,7 +2,7 @@ const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const socketIO = require('socket.io');
-const qrcode = require('qrcode');
+const qrcode = require('qrcode-terminal');
 const http = require('http');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
@@ -84,15 +84,19 @@ const createSession = function(id, description) {
     })
   });
 
-  client.initialize();
 
+  
   client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
+    qrcode.generate(qr, {small: true});
     qrcode.toDataURL(qr, (err, url) => {
       io.emit('qr', { id: id, src: url });
       io.emit('message', { id: id, text: 'QR Code received, scan please!' });
     });
   });
+
+  client.initialize();
+
 
   client.on('ready', () => {
     io.emit('ready', { id: id });
@@ -223,3 +227,6 @@ app.post('/send-message', async (req, res) => {
 // server.listen(port, function() {
 //   console.log('App running on *: ' + port);
 // });
+
+
+module.exports= {qrcode};
