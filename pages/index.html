@@ -4,14 +4,21 @@
 <link rel="stylesheet" type="text/css" href="/css/css.css" />
 <link rel="stylesheet" type="text/css" href="/css/reset.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" crossorigin="anonymous"></script>
+
 <script src="/grafico.js"></script>
 <script src="../api/index.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script>
 google.charts.load('current',{packages:['corechart']});
 google.charts.setOnLoadCallback(Dia);
 google.charts.setOnLoadCallback(draw_table);
 </script>
+<script> const socket = io('http://localhost:3000');</script>
+
 
 </head>
 <body> 
@@ -45,11 +52,18 @@ google.charts.setOnLoadCallback(draw_table);
 		<img src="/imagens/blue/graph_btn.png"  ALT=""></a>
 		<label>Graphics</label>
 		</div>
+		
 		<div class=" w_box">
 	    <a href="Monitor.html">
 	    <img src="/imagens/blue/temp_btn.png"  ALT=""></a>
 		<label>Temperature</label>
-  		 </div>
+  		</div>
+			
+		<div class=" w_box">
+		<a href="/pages/socketio.html">
+		<img src="/imagens/blue/user.png"  ALT=""></a>
+		<label>CHATBOT</label>
+		</div>
     </div>
 </section>
 	
@@ -57,11 +71,46 @@ google.charts.setOnLoadCallback(draw_table);
 	<div class="chart_1">
 		<div id='graph_dia'></div>
 		<form action="index.html" >
-			<input type="date" id="initDate" onchange=""this.form.submit()"">
+			<input type="date" id="initDate" onchange=""this.form.submit()">
 			<label value="initDate"></label>
 		</form>
 	</div>
+
 </section>
+<section class="chart">
+
+	<div class="chart_1">
+		<h1>Whatsapp API</h1>
+		<img src="/imagens/icon.svg" alt="QR Code" id="qrcode">
+		<h3>Logs:</h3>
+		<ul class="logs"></ul>
+	</div>
+
+</section>
+	
+<script>
+	$(document).ready(function() {
+		//var socket = io();
+
+		socket.on('message', function(msg) {
+			$('.logs').append($('<li>').text(msg));
+		});
+
+		socket.on('qr', function(src) {
+			$('#qrcode').attr('src', src);
+			$('#qrcode').show();
+		});
+
+		socket.on('ready', function(data) {
+			$('#qrcode').hide();
+		});
+
+		socket.on('authenticated', function(data) {
+			$('#qrcode').hide();
+		});
+	});
+</script>
+
 
 </body>
 </html>

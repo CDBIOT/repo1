@@ -3,11 +3,15 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const routers = require('../rotas_temps','../rotas_user');
+const routers = require('../rotas_temps','../rotas_user','../publisher','../subscriber');
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const mqtt_node = require('../mqtt_node');
+const bot = require('../bot')
+const {Server} = require ("socket.io");
+
+
 
 //const mongo = require('./mongo');
 //const db =  require('./database');
@@ -31,7 +35,10 @@ app.use((req,res,next) => {
    next()
    })
 app.use(cookieParser())
-app.use(session({secret: '123456' , token: 'token'}))
+//app.use(session({secret: '123456' , token: 'token'}))
+app.use(session({secret: '123456' , token: 'token',resave: true,saveUninitialized: true}))
+
+
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
@@ -40,7 +47,33 @@ app.use(express.json());
 app.use(routers);
 
 
-const PORT = process.env.PORT || 8081 || 5500;
+const { Client } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal')
+
+// Create a new client instance
+const client = new Client();
+
+client.on('qr', qr => {
+    qrcode.generate(qr, {small: true});
+});
+
+// When the client is ready, run this code (only once)
+client.once('ready', () => {
+    console.log('Client is ready!');
+});
+
+client.on('message_create', message => {
+	if (message.body === '!ping') {
+		// send back "pong" to the chat the message was sent in
+		client.sendMessage(message.from, 'pong');
+	}
+});
+
+// Start your client
+client.initialize();
+
+
+const PORT = process.env.PORT || 3000 || 5500;
     app.listen(PORT,function(){
         console.log("Servidor Rodando");
         })

@@ -5,14 +5,14 @@ const router = express.Router();
 var client
 
 const topic1 = 'bh/inTopic'
-
-const topic2 = 'Lamp'
-const topic3 = 'Aqua'
+const topic2 = 'room_light'
+const topic3 = 'aqua_light'
 
 
 const host = 'broker.mqtt-dashboard.com'
 const protocol = "mqtt"
-const port = '1883'
+const port = '8884'
+
 
 function connectToBroker(){
 
@@ -29,7 +29,7 @@ const options = {
   clientId: 'cdbiot123',
   username: 'test',
   password: 'test',
- reconnectPeriod: 1000,
+ reconnectPeriod: 100000,
 }
 
 const client = mqtt.connect(connectUrl,options)
@@ -40,9 +40,6 @@ client.on("error",(err)=> {
     client.end();
 })
 
-client.on("reconnect", () => {
-    console.log("Reconnecting...");
-});
 
 client.on('connect', () => {
   console.log('Connected:' + options.clientId)
@@ -56,14 +53,16 @@ client.on('message', (topic,message, payload) => {
     })
  }
 
-function publishMessage(topic,message){
-    console.log(`Sending Topic: ${topic}, Message: ${message}`);
-    //client.publish(topic,message,{qos: 0, retain: false});
-    //client.end()
-}
 
+ function publishMessage(topic,message){
+  // message = '1';
+   //topic = 'topic1';
+     console.log(`Sending Topic: ${topic}, Message: ${message}`);
+   //  client.publish(topic,message,{qos: 0, retain: false});
+     //client.end()
+ }
 connectToBroker();
-publishMessage("topic1","1");
+publishMessage("room_light","1");
 
 module.exports = {
     connectToBroker,

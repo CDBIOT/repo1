@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mqtt = require('mqtt')
+
 const options = {
   // Clean session
   clean: true,
@@ -9,14 +10,15 @@ const options = {
   clientId: 'cdbiot123',
   username: 'test',
   password: 'test',
- reconnectPeriod: 1000,
+ reconnectPeriod: 100000,
 }
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
   console.log('Connected')
   client.subscribe('Temp_sala', function (err) {
     if (!err) {
-      //client.publish('bh/inTopic', '1')
+      client.publish('room_light', '0')
+      console.log('Connected topic room mqtt_node ')
     }
   })
 })
