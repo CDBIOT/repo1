@@ -1,3 +1,6 @@
 node_modules
 .env
 .vercel
+whatsapp-session*.json
+package-lock.json
+downloaded-media/
