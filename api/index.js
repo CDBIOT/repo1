@@ -12,6 +12,10 @@ const bot = require('../bot')
 const {Server} = require ("socket.io");
 
 
+const { Client } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal')
+
+
 
 //const mongo = require('./mongo');
 //const db =  require('./database');
@@ -47,15 +51,12 @@ app.use(express.json());
 app.use(routers);
 
 
-const { Client } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal')
-
 // Create a new client instance
 const client = new Client();
 
-client.on('qr', qr => {
-    qrcode.generate(qr, {small: true});
-});
+// client.on('qr', qr => {
+//     qrcode.generate(qr, {small: true});
+// });
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
