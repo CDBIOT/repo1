@@ -265,23 +265,7 @@
     "watchpack": "^2.4.0",
     "webidl-conversions": "^7.0.0",
     "webpack": "^5.89.0",
-<<<<<<< HEAD
     "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js#webpack-exodus"
-=======
-    "webpack-cli": "^5.1.4",
-    "webpack-merge": "^5.10.0",
-    "webpack-sources": "^3.2.3",
-    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js#webpack-exodus",
-    "whatwg-url": "^11.0.0",
-    "which": "^2.0.2",
-    "wildcard": "^2.0.1",
-    "wkx": "^0.5.0",
-    "wordwrap": "^1.0.0",
-    "wrappy": "^1.0.2",
-    "ws": "^7.5.7",
-    "xtend": "^4.0.2",
-    "yallist": "^4.0.0"
->>>>>>> 27eda30ce741d091a0d2ed0223d29adf170c855e
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
