@@ -43,7 +43,7 @@ const client = new Client({
 
 io.on('connection', function(socket) {
   socket.emit('message', '© BOT-CDB - Iniciado');
-  socket.emit('qr', './icon.svg');
+  socket.emit('qr', './socketio.html');
 
 client.on('qr', (qr) => {
     qrcode.generate(qr, {small: true});
