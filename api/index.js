@@ -71,7 +71,7 @@ client.on('message_create', message => {
 });
 
 // Start your client
-client.initialize();
+//client.initialize();
 
 
 const PORT = process.env.PORT || 3000 || 5500;
@@ -79,5 +79,6 @@ const PORT = process.env.PORT || 3000 || 5500;
         console.log("Servidor Rodando");
         })
 
+module.exports={io}
   //      "src": "api/index.js",
   //"src": "!{api/**,package.json,middleware.[jt]s}",
