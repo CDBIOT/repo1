@@ -51,24 +51,24 @@ app.use(express.json());
 app.use(routers);
 
 
-// Create a new client instance
-const client = new Client();
+// // Create a new client instance
+// const client = new Client();
 
- client.on('qr', qr => {
-     qrcode.generate(qr, {small: true});
- });
+//  client.on('qr', qr => {
+//      qrcode.generate(qr, {small: true});
+//  });
 
-// When the client is ready, run this code (only once)
-client.once('ready', () => {
-    console.log('Client is ready!');
-});
+// // When the client is ready, run this code (only once)
+// client.once('ready', () => {
+//     console.log('Client is ready!');
+// });
 
-client.on('message_create', message => {
-	if (message.body === '!ping') {
-		// send back "pong" to the chat the message was sent in
-		client.sendMessage(message.from, 'pong');
-	}
-});
+// client.on('message_create', message => {
+// 	if (message.body === '!ping') {
+// 		// send back "pong" to the chat the message was sent in
+// 		client.sendMessage(message.from, 'pong');
+// 	}
+// });
 
 // Start your client
 //client.initialize();
