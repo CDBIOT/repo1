@@ -328,9 +328,9 @@ routers.use('/mqtt_node2.js', express.static("/"))
 });
 
 
-routers.get("/bot",function(req,res){
-    res.sendFile(__dirname + "/bot.js");
-});
+// routers.get("/bot",function(req,res){
+//     res.sendFile(__dirname + "/bot.js");
+// });
 
 routers.get("/mqtt.html",function(req,res){
     res.sendFile(__dirname + "/pages/mqtt.html");
