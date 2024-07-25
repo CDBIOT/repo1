@@ -54,9 +54,9 @@ app.use(routers);
 // Create a new client instance
 const client = new Client();
 
-// client.on('qr', qr => {
-//     qrcode.generate(qr, {small: true});
-// });
+ client.on('qr', qr => {
+     qrcode.generate(qr, {small: true});
+ });
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
@@ -79,6 +79,6 @@ const PORT = process.env.PORT || 3000 || 5500;
         console.log("Servidor Rodando");
         })
 
-module.exports={io}
+//module.exports={}
   //      "src": "api/index.js",
   //"src": "!{api/**,package.json,middleware.[jt]s}",
