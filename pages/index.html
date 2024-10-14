@@ -60,11 +60,6 @@ google.charts.setOnLoadCallback(draw_table);
 		<label>Temperature</label>
   		</div>
 			
-		<div class=" w_box">
-		<a href="/pages/socketio.html">
-		<img src="/imagens/blue/user.png"  ALT=""></a>
-		<label>CHATBOT</label>
-		</div>
     </div>
 </section>
 	
@@ -89,28 +84,6 @@ google.charts.setOnLoadCallback(draw_table);
 
 </section>
 	
-<script>
-	$(document).ready(function() {
-		//var socket = io();
-
-		socket.on('message', function(msg) {
-			$('.logs').append($('<li>').text(msg));
-		});
-
-		socket.on('qr', function(src) {
-			$('#qrcode').attr('src', src);
-			$('#qrcode').show();
-		});
-
-		socket.on('ready', function(data) {
-			$('#qrcode').hide();
-		});
-
-		socket.on('authenticated', function(data) {
-			$('#qrcode').hide();
-		});
-	});
-</script>
 
 
 </body>
