@@ -2,7 +2,7 @@ const { response } = require('express');
 const express = require('express');
 const routers = express.Router();
 const app = express();
-const bot = require('./bot')
+//const bot = require('./bot')
 const Temps = require('./temps')
 const Person = require('./user')
 const mqtt = require('./mqttio','./mqtt_node','./mqtt_node2')
@@ -352,9 +352,9 @@ routers.get("/mqtt.html",function(req,res){
     res.sendFile(__dirname + "/pages/autentica.html");
 });
 
-routers.get("/socketio",function(req,res){
-    res.sendFile(__dirname + "/pages/socketio.html");
-});
+//routers.get("/socketio",function(req,res){
+ //   res.sendFile(__dirname + "/pages/socketio.html");
+//});
 
 routers.get("/",function(req,res){
     res.sendFile(__dirname + "/pages/index.html");
