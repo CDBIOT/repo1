@@ -211,7 +211,9 @@ var temperatura = document.getElementById('temperatura').innerText= parseInt(myO
 var dias 		= document.getElementById('dia').innerText= parseInt(date.getDate());
 var meses		= document.getElementById('mes').innerText= parseInt(date.getMonth()+ 1);
 var anos		= document.getElementById('ano').innerText= parseInt(date.getFullYear());
-		
+
+console.log(response.json());
+
 const dados = {
 	local: local,
 	temperatura: temperatura,
