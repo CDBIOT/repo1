@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 var client
-const topic1 = 'bh/outTopic'
+const topic1 = 'Sala'
 const topic2 = 'room_temp'
 const topic3 = 'aqua_temp'
 
@@ -33,9 +33,9 @@ const client = mqtt.connect(connectUrl,options)
 client.on('connect', function () {
   console.log('Connected to Subscriber')
   
-  client.subscribe("room_light", function (err) {
+  client.subscribe("Sala", function (err) {
 
-    console.log('Subscribe to room_light')
+    console.log('Subscribe to Sala')
     if (!err) {
       client.publish("room_light", '0')
     }
@@ -60,7 +60,7 @@ client.on('connect', () => {
 
 client.on('message', (topic,message, payload) => {
       temp = payload
-      local= topic2
+      local= Sala
       message=message
       console.log('Received Message:'+message.toString(), topic, payload.toString())
       client.end();
@@ -79,7 +79,7 @@ function subscribeToTopic(topic2,message){
 }
 
 connectToBroker();
-subscribeToTopic("room_light","0");
+subscribeToTopic("Sala","0");
 
 publishMessage("room_light","0");
 
