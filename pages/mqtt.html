@@ -193,7 +193,7 @@ async function mqtt_show() {
 	const options = {method: 'GET',	mode: 'cors',cache: 'default'}
 	
 	//const response =fetch(URI)
-	const response = fetch('https://repo1-beta.vercel.app/mqtt',options)
+	const response = fetch('https://repo1-beta.vercel.app/subscriber',options)
 	.then(function (response){
 	return response.text()})
 	.then(data=>{
