@@ -6,6 +6,7 @@ const app = express();
 const Temps = require('./temps')
 const Person = require('./user')
 const mqtt = require('./mqttio','./mqtt_node','./mqtt_node2')
+const subscribe = require('./subscriber.js')
 const publisher =require('./publisher')
 var fs = require('fs');
 //app.use(mqtt);
@@ -23,6 +24,24 @@ const jwt = require('jsonwebtoken')
 
 
  routers.get('/mqtt',(req, res) =>{
+    try{ 
+        date = new Date() 
+        var vm = {
+            temp: temp,
+            local: local,
+            dia: date.getDate(),   
+            mes: date.getMonth() + 1,
+            ano: date.getFullYear()
+        }
+        console.log(vm);
+        //res.send(vm);
+        res.status(200).json({vm})
+     }catch(error){
+         res.status(500).json(error)
+     }  
+    })
+    
+ routers.get('/subscriber',(req, res) =>{
     try{ 
         date = new Date() 
         var vm = {
