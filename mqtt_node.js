@@ -17,7 +17,7 @@ client.on('connect', function () {
   console.log('Connected')
   client.subscribe('Temp_sala', function (err) {
     if (!err) {
-      client.publish('room_light', '0')
+     client.publish('room_light', '1')
       console.log('Connected topic room mqtt_node ')
     }
   })
@@ -47,4 +47,7 @@ router.get('/getsensordata', function (req, res) {
     res.send(vm);
 });
 
-module.exports = mqtt;
+module.exports =  {
+  
+  mqtt
+}

@@ -5,21 +5,28 @@ const app = express();
 //const bot = require('./bot')
 const Temps = require('./temps')
 const Person = require('./user')
-const mqtt = require('./mqttio','./mqtt_node','./mqtt_node2')
-const subscribe = require('./subscriber.js')
+const mqtt = require('./mqtt_node')
+const mqttnode = require('./mqtt_node')
+const mqttio = require('./mqttio')
+const mqtt2 = require('./mqtt_node2')
+const subscribe = require('./subscriber')
 const publisher =require('./publisher')
 var fs = require('fs');
 //app.use(mqtt);
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 
-//routers.get('/mqtt_pub', mqtt.onLight)
-//routers.get('/mqtt_on', publisher)
+const { onLight } = require('./mqtt_node2.js');
 
-//routers.get('/mqtt_off', mqtt.offLight)
 
-//routers.get('/bot',bot)
+routers.post('/mqttio', mqttio.postPub)
+routers.get('/mqtt2', onLight)
+routers.get('/mqttnode', mqttnode)
+
+routers.post('/subscriber', subscribe.publishMessage)
+
+//routers.post('/bot',bot)
 //routers.use(qrcode);
 
 

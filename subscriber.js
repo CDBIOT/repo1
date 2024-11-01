@@ -60,15 +60,15 @@ client.on('connect', () => {
 
 client.on('message', (topic,message, payload) => {
       temp = payload
-      local= Sala
-      message=message
+      local= "Teste1",
+      message=message,
       console.log('Received Message:'+message.toString(), topic, payload.toString())
       client.end();
     })
 }
 
 function publishMessage(topic,message){
-  console.log(`Sending Topic via publishMessage: ${topic}, Message: ${message}`);
+  console.log(`Sending Topic via Subscriber.publishMessage: ${topic}, Message: ${message}`);
   //client.publish(topic,message,{qos: 0, retain: false});
   //client.end()
 }
@@ -81,11 +81,12 @@ function subscribeToTopic(topic2,message){
 connectToBroker();
 subscribeToTopic("Sala","0");
 
-publishMessage("room_light","0");
+publishMessage("room_light","1");
 
 
 module.exports = {
     connectToBroker,
     subscribeToTopic,
+    publishMessage,
   mqtt
 }

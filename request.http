@@ -7,19 +7,28 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/mqtt_on
+POST http://localhost:3000/mqtt2
 
-###
-POST http://localhost:8081/cadastrar
-
-###
-GET  http://localhost:3000/mqtt_on
 content-type: application/json
 headers
 {
 //"_id": "2",
-"nome": "cris",
-"senha0": "123"
+"topic": "Sala",
+"message": "0"
+}
+###
+GET  http://localhost:3000/mqtt
+
+###
+GET  http://localhost:3000/subscriber
+
+###
+POST  http://localhost:3000/mqttio
+
+content-type: application/json
+body = {
+"topic": "Sala",
+"message": "1"
 }
 
 ###

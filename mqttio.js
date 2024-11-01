@@ -22,7 +22,7 @@ client.on('connect', function () {
 
     console.log('Subscribe to topic room_light')
     if (!err) {
-      client.publish('room_light', '0')
+     client.publish('room_light', '0')
       console.log('Enviado comando 0 para room_light ')
     }
   })
@@ -38,16 +38,16 @@ client.on('message', function (topic, message) {
 })
 
  //Page published
- const postPublished=( async (req, res) =>{
+ const postPub=( async (req, res) =>{
   const {message,payload } = req.body
      // const temps = req.params
-  const mess = {message,payload}
+  const mess = (req.body)
   const create_temp = new publishMessage(req.body);
   //temps.save()
       try{
           await client.publish(mess)
           //temps.save()
-          console.log(message,payload)
+          console.log(mess)
           res.status(201).json({message: "Lâmpada Ligada"})
           }catch(error){
           res.status(500).json({error: error})
@@ -75,4 +75,8 @@ router.get('/', function (req, res) {
 
 
 
-module.exports = mqtt;
+module.exports =  {
+
+  postPub,
+  mqtt
+}
