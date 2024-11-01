@@ -221,8 +221,8 @@ console.log(response)
 }
 function lampadaOn(){
 	
-const response = fetch('https://repo1-beta.vercel.app/mqtt',{
-method: 'POST',	mode: 'cors',
+const response = fetch('https://repo1-beta.vercel.app/mqtton',{
+method: 'GET',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
 //body: {"topic":'room_light',"message": '1'}
 body: JSON.stringify({"topic":'room_light',"message": '1'})
@@ -247,8 +247,8 @@ console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 
 function lampadaOff(){
 
-	const response = fetch('https://repo1-beta.vercel.app/mqttio',{
-method: 'POST',	mode: 'cors',
+	const response = fetch('https://repo1-beta.vercel.app/mqttoff',{
+method: 'GET',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
 body: JSON.stringify({"topic":'room_light',"message": '1'})
 //body: {"topic":'room_light',"message": '0'}
@@ -273,7 +273,7 @@ console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 
 function mqttOff(){
 
-const response = fetch('https://repo1-beta.vercel.app/mqtt2',{
+const response = fetch('https://repo1-beta.vercel.app/mqttnode',{
 method: 'POST',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
 body: {"topic":'room_light',"message": '0'}

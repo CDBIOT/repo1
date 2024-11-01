@@ -8,7 +8,7 @@ const Person = require('./user')
 const mqtt = require('./mqtt_node')
 const mqttnode = require('./mqtt_node')
 const mqttio = require('./mqttio')
-const mqtt2 = require('./mqtt_node2')
+//const mqtt2 = require('./mqtt_node2')
 const subscribe = require('./subscriber')
 const publisher =require('./publisher')
 var fs = require('fs');
@@ -17,12 +17,12 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 
 
-const { onLight } = require('./mqtt_node2.js');
+//const { onLight } = require('./mqtt_node2.js');
 
 
-routers.post('/mqttio', mqttio.postPub)
-routers.get('/mqtt2', onLight)
-routers.get('/mqttnode', mqttnode)
+routers.get('/mqtton', mqttio.postPub);
+routers.get('/mqttoff', mqttio.offLight);
+routers.get('/mqtton', mqttio.onLight);
 
 routers.post('/subscriber', subscribe.publishMessage)
 

@@ -17,13 +17,13 @@ headers
 "message": "0"
 }
 ###
-GET  http://localhost:3000/mqtt
+GET  http://localhost:3000/mqttoff
 
 ###
 GET  http://localhost:3000/subscriber
 
 ###
-POST  http://localhost:3000/mqttio
+POST  http://localhost:3000/mqtton
 
 content-type: application/json
 body = {
@@ -32,17 +32,26 @@ body = {
 }
 
 ###
+POST  http://localhost:3000/mqttoff
+
+content-type: application/json
+body = {
+"topic": "Sala",
+"message": "0"
+}
+
+###
 DELETE https://repo1-beta.vercel.app/650dd8634cd1674851ffa8ae
 
 
 ####
-POST https://polar-beyond-82520.herokuapp.com/temps
+POST https://repo1-beta.vercel.app/temps
 content-type: application/json
 
 {
 //"_id": "2",
-"local": "sala",
-"temperatura": "14",
+"local": "Sala",
+"temperatura": "31",
 "dia":"18",
 "mes":"06",
 "ano":"2022"
