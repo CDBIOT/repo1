@@ -27,7 +27,7 @@ client.on('message', function (topic, message) {
   // message is Buffer
   m = message;
   console.log(message.toString())
-  client.end()
+  //client.end()
 })
 
 

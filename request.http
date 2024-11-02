@@ -7,23 +7,16 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:3000/mqtt2
-
-content-type: application/json
-headers
-{
-//"_id": "2",
-"topic": "Sala",
-"message": "0"
-}
-###
-GET  http://localhost:3000/mqtt
+GET  http://localhost:3000/mqtton
 
 ###
-GET  http://localhost:3000/subscriber
+GET  http://localhost:3000/mqttoff
 
 ###
-POST  http://localhost:3000/mqtton
+GET  http://localhost:3000/subscrib
+
+###
+POST  http://localhost:3000/subscrib
 
 content-type: application/json
 body = {

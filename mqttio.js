@@ -30,7 +30,7 @@ client.on('connect', function () {
       console.log('Enviado comando 0 para room_light ')
     }
   })
- // client.end()
+  client.end()
 
 })
 
@@ -38,7 +38,7 @@ client.on('message', function (topic, message) {
   // message is Buffer
   m = message.toString();
   console.log(message.toString())
- // client.end()
+  client.end()
 })
 
  //Page published
@@ -60,7 +60,7 @@ client.on('message', function (topic, message) {
   
  //Page published
  const offLight=( async (req, res) =>{
-  client.subscribe('Temp_sala', function (err) {
+  client.subscribe('Sala', function (err) {
 
     console.log('Subscribe to topic room_light')
     if (!err) {
@@ -68,12 +68,12 @@ client.on('message', function (topic, message) {
       console.log('Enviado comando 0 para room_light ')
     }
   })
- // client.end()
+  client.end()
 
 })
 
  
-  const onLight=(async (req,res)=>{
+const onLight=(async (req,res)=>{
     
 publishMessage("room_light","1");
  

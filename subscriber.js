@@ -11,8 +11,6 @@ const port = '1883'
 
 
 
-function connectToBroker(){
-
 const connectUrl = `mqtt://${host}:${port}`
 const options = {
     // Clean session
@@ -29,6 +27,8 @@ const options = {
 
 const client = mqtt.connect(connectUrl,options)
 
+function connectToBroker(){
+
 client.on('connect', function () {
   console.log('Connected to Subscriber')
   
@@ -39,7 +39,7 @@ client.on('connect', function () {
       client.publish("aqua_light", '0')
     }
   })
-  client.end()
+ // client.end()
 
 })
 
@@ -54,33 +54,33 @@ client.on("error",(err)=> {
 
 client.on('connect', () => {
   console.log('Connected:' + options.clientId)
-  client.end();
+ // client.end();
 })
 
 client.on('message', (topic,message, payload) => {
-      temp = payload
-      local= "aqua_light",
+      temp = payload.data,
+      local= "Sala",
       message=message,
       console.log('Received Message:'+message.toString(), topic, payload.toString())
-      client.end();
+     // client.end();
     })
 }
 
 function publishMessage(topic,message){
   console.log(`Sending Topic via Subscriber.publishMessage: ${topic}, Message: ${message}`);
-  //client.publish(topic,message,{qos: 0, retain: false});
-  //client.end()
+  client.publish(topic,message,{qos: 0, retain: false});
+ // client.end()
 }
 function subscribeToTopic(topic2,message){
-    console.log(`Subscribing to Topic via subscribe function in: ${topic2}`);
-    //client.subscribe(topic,message,{qos: 0});
-    //client.end()
+  console.log(`Subscribing to Topic via subscribe function in: ${topic2}`);
+  client.subscribe(topic1,message,{qos: 0});
+  //client.end()
 }
 
 connectToBroker();
 subscribeToTopic("Sala","0");
 
-publishMessage("aqua_light","1");
+publishMessage("aqua_light","0");
 
 
 module.exports = {

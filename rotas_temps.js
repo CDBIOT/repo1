@@ -22,8 +22,8 @@ const jwt = require('jsonwebtoken');
 
 routers.get('/mqtton', mqttio.postPub);
 routers.get('/mqttoff', mqttio.offLight);
-routers.get('/mqtton', mqttio.onLight);
-//routers.get('/mqtton', mqttnode);
+routers.get('/mqtton2', mqttio.onLight);
+routers.post('/subscrib', subscribe.publishMessage);
 
 routers.post('/subscriber', subscribe.publishMessage)
 
@@ -365,12 +365,13 @@ routers.use('/', express.static(__dirname + '/'))
 routers.use('/css', express.static(__dirname + "/css"))
 routers.use('/imagens', express.static(__dirname +"/imagens"))
 routers.use('/grafico.js', express.static("/"))
-routers.use('/mqtt_node2.js', express.static("/"))
+
+//routers.use('/mqtt_node2.js', express.static("/"))
 
 
- routers.get("/mqtt_node2",function(req,res){
-    res.sendFile(__dirname + "/mqtt_node2.js");
-});
+//  routers.get("/mqtt_node2",function(req,res){
+//     res.sendFile(__dirname + "/mqtt_node2.js");
+// });
 
 
 // routers.get("/bot",function(req,res){
