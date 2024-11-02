@@ -17,7 +17,7 @@ headers
 "message": "0"
 }
 ###
-GET  http://localhost:3000/mqttoff
+GET  http://localhost:3000/mqtt
 
 ###
 GET  http://localhost:3000/subscriber

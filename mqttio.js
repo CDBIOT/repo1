@@ -3,7 +3,6 @@ const router = express.Router();
 const mqtt = require('mqtt');
 const { publishMessage } = require('./publisher');
 
-var client
 const topic1 = 'Sala'
 const topic2 = 'room_temp'
 const topic3 = 'aqua_temp'
@@ -20,12 +19,12 @@ const options = {
 }
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
-  console.log('Connected on mqtt broker topic Teste1')
+  console.log('Connected on mqtt broker')
 
 
-  client.subscribe('Teste1', function (err) {
+  client.subscribe('room_light', function (err) {
 
-    console.log('Subscribe to topic room_light')
+    console.log('Subscribe to topic room_light mqttio')
     if (!err) {
      client.publish('room_light', '0')
       console.log('Enviado comando 0 para room_light ')
@@ -61,7 +60,7 @@ client.on('message', function (topic, message) {
   
  //Page published
  const offLight=( async (req, res) =>{
-  client.subscribe('Teste1', function (err) {
+  client.subscribe('Temp_sala', function (err) {
 
     console.log('Subscribe to topic room_light')
     if (!err) {

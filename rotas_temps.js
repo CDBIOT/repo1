@@ -23,11 +23,30 @@ const jwt = require('jsonwebtoken');
 routers.get('/mqtton', mqttio.postPub);
 routers.get('/mqttoff', mqttio.offLight);
 routers.get('/mqtton', mqttio.onLight);
+//routers.get('/mqtton', mqttnode);
 
 routers.post('/subscriber', subscribe.publishMessage)
 
 //routers.post('/bot',bot)
 //routers.use(qrcode);
+
+// router.get('/getsensordata', function (req, res) {
+//     var vm = {
+//     data:m
+//     };
+//     res.send(vm);
+// });
+
+// router.get('/', function (req, res) {
+//     /*Render the index.hbs and pass the View Model*/
+//     var vm = {
+//         title: 'MQTT',
+//         message: [new Date(), m]
+//     }
+//     console.log(vm.message);
+//     res.render('mqtt/index', vm);
+// });
+
 
 
  routers.get('/mqtt',(req, res) =>{

@@ -15,10 +15,10 @@ const options = {
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
   console.log('Connected')
-  client.subscribe('Temp_sala', function (err) {
+  client.subscribe('aqua_light', function (err) {
     if (!err) {
-     client.publish('room_light', '1')
-      console.log('Connected topic room mqtt_node ')
+     client.publish('aqua_light', '1')
+      console.log('Connected topic aqua_light mqtt_node ')
     }
   })
 })
@@ -30,22 +30,6 @@ client.on('message', function (topic, message) {
   client.end()
 })
 
-router.get('/', function (req, res) {
-    /*Render the index.hbs and pass the View Model*/
-    var vm = {
-        title: 'MQTT',
-        message: [new Date(), m]
-    }
-    console.log(vm.message);
-    res.render('mqtt/index', vm);
-});
-
-router.get('/getsensordata', function (req, res) {
-    var vm = {
-    data:m
-    };
-    res.send(vm);
-});
 
 module.exports =  {
   
