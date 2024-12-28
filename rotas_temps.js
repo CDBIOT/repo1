@@ -26,7 +26,7 @@ const jwt = require('jsonwebtoken')
     try{ 
         date = new Date() 
         var vm = {
-            temp: temp,
+            temp: temperatura,
             local: local,
             dia: date.getDate(),   
             mes: date.getMonth() + 1,
