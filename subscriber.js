@@ -2,8 +2,7 @@ const mqtt = require('mqtt');
 const express = require('express');
 const router = express.Router();
 
-var client
-const topic1 = 'bh/outTopic'
+const topic1 = 'Sala'
 const topic2 = 'room_temp'
 const topic3 = 'aqua_temp'
 
@@ -11,8 +10,6 @@ const host = 'broker.mqtt-dashboard.com'
 const port = '1883'
 
 
-
-function connectToBroker(){
 
 const connectUrl = `mqtt://${host}:${port}`
 const options = {
@@ -30,17 +27,19 @@ const options = {
 
 const client = mqtt.connect(connectUrl,options)
 
+function connectToBroker(){
+
 client.on('connect', function () {
   console.log('Connected to Subscriber')
   
-  client.subscribe("room_light", function (err) {
+  client.subscribe("Sala", function (err) {
 
-    console.log('Subscribe to room_light')
+    console.log('Subscribe to aqua_temp')
     if (!err) {
-      client.publish("room_light", '0')
+      client.publish("aqua_light", '0')
     }
   })
-  client.end()
+ // client.end()
 
 })
 
@@ -55,37 +54,38 @@ client.on("error",(err)=> {
 
 client.on('connect', () => {
   console.log('Connected:' + options.clientId)
-  client.end();
+ // client.end();
 })
 
 client.on('message', (topic,message, payload) => {
-      temp = payload
-      local= topic2
-      message=message
+      temp = payload.data,
+      local= "Sala",
+      message=message,
       console.log('Received Message:'+message.toString(), topic, payload.toString())
-      client.end();
+     // client.end();
     })
 }
 
 function publishMessage(topic,message){
-  console.log(`Sending Topic via publishMessage: ${topic}, Message: ${message}`);
-  //client.publish(topic,message,{qos: 0, retain: false});
-  //client.end()
+  console.log(`Sending Topic via Subscriber.publishMessage: ${topic}, Message: ${message}`);
+  client.publish(topic,message,{qos: 0, retain: false});
+ // client.end()
 }
 function subscribeToTopic(topic2,message){
-    console.log(`Subscribing to Topic via subscribe function in: ${topic2}`);
-    //client.subscribe(topic,message,{qos: 0});
-    //client.end()
+  console.log(`Subscribing to Topic via subscribe function in: ${topic2}`);
+  client.subscribe(topic1,message,{qos: 0});
+  //client.end()
 }
 
 connectToBroker();
-subscribeToTopic("room_light","0");
+subscribeToTopic("Sala","0");
 
-publishMessage("room_light","0");
+publishMessage("aqua_light","0");
 
 
 module.exports = {
     connectToBroker,
     subscribeToTopic,
+    publishMessage,
   mqtt
 }

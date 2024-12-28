@@ -15,7 +15,7 @@ const client = mqtt.connect(connectUrl, {
   reconnectPeriod: 100000,
 })
 
-const topic = 'Sala'
+const topic = 'Teste1'
 client.on('connect', () => {
   console.log('Connected')
   client.subscribe([topic], () => {
@@ -62,27 +62,6 @@ client.on('message', (topic, payload) => {
  // })
 
 
- 
- client.publish(topic, 1, { qos: 0, retain: true }, (error) => {
-  if (error) {
-      console.error(error)
-    }
-  })
- 
- 
-  const onLight=(async (req,res)=>{
- 
- try{
-   await client.publish(topic, 0, { qos: 0, retain: true }, (error) => {
-     if (error) {
-           console.error(error)
-         }
-       })
- 
-     }catch(error){
-       res.status(500).json({error: error})
-     }
-  })
  
 module.exports =  {
 

@@ -199,7 +199,7 @@ async function getContent() {
 async function cad_new_temp(){
 
 const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-fetch('https://repo1-beta.vercel.app/mqtt',options)
+fetch('https://repo1-beta.vercel.app/subscriber',options)
 //fetch('http://127.0.0.1:8081/mqtt')
 .then(function (response){
 return response.text()})
@@ -211,7 +211,9 @@ var temperatura = document.getElementById('temperatura').innerText= parseInt(myO
 var dias 		= document.getElementById('dia').innerText= parseInt(date.getDate());
 var meses		= document.getElementById('mes').innerText= parseInt(date.getMonth()+ 1);
 var anos		= document.getElementById('ano').innerText= parseInt(date.getFullYear());
-		
+
+console.log(response.json());
+
 const dados = {
 	local: local,
 	temperatura: temperatura,

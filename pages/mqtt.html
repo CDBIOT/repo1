@@ -37,9 +37,9 @@
 <section class=" Botoes_pagina0">
     <div class= "Botoes__pagina0">
 		
-			<a onclick = Relogio()>
+<a onclick="mqttOff()" >
 		<img name="lamp_btn" src="/imagens/blue/lamp_btn.png" ALT=""></a>
-		<label> Set Time Light </label>
+	</a>
 		<label> Temperatura Atual </label>
 	</div>
 </section>
@@ -83,9 +83,9 @@
 </tr>
 
 <tr><td>
-	<input type="button" id="btnOn"   value="Ligar"    onClick="setRelay(1)">
-	<input type="button" id="btnOff"  value="Desligar" onClick="setRelay(0)">
-	<input type="button" id="btndisp" value="Setar"    onClick="setdisp()">
+	<input type="button" id="btnOn"   value="Ligar"    onClick="lampadaOn(1)">
+	<input type="button" id="btnOff"  value="Desligar" onClick="lampadaOff(0)">
+	
 </td></tr>
 
 </table>
@@ -109,7 +109,7 @@ setInterval(function(){
 
 },10000); 
 
-		function startTime() {
+function startTime() {
 			var today=new Date();
 			var h=today.getHours();
 			var m=today.getMinutes();
@@ -121,7 +121,7 @@ setInterval(function(){
 			t=setTimeout('startTime()',500);
 		}
 	   
-	function checkTime(i){
+function checkTime(i){
 		
 		if (i<10) {
 			i="0" + i;
@@ -129,7 +129,7 @@ setInterval(function(){
 			return i;
 		}
 
-	function setdisp(){
+function setdisp(){
 
 
 var countDownDate = new Date("Jun 27, 2022 15:37:25").getTime();
@@ -191,7 +191,7 @@ var countDownDate = new Date("Jun 27, 2022 15:37:25").getTime();
 
 async function mqtt_show() {
 	const options = {method: 'GET',	mode: 'cors',cache: 'default'}
-	//const response =fetch(`https://server-orpin-zeta.vercel.app/mqtt`)
+	
 	//const response =fetch(URI)
 	const response = fetch('https://repo1-beta.vercel.app/mqtt',options)
 	.then(function (response){
@@ -219,6 +219,80 @@ console.log(hora1);
 console.log(dados)
 console.log(response)
 }
+function lampadaOn(){
+	
+const response = fetch('https://repo1-beta.vercel.app/mqtton',{
+method: 'GET',	mode: 'cors',
+headers: { "Content-type": 'application/json'},
+//body: {"topic":'room_light',"message": '1'}
+//body: JSON.stringify({"topic":'room_light',"message": '1'})
+})
 
+.then((response) => {
+	if(response.status == 200)
+		{
+		console.log('Cadastrada com sucesso');
+		console.log(res.json());
+		}else{
+			console.log('Ocorreu um erro ao cadastrar!');
+			
+				}
+
+}).catch((err) => {
+console.log('Ocorreu um erro no servidor \n Erro: '+ err);
+	})
+
+}
+	
+
+function lampadaOff(){
+
+	const response = fetch('https://repo1-beta.vercel.app/mqttoff',{
+method: 'GET',	mode: 'cors',
+headers: { "Content-type": 'application/json'},
+body: JSON.stringify({"topic":'room_light',"message": '1'})
+//body: {"topic":'room_light',"message": '0'}
+})
+
+.then((response) => {
+	if(response.status == 200)
+		{
+		console.log('Cadastrada com sucesso');
+		console.log(res.json());
+		}else{
+			console.log('Ocorreu um erro ao cadastrar!');
+			
+				}
+
+}).catch((err) => {
+console.log('Ocorreu um erro no servidor \n Erro: '+ err);
+	})
+
+}
+
+
+function mqttOff(){
+
+const response = fetch('https://repo1-beta.vercel.app/mqtton2',{
+method: 'POST',	mode: 'cors',
+headers: { "Content-type": 'application/json'},
+body: {"topic":'room_light',"message": '0'}
+})
+
+.then((response) => {
+if(response.status == 200)
+	{
+	console.log('Cadastrada com sucesso');
+	console.log(res.json());
+	}else{
+		console.log('Ocorreu um erro ao cadastrar!');
+		
+			}
+
+}).catch((err) => {
+console.log('Ocorreu um erro no servidor \n Erro: '+ err);
+})
+
+}
 </script>
 </html>

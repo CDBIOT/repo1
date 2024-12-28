@@ -2,24 +2,51 @@ const { response } = require('express');
 const express = require('express');
 const routers = express.Router();
 const app = express();
-const bot = require('./bot')
+//const bot = require('./bot')
 const Temps = require('./temps')
 const Person = require('./user')
-const mqtt = require('./mqttio','./mqtt_node','./mqtt_node2')
+const mqtt = require('./mqtt_node')
+const mqttnode = require('./mqtt_node')
+const mqttio = require('./mqttio')
+//const mqtt2 = require('./mqtt_node2')
+const subscribe = require('./subscriber')
 const publisher =require('./publisher')
 var fs = require('fs');
 //app.use(mqtt);
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 
-//routers.get('/mqtt_pub', mqtt.onLight)
-//routers.get('/mqtt_on', publisher)
+//const { onLight } = require('./mqtt_node2.js');
 
-//routers.get('/mqtt_off', mqtt.offLight)
 
-//routers.get('/bot',bot)
+routers.get('/mqtton', mqttio.postPub);
+routers.get('/mqttoff', mqttio.offLight);
+routers.get('/mqtton2', mqttio.onLight);
+routers.post('/subscrib', subscribe.publishMessage);
+
+routers.post('/subscriber', subscribe.publishMessage)
+
+//routers.post('/bot',bot)
 //routers.use(qrcode);
+
+// router.get('/getsensordata', function (req, res) {
+//     var vm = {
+//     data:m
+//     };
+//     res.send(vm);
+// });
+
+// router.get('/', function (req, res) {
+//     /*Render the index.hbs and pass the View Model*/
+//     var vm = {
+//         title: 'MQTT',
+//         message: [new Date(), m]
+//     }
+//     console.log(vm.message);
+//     res.render('mqtt/index', vm);
+// });
+
 
 
  routers.get('/mqtt',(req, res) =>{
@@ -27,6 +54,24 @@ const jwt = require('jsonwebtoken')
         date = new Date() 
         var vm = {
             temp: temperatura,
+            local: local,
+            dia: date.getDate(),   
+            mes: date.getMonth() + 1,
+            ano: date.getFullYear()
+        }
+        console.log(vm);
+        //res.send(vm);
+        res.status(200).json({vm})
+     }catch(error){
+         res.status(500).json(error)
+     }  
+    })
+    
+ routers.get('/subscriber',(req, res) =>{
+    try{ 
+        date = new Date() 
+        var vm = {
+            temp: temp,
             local: local,
             dia: date.getDate(),   
             mes: date.getMonth() + 1,
@@ -320,12 +365,13 @@ routers.use('/', express.static(__dirname + '/'))
 routers.use('/css', express.static(__dirname + "/css"))
 routers.use('/imagens', express.static(__dirname +"/imagens"))
 routers.use('/grafico.js', express.static("/"))
-routers.use('/mqtt_node2.js', express.static("/"))
+
+//routers.use('/mqtt_node2.js', express.static("/"))
 
 
- routers.get("/mqtt_node2",function(req,res){
-    res.sendFile(__dirname + "/mqtt_node2.js");
-});
+//  routers.get("/mqtt_node2",function(req,res){
+//     res.sendFile(__dirname + "/mqtt_node2.js");
+// });
 
 
 // routers.get("/bot",function(req,res){
@@ -352,9 +398,9 @@ routers.get("/mqtt.html",function(req,res){
     res.sendFile(__dirname + "/pages/autentica.html");
 });
 
-routers.get("/socketio",function(req,res){
-    res.sendFile(__dirname + "/pages/socketio.html");
-});
+//routers.get("/socketio",function(req,res){
+ //   res.sendFile(__dirname + "/pages/socketio.html");
+//});
 
 routers.get("/",function(req,res){
     res.sendFile(__dirname + "/pages/index.html");

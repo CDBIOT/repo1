@@ -3,6 +3,10 @@ const router = express.Router();
 const mqtt = require('mqtt');
 const { publishMessage } = require('./publisher');
 
+const topic1 = 'Sala'
+const topic2 = 'room_temp'
+const topic3 = 'aqua_temp'
+
 const options = {
   // Clean session
   clean: true,
@@ -15,18 +19,18 @@ const options = {
 }
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
-  console.log('Connected on mqtt broker topic Teste1')
+  console.log('Connected on mqtt broker')
 
 
-  client.subscribe('Teste1', function (err) {
+  client.subscribe('room_light', function (err) {
 
-    console.log('Subscribe to topic room_light')
+    console.log('Subscribe to topic room_light mqttio')
     if (!err) {
-      client.publish('room_light', '0')
+     client.publish('room_light', '0')
       console.log('Enviado comando 0 para room_light ')
     }
   })
- // client.end()
+  client.end()
 
 })
 
@@ -34,45 +38,64 @@ client.on('message', function (topic, message) {
   // message is Buffer
   m = message.toString();
   console.log(message.toString())
- // client.end()
+  client.end()
 })
 
  //Page published
- const postPublished=( async (req, res) =>{
+ const postPub=( async (req, res) =>{
   const {message,payload } = req.body
      // const temps = req.params
-  const mess = {message,payload}
+  const mess = (req.body)
   const create_temp = new publishMessage(req.body);
   //temps.save()
       try{
           await client.publish(mess)
           //temps.save()
-          console.log(message,payload)
+          console.log(mess)
           res.status(201).json({message: "Lâmpada Ligada"})
           }catch(error){
           res.status(500).json({error: error})
       }  
   })
   
-router.get('/', function (req, res) {
-  try{ 
-    date = new Date() 
-    var vm = {
-        temp: temp,
-        local: local,
-        dia: date.getDate(),   
-        mes: date.getMonth() + 1,
-        ano: date.getFullYear()
+ //Page published
+ const offLight=( async (req, res) =>{
+  client.subscribe('Sala', function (err) {
+
+    console.log('Subscribe to topic room_light')
+    if (!err) {
+     client.publish('room_light', '0')
+      console.log('Enviado comando 0 para room_light ')
     }
-    console.log(vm);
-    //res.send(vm);
-    res.status(200).json({vm})
- }catch(error){
-     res.status(500).json(error)
- }  
+  })
+  client.end()
+
 })
+
  
+const onLight=(async (req,res)=>{
+    
+publishMessage("room_light","1");
+ 
+    // try{
+    //   await client.publish(topic, "1", { qos: 0, retain: true }, (error) => {
+    //     if (error) {
+    //           console.error(error)
+    //         }
+    //       })
+    
+    //     }catch(error){
+    //       res.status(500).json({error: error})
+    //     }
+     })
+    
 
 
 
-module.exports = mqtt;
+module.exports =  {
+
+  postPub,
+  offLight,
+  onLight,
+  mqtt
+}
