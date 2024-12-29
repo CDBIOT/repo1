@@ -41,6 +41,16 @@ client.on('message', function (topic, message) {
   client.end()
 })
 
+router.get('/', function (req, res) {
+  /*Render the index.hbs and pass the View Model*/
+  var vm = {
+      title: 'MQTT',
+      message: [new Date(), m]
+  }
+  console.log(vm.message);
+  res.render('mqtt/index', vm);
+});
+
  //Page published
  const postPub=( async (req, res) =>{
   const {message,payload } = req.body

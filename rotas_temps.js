@@ -53,7 +53,7 @@ routers.post('/subscriber', subscribe.publishMessage)
     try{ 
         date = new Date() 
         var vm = {
-            temp: temperatura,
+            temp: temp,
             local: local,
             dia: date.getDate(),   
             mes: date.getMonth() + 1,
