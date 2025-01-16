@@ -7,10 +7,10 @@ content-type: application/json
 }
 
 ###
-GET  http://localhost:3000/mqtton
+GET  https://repo1-beta.vercel.app/mqtt
 
 ###
-GET  http://localhost:3000/mqttoff
+GET  https://test-no-vercel.vercel.app/mqtt
 
 ###
 GET  http://localhost:3000/subscrib
@@ -54,7 +54,7 @@ content-type: application/json
 GET http://localhost:8081/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ4ZmJlY2Y0ODI5M2IwMTc1MTRkZCIsImlhdCI6MTY2MDUyNDEwMX0.F5dFIeqRXdpqTyXCJbE-wJyZCW7pv2SZoV5ETC2I2xA
 
 ###
-GET http://localhost:8081/temps/mqtt
+GET http://localhost:3000/subscriber
 
 
 

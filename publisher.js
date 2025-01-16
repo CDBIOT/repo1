@@ -46,10 +46,10 @@ client.on('connect', () => {
 })
 
 client.on('message', (topic,message, payload) => {
-      temp = payload
+      temp = payload.data
       local= topic
       message=message
-      console.log('Received Message:'+message.toString(), topic, payload.toString())
+      console.log('Received Message publisher:'+message.toString(), topic, payload.toString())
     })
  }
 

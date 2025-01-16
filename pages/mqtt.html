@@ -48,9 +48,16 @@
 <form action="/mqtt" method = "get"></form>
 <table>
 	<tr><th colspan = 6><h1>TEMPERATURA DO QUARTO </h1></th></tr>
-	<tr><td><span id = "temp"> </span></td><td><span>  ºC</span></td></tr>
+	<tr><td><span>Temp: </span><span id = "temp"> </span></td><td><span>  ºC</span></td></tr>
 
     <tr><th colspan = 6> <h1>TEMPERATURA DA SALA</h1></th></tr>
+	<tr>
+		<td><span > Local</td>
+		<td><span > Temp </span></td>
+		<td><span > Dia </span></td>
+		<td><span > Mes </span></td>
+		<td><span > Ano</span></td>
+		</tr>
     <tr>
     <td><span id = "local"> </td>
     <td><span id = "temp"> </span></td>
@@ -193,17 +200,17 @@ async function mqtt_show() {
 	const options = {method: 'GET',	mode: 'cors',cache: 'default'}
 	
 	//const response =fetch(URI)
-	const response = fetch('https://repo1-beta.vercel.app/mqtt',options)
+	const response = await fetch('https://repo1-beta.vercel.app/mqtt',options)
 	.then(function (response){
 	return response.text()})
 	.then(data=>{
 	console.log(data)
 	const myObj = JSON.parse(data)
-	var local 	= document.getElementById('local').innerText = myObj.vm.local;
-	var temp 	= document.getElementById('temp').innerText = parseInt(myObj.vm.temp);
-	let dia	 	= document.getElementById('dia').innerText  = parseInt(myObj.vm.dia);
-	let mes 	= document.getElementById('mes').innerText  = parseInt(myObj.vm.mes);
-	let ano 	= document.getElementById('ano').innerText  = parseInt(myObj.vm.ano);
+	var local 	= document.getElementById('local').innerText = myObj.local;
+	var temp 	= document.getElementById('temp').innerText = myObj.temp;
+	let dia	 	= document.getElementById('dia').innerText  = parseInt(myObj.dia);
+	let mes 	= document.getElementById('mes').innerText  = parseInt(myObj.mes);
+	let ano 	= document.getElementById('ano').innerText  = parseInt(myObj.ano);
 
 })
 }

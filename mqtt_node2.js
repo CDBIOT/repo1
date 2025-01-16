@@ -33,7 +33,7 @@ client.on('message', (topic, payload) => {
 setInterval(() => {
 client.on('message', (topic, payload) => {
   temp = payload.toString()
-  console.log('Received Message:', topic, temp)
+  console.log('Received Message node2:', topic, Message.toString(),payload.toString(), temp)
   client.end()
  // res.status(200).json({m})
 })

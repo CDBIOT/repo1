@@ -59,9 +59,9 @@ client.on('connect', () => {
 
 client.on('message', (topic,message, payload) => {
       temp = payload.data,
-      local= "Sala",
+     // local= payload.data,
       message=message,
-      console.log('Received Message:'+message.toString(), topic, payload.toString())
+      console.log('Received Message subscriber:'+topic, message.toString(), payload.toString(),temp)
      // client.end();
     })
 }

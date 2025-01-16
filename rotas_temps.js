@@ -85,7 +85,7 @@ routers.post('/subscriber', subscribe.publishMessage)
      }  
     })
     
- //Create temps
+ //Create temps[]
  routers.post('/temps', async (req, res) =>{
 const {local, temperatura, dia, mes, ano } = req.body
    // const temps = req.params
