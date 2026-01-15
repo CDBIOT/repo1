@@ -17,10 +17,9 @@ const options = {
   password: 'test',
  reconnectPeriod: 1000,
 }
-const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
+const client  = mqtt.connect('wss://broker.mqtt-dashboard.com:8884/mqtt', options)
 client.on('connect', function () {
   console.log('Connected on mqtt broker')
-
 
   client.subscribe('room_light', function (err) {
 
@@ -70,7 +69,7 @@ router.get('/', function (req, res) {
   
  //Page published
  const offLight=( async (req, res) =>{
-  client.subscribe('Sala', function (err) {
+  client.subscribe('room_light', function (err) {
 
     console.log('Subscribe to topic room_light')
     if (!err) {
