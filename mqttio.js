@@ -15,7 +15,7 @@ const options = {
   clientId: 'cdbiot123',
   username: 'test',
   password: 'test',
- reconnectPeriod: 100000,
+ reconnectPeriod: 1000,
 }
 const client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com:1883', options)
 client.on('connect', function () {
