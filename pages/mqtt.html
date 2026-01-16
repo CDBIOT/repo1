@@ -239,8 +239,6 @@ function lampadaOn(){
 const response = fetch('https://repo1-beta.vercel.app/mqtton',{
 method: 'GET',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
-//body: {"topic":'room_light',"message": '1'}
-//body: JSON.stringify({"topic":'room_light',"message": '1'})
 })
 
 .then((response) => {
@@ -262,20 +260,19 @@ console.log('Ocorreu um erro no servidor \n Erro: '+ err);
 
 function lampadaOff(){
 
-	const response = fetch('https://repo1-beta.vercel.app/mqttoff',{
+const response = fetch('https://repo1-beta.vercel.app/mqttoff',{
 method: 'GET',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
-body: JSON.stringify({"topic":'room_light',"message": '1'})
-//body: {"topic":'room_light',"message": '0'}
+
 })
 
 .then((response) => {
 	if(response.status == 200)
 		{
-		console.log('Cadastrada com sucesso');
+		console.log('Apagada com sucesso');
 		console.log(res.json());
 		}else{
-			console.log('Ocorreu um erro ao cadastrar!');
+			console.log('Ocorreu um erro ao apagar lampada');
 			
 				}
 
@@ -291,7 +288,6 @@ function mqttOff(){
 const response = fetch('https://repo1-beta.vercel.app/mqtton2',{
 method: 'POST',	mode: 'cors',
 headers: { "Content-type": 'application/json'},
-body: {"topic":'room_light',"message": '0'}
 })
 
 .then((response) => {

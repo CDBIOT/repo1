@@ -53,6 +53,8 @@ router.get('/', function (req, res) {
  //Page published
  const postPub=( async (req, res) =>{
   const {message,payload } = req.body
+  
+//body: JSON.stringify({"topic":'room_light',"message": '1'})
      // const temps = req.params
   const mess = (req.body)
   const create_temp = new publishMessage(req.body);
