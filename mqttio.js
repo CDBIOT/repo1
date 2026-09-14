@@ -17,7 +17,7 @@ const options = {
   password: 'test',
  reconnectPeriod: 1000,
 }
-const client  = mqtt.connect('wss://broker.mqtt-dashboard.com:8884/mqtt', options)
+const client  = mqtt.connect('wss://broker.mqtt-dashboard.com:8084/mqtt', options)
 client.on('connect', function () {
   console.log('Connected on mqtt broker')
 
