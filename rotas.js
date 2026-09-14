@@ -10,6 +10,15 @@ const Temps = require('./temps')
  //   res.status(200).sendFile(__dirname + "/index.html");
  //   });
 
+ 
+ router.get('/mqtt', function (req, res) {
+     var vm = {
+     data:m
+     };
+     res.send(vm);
+ });
+
+
  routers.post('/mqtt',(req, res) =>{
     // res.send("Texto: "+ req.body.output);
  })
